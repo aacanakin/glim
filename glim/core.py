@@ -6,18 +6,23 @@ class Registry:
     def __init__(self, registrar):
         self.registrar = registrar
 
-    def __getattr__(self, key):
-        return self.registrar[key]
+    def get(self, key):
+        layers = key.split('.')
+        value = self.registrar
+        for item in layers:
+            value = value[item]
+        return value
 
     def set(self, key, value):
+        key_parts = key.split('.')
+        registrar = self.registrar
+        while key_parts[:-1]:
+            key = key_parts.pop(0)
+            if key not in registrar:
+                registrar[key] = {}
+            registrar = registrar[key]
 
-        layers = key.split('.')
-        layer = layers[0]
-
-        if layers[1:] :
-            self.registrar[layer] = self.set(layers[1:].join('.'), value)
-        else :
-            self[layer] = value
+        registrar[key_parts[-1]] = value        
 
     def flush(self):
         self.registrar.clear()
