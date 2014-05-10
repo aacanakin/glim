@@ -1,3 +1,8 @@
+services = [
+	'glim.services.Session',
+	'glim.services.Cookie',
+]
+
 config = {
 	'db' : {
 		'host' : 'localhost',
