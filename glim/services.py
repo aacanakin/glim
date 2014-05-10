@@ -1,21 +1,29 @@
-# facade classes
-from glim.core import App
+# metaclass for Service class
+class DeflectToInstance(type):
+    def __getattr__(selfcls, a): # selfcls in order to make clear it is a class object (as we are a metaclass)
+        try:
+            # first, inquiry the class itself
+            return super(DeflectToInstance, selfcls).__getattr__(a)
+        except AttributeError:
+            # Not found, so try to inquiry the instance attribute:
+            return getattr(selfcls.instance, a)
 
-class Facade(object):
-	key = None
+# facade that is used for saving complex
+class Service:
+	__metaclass__ = DeflectToInstance
 
-	@staticmethod
-	def __getattr__(self, attr):
-		def default(* args):
-			instance = App.resolve(key)
-			method = getattr(instance, attr)
-			return instance.method(args)
+	instance = None
 
-class Config(Facade):
-	key = 'config'
+	@classmethod
+	def boot(cls, object, configuration = {}):
+		if cls.instance is None:
+			cls.instance = object(configuration)	
 
-class Session(Facade):
-	key = 'session'
+class Config(Service):
+	pass
 
-class Router(Facade):
-	key = 'router'
+class Session(Service):
+	pass
+
+class Router(Service):
+	pass
