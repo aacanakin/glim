@@ -4,10 +4,24 @@ services = [
 ]
 
 config = {
+
 	'db' : {
 		'host' : 'localhost',
 		'schema' : 'test',
 		'user' : 'root',
 		'password' : '',
+	},
+
+	'session' : {
+
+	},
+
+	'cookie' : {
+
+	}
+
+	'glim' : {
+		'reloader' : True,
+		'debugger' : True
 	}
 }
