@@ -1,4 +1,14 @@
 ```
+---------------------- v0.0.1 13/05/2014 ----------------------
+- Routing is implemented and currently working
+- Implicit restful routing is implemented
+- Controller dispatch_request() relation is implemented
+- Werkzeug is integrated
+- Response class removed from Controllers constructor
+- use_reloader, use_debugger settings added in app boot
+- initial dynamic service loading is implemented
+---------------------------------------------------------------
+
 ---------------------- 10/05/2014 ----------------------
 - Service layer fixed
 - Registry class is finalized
