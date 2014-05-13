@@ -1,5 +1,5 @@
 from termcolor import colored
-from glim.app import start as s
+from glim.app import start as appify
 # glim with use of click
 import click
 
@@ -12,8 +12,8 @@ def glim():
 @click.option('--port', default = '8080', help = 'enter port')
 @click.option('--env', default = 'development', help = 'enter environment (development)')
 def start(host, port, env):
-    s(host, port, env)
     print colored('glim %s server is running on %s:%s' % (env, host, port), 'green')
+    appify(host, port, env)
 
 @click.command()
 @click.argument('name')
