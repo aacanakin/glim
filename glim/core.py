@@ -9,20 +9,15 @@ class Registry:
     def get(self, key):
         layers = key.split('.')
         value = self.registrar
-        for item in layers:
-            value = value[item]
+        for key in layers:
+            value = value[key]
         return value
 
     def set(self, key, value):
-        key_parts = key.split('.')
-        registrar = self.registrar
-        while key_parts[:-1]:
-            key = key_parts.pop(0)
-            if key not in registrar:
-                registrar[key] = {}
-            registrar = registrar[key]
-
-        registrar[key_parts[-1]] = value        
+        target = self.registrar
+        for element in key.split(".")[:-1]:
+            target = target.setdefault(element, dict())
+        target[key.split(".")[-1]] = value
 
     def flush(self):
         self.registrar.clear()
