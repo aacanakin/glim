@@ -1,6 +1,8 @@
 ```
 ---------------------- v0.0.2 18/05/2014 ----------------------
 - config folder moved into app
+- static folder definition is disabled initially
+- after function is removed from start.py
 ---------------------------------------------------------------
 
 ---------------------- v0.0.1 13/05/2014 ----------------------
