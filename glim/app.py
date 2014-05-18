@@ -64,7 +64,7 @@ def start(host = '127.0.0.1', port = '8080', environment = 'development', with_s
 
     try :
 
-        mconfig = __import__('config.%s' % environment, fromlist = ['config'])
+        mconfig = __import__('app.config.%s' % environment, fromlist = ['config'])
         mroutes = __import__('app.routes', fromlist = ['routes'])
 
         registry = mconfig.config

@@ -18,7 +18,7 @@ config = {
 
 	'cookie' : {
 
-	}
+	},
 
 	'glim' : {
 		'reloader' : True,
