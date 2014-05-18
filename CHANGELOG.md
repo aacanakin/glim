@@ -1,4 +1,8 @@
 ```
+---------------------- v0.0.2 18/05/2014 ----------------------
+- config folder moved into app
+---------------------------------------------------------------
+
 ---------------------- v0.0.1 13/05/2014 ----------------------
 - Routing is implemented and currently working
 - Implicit restful routing is implemented

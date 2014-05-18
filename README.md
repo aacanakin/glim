@@ -1,4 +1,4 @@
-glim (v0.0.1)
+glim (v0.0.2)
 ====
 
 The simple MC (Model, Controller) framework on top of werkzeug
@@ -22,7 +22,6 @@ tada
 - remove static folder binding in app start
 - Glim class should extend App
 - session & cookie
-- config folder should reside in app
 - add before & after handlers for app boot
 - improve routing
     + filtering
