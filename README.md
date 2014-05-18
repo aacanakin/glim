@@ -53,7 +53,9 @@ tada
     + SQLite driver
 - benchmarks & performance tests
     + apache bench
-- unit tests (maybe)
+- testing
+    + Mockery implementation
+    + unit tests (maybe)
 - coding standards & quality analysis (currently, a lot is hacking)
 - documentation on first stable release
 - package release for PyPI
