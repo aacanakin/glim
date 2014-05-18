@@ -1,13 +1,30 @@
-glim (v0.0.2)
-====
+glim - 0.0.2
+============
 
-The simple MC (Model, Controller) framework on top of werkzeug
+glim is the lightweight MC (Model, Controller) framework on top of werkzeug inspired from play & laravel. The aim is to build an architecture for API developers. So, there isn't any ui, view - related components. The development philosophy here is to make the core small as possible but still not featureless.
+
+glim currently has
+==================
+- url routing w/ controller definitions
+- controller mapping with urls
+- configuration module for different environments
+- some command line utilities
+
+glim will have
+==============
+- SQLAlchemy integration
+- sql query builder in model layer
+- session, cookie module
+- extension system that users can integrate into project dynamically
+- commands module that enables easier to use command line utilities
+- drivers for redis, memcache and some popular message queue services
 
 glim is
 =======
-- small
+- lightweight
+- build on top of werkzeug
+- dependent on some great open source python projects (See reqs file)
 - great for API development
-- inspired from some great full-stack frameworks like rails & laravel
 
 glim isn't
 ==========
@@ -19,7 +36,6 @@ glim isn't
 tada
 ====
 
-- remove static folder binding in app start
 - Glim class should extend App
 - session & cookie
 - add before & after handlers for app boot
@@ -29,8 +45,8 @@ tada
     + before & after handlers
 - glim command-line tools
     + add new app
-    + add new controller with restful option
     + add new model
+    + add new command
 - model layer 
     + SQLAlchemy integration
     + Custom query implementation with SQLAlchemy connection
@@ -44,7 +60,7 @@ tada
 - Mockery implementation
 - Improve config system    
     + Hold a default configuration for independent configs from environment
-    +  Auto merge with default configuration
+    + Auto merge with default configuration
 - Some other extensions to develop
     + Mail
     + Message Queue
