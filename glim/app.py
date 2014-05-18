@@ -60,7 +60,7 @@ class Glim:
     def __call__(self, environ, start_response):
         return self.wsgi_app(environ, start_response)
 
-def start(host = '127.0.0.1', port = '8080', environment = 'development', with_static = True, use_reloader = True):
+def start(host = '127.0.0.1', port = '8080', environment = 'development', with_static = False, use_reloader = True):
 
     try :
 
