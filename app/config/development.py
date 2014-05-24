@@ -1,15 +1,19 @@
-services = [
-	'glim.services.Session',
-	'glim.services.Cookie',
+facades = [
+	'Session',
+	'Cookie',	
 ]
 
 config = {
 
 	'db' : {
-		'host' : 'localhost',
-		'schema' : 'test',
-		'user' : 'root',
-		'password' : '',
+
+		'default' : {
+			'driver' : 'mysql',
+			'host' : 'localhost',
+			'schema' : 'test',
+			'user' : 'root',
+			'password' : '',
+		},
 	},
 
 	'session' : {
