@@ -2,3 +2,4 @@ Werkzeug
 SQLAlchemy
 click
 termcolor
+mysql-python
