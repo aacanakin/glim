@@ -1,7 +1,7 @@
 # application initiation script
 import os
-from glim.core import Config as C,App
-from glim.services import Config
+from glim.core import Config as C, Database as D, App
+from glim.facades import Config, Database, Session, Cookie
 
 from werkzeug.serving import run_simple
 from werkzeug.wrappers import Request, Response
@@ -16,9 +16,8 @@ class Glim:
 
         self.urls = urls
         rule_map = []
-        for raw_rule in self.urls:
-            for k,v in raw_rule.items():
-                rule_map.append(Rule(k, endpoint = v))
+        for url,rule in self.urls.items():
+            rule_map.append(Rule(url, endpoint = rule))
 
         self.url_map = Map(rule_map)
 
@@ -28,13 +27,12 @@ class Glim:
 
         try:
             endpoint, values = adapter.match()
-            print 'endpoint %s' % endpoint
             mcontroller = __import__('app.controllers', fromlist = ['controllers'])
             endpoint_pieces = endpoint.split('.')
             cls = endpoint_pieces[0]
 
             restful = False
-            try :
+            try:
                 fnc = endpoint_pieces[1]
             except:
                 restful = True
@@ -44,53 +42,58 @@ class Glim:
             instance = obj(request)
             if restful:
                 return getattr(instance, request.method.lower())(** values)
-            else :
+            else:
                 return getattr(instance, fnc)(** values)
 
         except HTTPException, e:
             return e
 
-        return Response('Welcome to Glim')
-
     def wsgi_app(self, environ, start_response):
+
         request = Request(environ)
         response = self.dispatch_request(request)
+
         return response(environ, start_response)
 
     def __call__(self, environ, start_response):
+
         return self.wsgi_app(environ, start_response)
 
-def start(host = '127.0.0.1', port = '8080', environment = 'development', with_static = False, use_reloader = True):
+def start(host = '127.0.0.1', port = '8080', environment = 'development', use_reloader = True):
 
     try :
 
+        # boot config
         mconfig = __import__('app.config.%s' % environment, fromlist = ['config'])
         mroutes = __import__('app.routes', fromlist = ['routes'])
 
         registry = mconfig.config
-        services = mconfig.services
+        facades = mconfig.facades
         Config.boot(C, registry)
+
+        # boot database
+        if Config.get('db'):
+            Database.boot(D, Config.get('db'))
+
+        # boot facades
+        for facade in facades:
+            core_mstr = 'glim.core'
+            facade_mstr = 'glim.facades'
+
+            fromlist = facade
+
+            core_module = __import__(core_mstr, fromlist = [facade])
+            facade_module = __import__(facade_mstr, fromlist = [fromlist])
+
+            core_class = getattr(core_module, facade)
+            facade_class = getattr(facade_module, facade)
+
+            config = Config.get(facade.lower())
+            facade_class.boot(core_class, config)
 
         app = Glim(mroutes.urls)
 
-        if with_static:
-            app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
-                '/static':  os.path.join(os.path.dirname(__file__), 'app/static')
-            })
-
         run_simple(host, int(port), app, use_debugger = True, use_reloader = True)
-
-        # service bootups
-        # for service in services:
-        #     fromlist = service.split('.')[-1]
-        #     module = '.'.join(service.split('.')[0:2])
-        #     m = __import__(module, fromlist = [fromlist])
-        #     service_conf =
-
-        # print 'fromlist = %s' % fromlist
-        # print 'module = %s' % module
-        # print 'service = %s' % service
-        # print 'm = %s' % m
 
     except Exception, e:
 
