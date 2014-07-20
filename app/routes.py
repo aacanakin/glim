@@ -1,7 +1,7 @@
 urls = {
     '/'         : 'BaseController.hello',
     '/<name>'   : 'BaseController.greet',
-    '/rest'     : 'RestfulController',
+    '/rest'     : 'RestfulController'
 
     # optional restful routing with
     # 'POST /rest' : 'RestfulController',
