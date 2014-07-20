@@ -50,6 +50,10 @@ class Cookie(Registry):
 class Router(Registry):
     pass
 
+# Extension class
+class Extension(Registry):
+    pass
+
 # Database related components
 class Database:
 
