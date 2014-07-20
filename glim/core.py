@@ -60,7 +60,7 @@ class Database:
         self.config = config
         self.connections = {}
         self.sessions = {}
-        self.engines = {}
+        self.engines = {}        
 
         for k, config in self.config.items():
 
@@ -73,6 +73,8 @@ class Database:
 
             engine = create_engine(cstring)
             connection = engine.connect()
+            Session = sessionmaker(bind=engine)
+            session = Session()
 
             self.engines[k] = engine
             self.sessions[k] = session
@@ -81,11 +83,14 @@ class Database:
     def __getattr__(self, attr):
         return getattr(self.connections[self.active], attr)
 
+    def session(self):
+        return self.sessions[self.active]
+
     def engine(self, key = None):
 
         if key:
             return self.engines[k]
-         else:
+        else:
             return self.engines[self.active]
 
     def connection(self, key = None):
