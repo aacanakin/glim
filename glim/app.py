@@ -1,5 +1,5 @@
 # application initiation script
-import os
+import os, sys, traceback
 from glim.core import Config as C, Database as D, Orm as O, App
 from glim.facades import Config, Database, Orm, Session, Cookie
 
@@ -94,9 +94,10 @@ def start(host = '127.0.0.1', port = '8080', environment = 'development', use_re
 
         app = Glim(mroutes.urls)
 
-        run_simple(host, int(port), app, use_debugger = True, use_reloader = True)
+        run_simple(host, int(port), app, use_debugger = Config.get('glim.debugger'), use_reloader = Config.get('glim.reloader'))
 
     except Exception, e:
 
-        print e
+        print traceback.format_exc()
+        print sys.exc_info()[0]
         exit()
