@@ -9,11 +9,12 @@ glim currently has
 - controller mapping with urls
 - configuration module for different environments
 - some command line utilities
+- SQLAlchemy integration
+- sql query builder in model layer
+
 
 glim will have
 ==============
-- SQLAlchemy integration
-- sql query builder in model layer
 - session, cookie module
 - extension system that users can integrate into project dynamically
 - commands module that enables easier to use command line utilities
@@ -47,10 +48,6 @@ tada
     + add new app
     + add new model
     + add new command
-- model layer 
-    + SQLAlchemy integration
-    + Custom query implementation with SQLAlchemy connection
-- dynamic service bootups from config file
 - improve extension system
     + command line functions to create extensions
 - some nosql driver extensions
