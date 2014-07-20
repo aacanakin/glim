@@ -1,0 +1,5 @@
+
+class <name>Controller(Controller):
+	def hello(name):
+		# self.request returns the request object of werkzeug
+		return Response('Hello from <name>Controller')
