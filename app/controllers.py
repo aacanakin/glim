@@ -1,14 +1,15 @@
 from glim.core import Controller
 from werkzeug.wrappers import Response
 
-from services import User
+from services import UserService
 
 # controllers reside here
 
 class BaseController(Controller):
 
     def hello(self):
-        User.register(full_name = "Aras Can Akin", title = "glim developer")
+        # User.register(full_name = "Aras Can Akin", title = "glim developer")
+        UserService.register()
         return Response('Welcome to glim!')
     def greet(self, name):
         return Response('Greetings %s' % name)
