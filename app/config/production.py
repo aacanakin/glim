@@ -1,4 +1,4 @@
-services = [
+facades = [
 	# bunch of services to be loaded up when web server starts
 ]
 
