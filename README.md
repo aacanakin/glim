@@ -15,7 +15,6 @@ glim currently has
 
 glim will have
 ==============
-- session, cookie module
 - extension system that users can integrate into project dynamically
 - commands module that enables easier to use command line utilities
 - drivers for redis, memcache and some popular message queue services
@@ -38,7 +37,6 @@ tada
 ====
 
 - Glim class should extend App
-- session & cookie
 - add before & after handlers for app boot
 - improve routing
     + filtering
