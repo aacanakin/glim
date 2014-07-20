@@ -1,4 +1,24 @@
 ```
+---------------------- v0.0.7 20/07/2014 ----------------------
+- SQLAlchemy initial model mapping is finished, need to cleanup
+- add orm session system from SQLAlchemy's sessionmaker & Session class
+- fixed an indentation bug that prevents web server boot
+- fixed a bug which raises a syntax error in routes file
+- code cleanups, delete trailing spaces in test app
+---------------------------------------------------------------
+
+---------------------- v0.0.6 24/05/2014 ----------------------
+- SQLAlchemy integration started
+- DB related classes are added into core
+- added mysql-python dependancy
+- removed cli.py, command line tools will be implemented w/ click
+- changed routes data structure
+- add feature for connecting multiple databases in config
+- add samples for glim app usage
+- services are changed into facades
+- Service layer is introduced in app context
+---------------------------------------------------------------
+
 ---------------------- v0.0.2 18/05/2014 ----------------------
 - config folder moved into app
 - static folder definition is disabled initially
