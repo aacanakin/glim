@@ -1,4 +1,4 @@
-glim - 0.0.2
+glim - 0.0.7
 ============
 
 glim is the lightweight MC (Model, Controller) framework on top of werkzeug inspired from play & laravel. The aim is to build an architecture for API developers. So, there isn't any ui, view - related components. The development philosophy here is to make the core small as possible but still not featureless.
