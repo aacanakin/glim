@@ -14,3 +14,6 @@ class Router(Facade):
 
 class Database(Facade):
 	pass
+
+class Orm(Facade):
+	pass
