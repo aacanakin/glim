@@ -1,7 +1,7 @@
 # application initiation script
 import os
-from glim.core import Config as C, Database as D, App
-from glim.facades import Config, Database, Session, Cookie
+from glim.core import Config as C, Database as D, Orm as O, App
+from glim.facades import Config, Database, Orm, Session, Cookie
 
 from werkzeug.serving import run_simple
 from werkzeug.wrappers import Request, Response
@@ -74,6 +74,7 @@ def start(host = '127.0.0.1', port = '8080', environment = 'development', use_re
         # boot database
         if Config.get('db'):
             Database.boot(D, Config.get('db'))
+            Orm.boot(O, Database.engines)
 
         # boot facades
         for facade in facades:
