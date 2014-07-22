@@ -3,3 +3,4 @@ SQLAlchemy
 click
 termcolor
 mysql-python
+redis
