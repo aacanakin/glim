@@ -27,6 +27,9 @@ class Glim:
             if isinstance(urls[key], dict):
                 self.flatten_urls(urls[key], current_key + key)
             # Otherwise, add the element to the result
+            elif isinstance(urls[key], (list, tuple)):
+                k = ','.join(urls[key])
+                ruleset[current_key] = k
             else:
                 ruleset[current_key + key] = urls[key]
         return ruleset
@@ -38,7 +41,26 @@ class Glim:
         try:
             endpoint, values = adapter.match()
             mcontroller = __import__('app.controllers', fromlist = ['controllers'])
-            endpoint_pieces = endpoint.split('.')
+
+            # detect filters
+            filters = endpoint.split(',')
+            endpoint_pieces = filters[-1].split('.')
+
+            # if there exists any filter defined
+            if len(filters) > 1:
+                filters = filters[:-1]
+                # here run filters
+                for f in filters:
+                    fpieces = f.split('.')
+                    cls = fpieces[0]
+                    fnc = fpieces[1]
+                    mfilter = __import__('app.controllers', fromlist = ['controllers'])
+                    obj = getattr(mfilter, cls)
+                    ifilter = obj(request)
+                    response = getattr(ifilter, fnc)(** values)
+                    if isinstance(response, Response):
+                        return response
+
             cls = endpoint_pieces[0]
 
             restful = False
