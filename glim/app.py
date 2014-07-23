@@ -12,14 +12,25 @@ from werkzeug.utils import redirect
 
 class Glim:
 
-    def __init__(self, urls = [], environment = 'development'):
+    def __init__(self, urls = {}, environment = 'development'):
 
-        self.urls = urls
+        ruleset = self.flatten_urls(urls)
+        print ruleset
         rule_map = []
-        for url,rule in self.urls.items():
+        for url,rule in ruleset.items():
             rule_map.append(Rule(url, endpoint = rule))
 
         self.url_map = Map(rule_map)
+
+    def flatten_urls(self, urls, current_key = "", ruleset = {}):
+        for key in urls:
+        # If the value is of type `dict`, then recurse with the value
+            if isinstance(urls[key], dict):
+                self.flatten_urls(urls[key], current_key + key)
+            # Otherwise, add the element to the result
+            else:
+                ruleset[current_key + key] = urls[key]
+        return ruleset
 
     def dispatch_request(self, request):
 
