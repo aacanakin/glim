@@ -20,13 +20,13 @@ config = {
 
 	# database configuration
 	'db' : {
-		'default' : {
-			'driver' : 'mysql',
-			'host' : 'localhost',
-			'schema' : 'test',
-			'user' : 'root',
-			'password' : '',
-		},
+		# 'default' : {
+		# 	'driver' : 'mysql',
+		# 	'host' : 'localhost',
+		# 	'schema' : 'test',
+		# 	'user' : 'root',
+		# 	'password' : '',
+		# },
 	},
 
 	# app specific configurations
