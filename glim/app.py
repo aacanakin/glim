@@ -15,7 +15,6 @@ class Glim:
     def __init__(self, urls = {}, environment = 'development'):
 
         ruleset = self.flatten_urls(urls)
-        print ruleset
         rule_map = []
         for url,rule in ruleset.items():
             rule_map.append(Rule(url, endpoint = rule))
