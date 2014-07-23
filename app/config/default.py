@@ -16,18 +16,18 @@ config = {
 		# 	'port' : '1234',
 		# 	'db'   : 0
 		# }
-	}
+	},
 
 	# database configuration
-	'db' : {
-		# 'default' : {
-		# 	'driver' : 'mysql',
-		# 	'host' : 'localhost',
-		# 	'schema' : 'test',
-		# 	'user' : 'root',
-		# 	'password' : '',
-		# },
-	},
+	# 'db' : {
+	# 	'default' : {
+	# 		'driver' : 'mysql',
+	# 		'host' : 'localhost',
+	# 		'schema' : 'test',
+	# 		'user' : 'root',
+	# 		'password' : '',
+	# 	},
+	# },
 
 	# app specific configurations
 	# reloader: detects changes in the code base and automatically restarts web server
