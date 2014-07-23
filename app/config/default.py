@@ -4,9 +4,19 @@ facades = [
 
 extensions = [
 	# bunch of extensions to be loaded up when web server starts
+	# 'redis'
 ]
 
 config = {
+
+	'extensions' : {
+
+		# 'redis' : {
+		# 	'host' : 'localhost',
+		# 	'port' : '1234',
+		# 	'db'   : 0
+		# }
+	}
 
 	# database configuration
 	'db' : {
