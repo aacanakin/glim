@@ -1,4 +1,4 @@
-glim - 0.0.7
+glim - 0.2.12
 ============
 
 glim is the lightweight MC (Model, Controller) framework on top of werkzeug inspired from play & laravel. The aim is to build an architecture for API developers. So, there isn't any ui, view - related components. The development philosophy here is to make the core small as possible but still not featureless.
@@ -6,6 +6,7 @@ glim is the lightweight MC (Model, Controller) framework on top of werkzeug insp
 glim currently has
 ==================
 - url routing w/ controller definitions
+- filtering w/ controller definitions
 - controller mapping with urls
 - configuration module for different environments
 - some command line utilities
@@ -36,12 +37,7 @@ glim isn't
 tada
 ====
 
-- Glim class should extend App
 - add before & after handlers for app boot
-- improve routing
-    + filtering
-    + grouping
-    + before & after handlers
 - glim command-line tools
     + add new app
     + add new model
@@ -60,7 +56,6 @@ tada
     + Mail
     + Message Queue
     + Filesystem IO
-    + SQLite driver
 - benchmarks & performance tests
     + apache bench
 - testing

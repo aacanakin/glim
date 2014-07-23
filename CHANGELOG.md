@@ -1,4 +1,19 @@
 ```
+---------------------- v0.2.12 20/07/2014 ----------------------
+- added storage folder for keeping logs, etc.
+- added initial prototypes for generating controllers, models & services from command line
+- removed cookie, session support from first stable release
+- changed configuration structure (See config/default.py)
+- add Orm to facades, add bootup after Db bootup
+- initial extension system integrated, default config changed accordingly
+- fixed an issue that prevents auto facade loading from config
+- fixed an issue that prevents config loading
+- fixed an issue that crashes everything
+- commented out sample db config, enabled extensions
+- added route filtering feature !
+- added route grouping feature !
+---------------------------------------------------------------
+
 ---------------------- v0.0.7 20/07/2014 ----------------------
 - SQLAlchemy initial model mapping is finished, need to cleanup
 - add orm session system from SQLAlchemy's sessionmaker & Session class
