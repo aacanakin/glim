@@ -4,30 +4,32 @@ facades = [
 
 extensions = [
 	# bunch of extensions to be loaded up when web server starts
-	# 'redis'
+	# 'gredis'
 ]
 
 config = {
 
 	'extensions' : {
 
-		# 'redis' : {
-		# 	'host' : 'localhost',
-		# 	'port' : '1234',
-		# 	'db'   : 0
+		# 'gredis' : {
+		# 	'default' : {
+		# 		'host' : 'localhost',
+		# 		'port' : '1234',
+		# 		'db'   : 0
+		# 	}
 		# }
 	},
 
 	# database configuration
-	# 'db' : {
-	# 	'default' : {
-	# 		'driver' : 'mysql',
-	# 		'host' : 'localhost',
-	# 		'schema' : 'test',
-	# 		'user' : 'root',
-	# 		'password' : '',
-	# 	},
-	# },
+	'db' : {
+		'default' : {
+			'driver' : 'mysql',
+			'host' : 'localhost',
+			'schema' : 'test',
+			'user' : 'root',
+			'password' : '',
+		},
+	},
 
 	# app specific configurations
 	# reloader: detects changes in the code base and automatically restarts web server
