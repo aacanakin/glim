@@ -1,6 +1,6 @@
 # application initiation script
 import os, sys, traceback
-from glim.core import Config as C, Database as D, Orm as O, App
+from glim.core import Facade, Config as C, Database as D, Orm as O, App
 from glim.facades import Config, Database, Orm, Session, Cookie
 
 from werkzeug.serving import run_simple
@@ -107,6 +107,21 @@ def start(host = '127.0.0.1', port = '8080', environment = 'development', use_re
         if Config.get('db'):
             Database.boot(D, Config.get('db'))
             Orm.boot(O, Database.engines)
+
+        # boot extensions
+        extensions = mconfig.extensions
+        for extension in extensions:
+
+            extension_config = Config.get('extensions.%s' % extension)
+            extension_mstr = 'ext.%s' % extension
+            extension_module = __import__(extension_mstr, fromlist = [extension])
+
+            extension_class = getattr(extension_module, extension.title())
+
+            # check if extension is bootable
+            if issubclass(extension_class, Facade):
+                cextension_class = getattr(extension_module, '%sExtension' % (extension.title()))
+                extension_class.boot(cextension_class, extension_config)
 
         # boot facades
         for facade in facades:
