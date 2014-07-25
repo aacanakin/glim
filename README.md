@@ -1,4 +1,4 @@
-glim - 0.2.12
+glim - 0.3.1
 ============
 
 glim is the lightweight MC (Model, Controller) framework on top of werkzeug inspired from play & laravel. The aim is to build an architecture for API developers. So, there isn't any ui, view - related components. The development philosophy here is to make the core small as possible but still not featureless.
@@ -12,7 +12,8 @@ glim currently has
 - some command line utilities
 - SQLAlchemy integration
 - sql query builder in model layer
-
+- an extension system that developers can integrate it to the base
+  framework
 
 glim will have
 ==============
@@ -45,13 +46,9 @@ tada
 - improve extension system
     + command line functions to create extensions
 - some nosql driver extensions
-    + Redis
     + Memcached
 - IoC implementation
 - Mockery implementation
-- Improve config system    
-    + Hold a default configuration for independent configs from environment
-    + Auto merge with default configuration
 - Some other extensions to develop
     + Mail
     + Message Queue

@@ -1,5 +1,12 @@
 ```
----------------------- v0.2.12 20/07/2014 ----------------------
+---------------------- v0.3.1 25/07/2014 ----------------------
+- initial extension system is finished!
+- written a sample extension namely "gredis" for test purposes
+- optional bootup for extension system implemented
+- deleted production config from code base
+---------------------------------------------------------------
+
+---------------------- v0.2.12 23/07/2014 ----------------------
 - added storage folder for keeping logs, etc.
 - added initial prototypes for generating controllers, models & services from command line
 - removed cookie, session support from first stable release
