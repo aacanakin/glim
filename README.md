@@ -34,28 +34,20 @@ glim isn't
 
 tada
 ----
-
-- more flexible facade booting in framework facades & extensions
-- add before & after handlers for app boot
-- glim command-line tools
-    + add new app
-    + add new model
-    + add new command
-- improve extension system
-    + command line functions to create extensions
-- some nosql driver extensions
+- session & cookie support
+- command layer implementation
+- some extensions to develop
     + Memcached
-- IoC implementation
-- Mockery implementation
-- Some other extensions to develop
     + Mail
     + Message Queue
     + Filesystem IO
-- benchmarks & performance tests
-    + apache bench
+- improve extension system
+    + command line functions to create extensions
+- performance
+    + optimization
+    + benchmarks
+        + apache bench
 - testing
     + Mockery implementation
     + unit tests (maybe)
-- coding standards & quality analysis
-- documentation on first stable release
 - package release for PyPI
