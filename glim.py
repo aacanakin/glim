@@ -2,6 +2,8 @@ from termcolor import colored
 from glim.app import start as appify
 # glim with use of click
 import click
+import shutil, errno
+import os
 
 @click.group()
 def glim():
@@ -16,29 +18,27 @@ def start(host, port, env):
     appify(host, port, env)
 
 @click.command()
-@click.argument('name')
-def new(name):
-    print colored('Created new app %s' % name, 'blue')
+def new():
+    # resolve prototype path and its childs
+    proto_path = 'glim/proto/project'
+    cpath = os.path.dirname(os.path.realpath(__file__))
+    try:
+        copytree(proto_path, cpath)
+        print colored('Created new glim app', 'blue')
+    except:
+        print colored('App already exists', 'red')
 
-@click.command()
-@click.argument('name')
-def model(name):
-    print colored('Creating new model %s' % name, 'blue')
-
-@click.command()
-@click.argument('name')
-def controller(name):
-    print colored('Creating new controller %s' % name, 'blue')
-
-@click.command()
-def routes():
-    print colored('Dumping all routes ..', 'blue')
+def copytree(src, dst, symlinks=False, ignore=None):
+    for item in os.listdir(src):
+        s = os.path.join(src, item)
+        d = os.path.join(dst, item)
+        if os.path.isdir(s):
+            shutil.copytree(s, d, symlinks, ignore)
+        else:
+            shutil.copy2(s, d)
 
 glim.add_command(start)
 glim.add_command(new)
-glim.add_command(model)
-glim.add_command(controller)
-glim.add_command(routes)
 
 if __name__ == '__main__':
     glim()
