@@ -1,4 +1,11 @@
 ```
+---------------------- v0.4.2 29/07/2014 ----------------------
+- introduced new command for generating a new glim app
+- app related folders removed from repo
+- database related files moved into glim.db module
+- added project prototype structure in glim/proto/project folder
+---------------------------------------------------------------
+
 ---------------------- v0.3.1 25/07/2014 ----------------------
 - initial extension system is finished!
 - written a sample extension namely "gredis" for test purposes
