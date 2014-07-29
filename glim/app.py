@@ -1,6 +1,7 @@
 # application initiation script
 import os, sys, traceback
-from glim.core import Facade, Config as C, Database as D, Orm as O, App
+from glim.core import Facade, Config as C, App
+from glim.db import Database as D, Orm as O
 from glim.facades import Config, Database, Orm, Session, Cookie
 
 from werkzeug.serving import run_simple
@@ -23,10 +24,10 @@ class Glim:
 
     def flatten_urls(self, urls, current_key = "", ruleset = {}):
         for key in urls:
-        # If the value is of type `dict`, then recurse with the value
+            # If the value is of type `dict`, then recurse with the value
             if isinstance(urls[key], dict):
                 self.flatten_urls(urls[key], current_key + key)
-            # Otherwise, add the element to the result
+            # Else if the value is type of list, meaning it is a filter
             elif isinstance(urls[key], (list, tuple)):
                 k = ','.join(urls[key])
                 ruleset[current_key] = k
