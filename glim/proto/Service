@@ -1,8 +1,0 @@
-
-class <name>Service(Service):
-
-	# @staticmethod
-	# def manipulate_db_and_models():
-	# 	use DB.execute('SELECT 1') for raw sql queries
-	#	use ORM.add() to add objects into database
-	#   use ORM.commit() to commit the current database session provided by SQLAlchemy
