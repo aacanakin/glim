@@ -1,0 +1,23 @@
+tada
+----
+- controller function returns shouldn't be Response but text
+- facades could be more extensible
+    - getFacadeAccessor
+    - 
+- session & cookie support (w/out expiration)
+- command layer implementation
+- some extensions to develop
+    - Memcached
+    - Mail
+    - Message Queue
+    - Filesystem IO
+- improve extension system
+    - command line functions to create extensions
+- performance
+    - optimization
+    - benchmarks
+        - apache bench
+- testing
+    - Mockery implementation
+    - unit tests (maybe)
+- package release for PyPI
