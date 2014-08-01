@@ -17,3 +17,6 @@ class Database(Facade):
 
 class Orm(Facade):
 	pass
+
+class IoC(Facade):
+	pass

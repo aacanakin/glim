@@ -1,8 +1,8 @@
 # application initiation script
 import os, sys, traceback
-from glim.core import Facade, Config as C, App
+from glim.core import Facade, Config as C, IoC as ioc
 from glim.db import Database as D, Orm as O
-from glim.facades import Config, Database, Orm, Session, Cookie
+from glim.facades import Config, Database, Orm, Session, Cookie, IoC
 
 from werkzeug.serving import run_simple
 from werkzeug.wrappers import Request, Response
@@ -11,9 +11,11 @@ from werkzeug.exceptions import HTTPException, NotFound
 from werkzeug.wsgi import SharedDataMiddleware
 from werkzeug.utils import redirect
 
+from termcolor import colored
+
 class Glim:
 
-    def __init__(self, urls = {}, environment = 'development'):
+    def __init__(self, urls = {}):
 
         ruleset = self.flatten_urls(urls)
         rule_map = []
@@ -74,9 +76,9 @@ class Glim:
             obj = getattr(mcontroller, cls)
             instance = obj(request)
             if restful:
-                return getattr(instance, request.method.lower())(** values)
+                return Response(getattr(instance, request.method.lower())(** values))
             else:
-                return getattr(instance, fnc)(** values)
+                return Response(getattr(instance, fnc)(** values))
 
         except HTTPException, e:
             return e
@@ -92,60 +94,110 @@ class Glim:
 
         return self.wsgi_app(environ, start_response)
 
-def start(host = '127.0.0.1', port = '8080', environment = 'development', use_reloader = True):
+class App:
 
-    try :
+    def __init__(self, host = '127.0.0.1', port = 8080,  env = 'development'):
 
-        # boot config
-        mconfig = __import__('app.config.%s' % environment, fromlist = ['config'])
-        mroutes = __import__('app.routes', fromlist = ['routes'])
+        self.mconfig = self.import_module(module = 'app.config.%s' % env, frm = 'config')
+        self.boot_config()
+        self.boot_db()
+        self.boot_facades()
+        self.boot_extensions()
+        self.boot_ioc()
 
-        registry = mconfig.config
-        facades = mconfig.facades
+        # find out start
+        mstart = self.import_module('app.start', 'start')
+        self.before = mstart.before
+
+    def import_module(self, module, frm):
+
+        try:
+
+            m = __import__(module, fromlist = [frm])
+            return m
+
+        except Exception, e:
+
+            print traceback.format_exc()
+            exit()
+
+    def boot_config(self):
+
+        registry = self.mconfig.config
         Config.boot(C, registry)
 
-        # boot database
+    def boot_db(self):
+
         if Config.get('db'):
             Database.boot(D, Config.get('db'))
-            Orm.boot(O, Database.engines)
+            Orm.boot(o, Database.engines)
 
-        # boot extensions
-        extensions = mconfig.extensions
-        for extension in extensions:
+    def boot_facades(self):
 
-            extension_config = Config.get('extensions.%s' % extension)
-            extension_mstr = 'ext.%s' % extension
-            extension_module = __import__(extension_mstr, fromlist = [extension])
+        try:
 
-            extension_class = getattr(extension_module, extension.title())
+            facades = self.mconfig.facades
 
-            # check if extension is bootable
-            if issubclass(extension_class, Facade):
-                cextension_class = getattr(extension_module, '%sExtension' % (extension.title()))
-                extension_class.boot(cextension_class, extension_config)
+            # boot facades
+            for facade in facades:
+                core_mstr = 'glim.core'
+                facade_mstr = 'glim.facades'
 
-        # boot facades
-        for facade in facades:
-            core_mstr = 'glim.core'
-            facade_mstr = 'glim.facades'
+                fromlist = facade
 
-            fromlist = facade
+                core_module = __import__(core_mstr, fromlist = [facade])
+                facade_module = __import__(facade_mstr, fromlist = [fromlist])
 
-            core_module = __import__(core_mstr, fromlist = [facade])
-            facade_module = __import__(facade_mstr, fromlist = [fromlist])
+                core_class = getattr(core_module, facade)
+                facade_class = getattr(facade_module, facade)
 
-            core_class = getattr(core_module, facade)
-            facade_class = getattr(facade_module, facade)
+                config = Config.get(facade.lower())
+                facade_class.boot(core_class, config)
 
-            config = Config.get(facade.lower())
-            facade_class.boot(core_class, config)
+        except Exception, e:
 
-        app = Glim(mroutes.urls)
+            print traceback.format_exc()
+            exit()
 
-        run_simple(host, int(port), app, use_debugger = Config.get('glim.debugger'), use_reloader = Config.get('glim.reloader'))
+    def boot_extensions(self, extensions = []):
 
-    except Exception, e:
+        try:
 
-        print traceback.format_exc()
-        print sys.exc_info()[0]
-        exit()
+            extensions = self.mconfig.extensions
+
+            for extension in extensions:
+
+                extension_config = Config.get('extensions.%s' % extension)
+                extension_mstr = 'ext.%s' % extension
+                extension_module = self.import_module(extension_mstr, extension)
+
+                extension_class = getattr(extension_module, extension.title())
+
+                # check if extension is bootable
+                if issubclass(extension_class, Facade):
+
+                    cextension_class = getattr(extension_module, '%sExtension' % (extension.title()))
+                    extension_class.boot(cextension_class, extension_config)
+
+        except Exception, e:
+
+            print traceback.format_exc()
+            exit()
+
+    def boot_ioc(self):
+        IoC.boot(ioc)
+
+    def start(self, host = '127.0.0.1', port = '8080', env = 'development'):
+
+        try:
+
+            self.before()
+            mroutes = self.import_module('app.routes', 'routes')
+            app = Glim(mroutes.urls)
+            print colored('Glim server started on %s environment' % env, 'green')
+            run_simple(host, int(port), app, use_debugger = Config.get('glim.debugger'), use_reloader = Config.get('glim.reloader'))
+
+        except Exception, e:
+
+            print traceback.format_exc()
+            exit()

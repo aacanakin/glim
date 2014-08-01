@@ -9,11 +9,14 @@ class Registry:
         self.registrar = registrar
 
     def get(self, key):
-        layers = key.split('.')
-        value = self.registrar
-        for key in layers:
-            value = value[key]
-        return value
+        try :
+            layers = key.split('.')
+            value = self.registrar
+            for key in layers:
+                value = value[key]
+            return value
+        except:
+            return None
 
     def set(self, key, value):
         target = self.registrar
@@ -53,33 +56,11 @@ class Router(Registry):
 class Extension(Registry):
     pass
 
-# IO subsystem
-class IO:
-    def __init__(self):
-        pass
-
-# App class is a simple dependancy injection kit plus some more functionality
-class App:
-
-    def __init__(self, registrar):
-        self.registrar = registrar
-
-    def bind(self, key, value):
-        App.registrar[key] = value
-
-    def resolve(self, key):
-        return App.registrar[key]
-
 # Base conroller class that extends all the controllers
 class Controller:
 
     def __init__(self, request):
         self.request = request
-
-class Service:
-
-    def __init__(self, session):
-        self.session = session
 
 # Rest controller that
 class RestController(Controller):
@@ -98,6 +79,22 @@ class RestController(Controller):
 
     def delete(self):
         pass
+
+class Service:
+    pass
+
+class IoC:
+    def __init__(self, instances = {}):
+        self.instances = instances
+
+    def bind(self, key, value):
+        self.instances[key] = value
+
+    def resolve(self, key):
+        try:
+            return self.instances[key]
+        except:
+            return None
 
 # metaclass for facade class
 class DeflectToInstance(type):
