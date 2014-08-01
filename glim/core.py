@@ -84,6 +84,7 @@ class Service:
     pass
 
 class IoC:
+
     def __init__(self, instances = {}):
         self.instances = instances
 
@@ -98,6 +99,7 @@ class IoC:
 
 # metaclass for facade class
 class DeflectToInstance(type):
+
     def __getattr__(selfcls, a): # selfcls in order to make clear it is a class object (as we are a metaclass)
         try:
             # first, inquiry the class itself
@@ -107,11 +109,13 @@ class DeflectToInstance(type):
             return getattr(selfcls.instance, a)
 
 class ClassNameDescriptor:
+
     def __get__(self, instance, owner):
         return owner.__name__
 
 # facade that is used to hold instances statically with boot method
 class Facade:
+
     __metaclass__ = DeflectToInstance
 
     instance = None
