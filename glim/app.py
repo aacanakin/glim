@@ -42,6 +42,7 @@ class Glim:
         adapter = self.url_map.bind_to_environ(request.environ)
 
         try:
+
             endpoint, values = adapter.match()
             mcontroller = __import__('app.controllers', fromlist = ['controllers'])
 
@@ -51,18 +52,21 @@ class Glim:
 
             # if there exists any filter defined
             if len(filters) > 1:
+
                 filters = filters[:-1]
                 # here run filters
                 for f in filters:
+
                     fpieces = f.split('.')
                     cls = fpieces[0]
                     fnc = fpieces[1]
                     mfilter = __import__('app.controllers', fromlist = ['controllers'])
                     obj = getattr(mfilter, cls)
                     ifilter = obj(request)
-                    response = getattr(ifilter, fnc)(** values)
-                    if isinstance(response, Response):
-                        return response
+                    raw = getattr(ifilter, fnc)(** values)
+
+                    if isinstance(raw, basestring):
+                        return Response(raw)
 
             cls = endpoint_pieces[0]
 
@@ -75,6 +79,7 @@ class Glim:
 
             obj = getattr(mcontroller, cls)
             instance = obj(request)
+
             if restful:
                 return Response(getattr(instance, request.method.lower())(** values))
             else:
