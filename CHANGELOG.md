@@ -1,5 +1,5 @@
 ```
----------------------- v0.5.5 29/07/2014 ----------------------
+---------------------- v0.5.5 02/08/2014 ----------------------
 - added IoC facade for instance binding & resolving
 - added feature for returning either Response object or basestring in controllers
 - added feature for registering a callback before web server starts
