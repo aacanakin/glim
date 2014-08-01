@@ -13,6 +13,18 @@ from werkzeug.utils import redirect
 
 from termcolor import colored
 
+def import_module(module, frm):
+
+    try:
+
+        m = __import__(module, fromlist = [frm])
+        return m
+
+    except Exception, e:
+
+        print traceback.format_exc()
+        exit()
+
 class Glim:
 
     def __init__(self, urls = {}):
@@ -25,6 +37,7 @@ class Glim:
         self.url_map = Map(rule_map)
 
     def flatten_urls(self, urls, current_key = "", ruleset = {}):
+
         for key in urls:
             # If the value is of type `dict`, then recurse with the value
             if isinstance(urls[key], dict):
@@ -32,9 +45,10 @@ class Glim:
             # Else if the value is type of list, meaning it is a filter
             elif isinstance(urls[key], (list, tuple)):
                 k = ','.join(urls[key])
-                ruleset[current_key] = k
+                ruleset[current_key + key] = k
             else:
                 ruleset[current_key + key] = urls[key]
+
         return ruleset
 
     def dispatch_request(self, request):
@@ -44,7 +58,7 @@ class Glim:
         try:
 
             endpoint, values = adapter.match()
-            mcontroller = __import__('app.controllers', fromlist = ['controllers'])
+            mcontroller = import_module('app.controllers', 'controllers')
 
             # detect filters
             filters = endpoint.split(',')
@@ -68,6 +82,9 @@ class Glim:
                     if isinstance(raw, basestring):
                         return Response(raw)
 
+                    if isinstance(raw, Response):
+                        return raw
+
             cls = endpoint_pieces[0]
 
             restful = False
@@ -80,10 +97,24 @@ class Glim:
             obj = getattr(mcontroller, cls)
             instance = obj(request)
 
+            raw = None
             if restful:
-                return Response(getattr(instance, request.method.lower())(** values))
+                raw = getattr(instance, request.method.lower()(** values))
             else:
-                return Response(getattr(instance, fnc)(** values))
+                raw = getattr(instance, fnc)(** values)
+
+            if isinstance(raw, Response):
+
+                print 'response is Response()'
+                return raw
+
+            elif isinstance(raw, basestring):
+
+                print 'response is string'
+                return Response(raw)
+
+            else:
+                return Response('not found')
 
         except HTTPException, e:
             return e
@@ -103,7 +134,7 @@ class App:
 
     def __init__(self, host = '127.0.0.1', port = 8080,  env = 'development'):
 
-        self.mconfig = self.import_module(module = 'app.config.%s' % env, frm = 'config')
+        self.mconfig = import_module(module = 'app.config.%s' % env, frm = 'config')
         self.boot_config()
         self.boot_db()
         self.boot_facades()
@@ -111,20 +142,8 @@ class App:
         self.boot_ioc()
 
         # find out start
-        mstart = self.import_module('app.start', 'start')
-        self.before = mstart.before
-
-    def import_module(self, module, frm):
-
-        try:
-
-            m = __import__(module, fromlist = [frm])
-            return m
-
-        except Exception, e:
-
-            print traceback.format_exc()
-            exit()
+        mstart = import_module('app.start', 'start')
+        self.before = mstart.before    
 
     def boot_config(self):
 
@@ -174,7 +193,7 @@ class App:
 
                 extension_config = Config.get('extensions.%s' % extension)
                 extension_mstr = 'ext.%s' % extension
-                extension_module = self.import_module(extension_mstr, extension)
+                extension_module = import_module(extension_mstr, extension)
 
                 extension_class = getattr(extension_module, extension.title())
 
@@ -197,7 +216,7 @@ class App:
         try:
 
             self.before()
-            mroutes = self.import_module('app.routes', 'routes')
+            mroutes = import_module('app.routes', 'routes')
             app = Glim(mroutes.urls)
             print colored('Glim server started on %s environment' % env, 'green')
             run_simple(host, int(port), app, use_debugger = Config.get('glim.debugger'), use_reloader = Config.get('glim.reloader'))
