@@ -1,4 +1,13 @@
 ```
+---------------------- v0.5.5 29/07/2014 ----------------------
+- added IoC facade for instance binding & resolving
+- added feature for returning either Response object or basestring in controllers
+- added feature for registering a callback before web server starts
+- made code organization in web server bootups & start. It's more object-oriented now
+- fixed a bug causing problems for filters that have string base returns
+- fixed a bug causing problems for root route filters
+---------------------------------------------------------------
+
 ---------------------- v0.4.2 29/07/2014 ----------------------
 - introduced new command for generating a new glim app
 - app related folders removed from repo
