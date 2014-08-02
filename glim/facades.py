@@ -9,9 +9,6 @@ class Session(Facade):
 class Cookie(Facade):
 	pass
 
-class Router(Facade):
-	pass
-
 class Database(Facade):
 	pass
 

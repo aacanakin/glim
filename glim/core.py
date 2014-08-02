@@ -44,10 +44,6 @@ class Session(Registry):
 class Cookie(Registry):
     pass
 
-# Route class
-class Router(Registry):
-    pass
-
 class IoC:
 
     def __init__(self, instances = {}):
