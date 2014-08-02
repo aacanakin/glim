@@ -41,6 +41,9 @@ config = {
 		'sessions' : {
 			'id_header' : 'glim_session',
 			'path' : 'app/storage/sessions'
+		},
+		'views' : {
+			'path' : 'app/views'
 		}
 	}
 }
