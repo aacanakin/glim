@@ -4,7 +4,6 @@ tada
     - accessor should be implemented
     - add onboot function 
     - multiple booting w/ or w/out configuration
-- session & cookie support (w/out expiration)
 - command layer implementation
 - some extensions to develop
     - Memcached
