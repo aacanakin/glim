@@ -1,7 +1,8 @@
 # application initiation script
 import os, sys, traceback
-from glim.core import Facade, Config as C, IoC as ioc, View as view
-from glim.db import Database as D, Orm as O
+from glim.core import Facade, Config as config, IoC as ioc
+from glim.component import View as view
+from glim.db import Database as database, Orm as orm
 from glim.facades import Config, Database, Orm, Session, Cookie, IoC, View
 
 from werkzeug.serving import run_simple
@@ -164,13 +165,13 @@ class App:
     def boot_config(self):
 
         registry = self.mconfig.config
-        Config.boot(C, registry)
+        Config.boot(config, registry)
 
     def boot_db(self):
 
         if Config.get('db'):
-            Database.boot(D, Config.get('db'))
-            Orm.boot(o, Database.engines)
+            Database.boot(database, Config.get('db'))
+            Orm.boot(orm, Database.engines)
 
     def boot_facades(self):
 
@@ -191,8 +192,8 @@ class App:
                 core_class = getattr(core_module, facade)
                 facade_class = getattr(facade_module, facade)
 
-                config = Config.get(facade.lower())
-                facade_class.boot(core_class, config)
+                cfg = Config.get(facade.lower())
+                facade_class.boot(core_class, cfg)
 
         except Exception, e:
 
