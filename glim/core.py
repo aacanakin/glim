@@ -1,7 +1,3 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-
 # registry class is for generic framework components register function with configuration
 class Registry:
 
@@ -76,11 +72,6 @@ class DeflectToInstance(type):
         except AttributeError:
             # Not found, so try to inquiry the instance attribute:
             return getattr(selfcls.instance, a)
-
-# class ClassNameDescriptor:
-
-#     def __get__(self, instance, owner):
-#         return owner.__name__
 
 # facade that is used to hold instances statically with boot method
 class Facade:
