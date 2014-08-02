@@ -40,7 +40,7 @@ config = {
 		'debugger' : True,
 		'sessions' : {
 			'id_header' : 'glim_session',
-			'path' : 'storage/sessions'
+			'path' : 'app/storage/sessions'
 		}
 	}
 }
