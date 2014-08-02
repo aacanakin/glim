@@ -20,3 +20,6 @@ class Orm(Facade):
 
 class IoC(Facade):
 	pass
+
+class View(Facade):
+	pass

@@ -1,8 +1,8 @@
 # application initiation script
 import os, sys, traceback
-from glim.core import Facade, Config as C, IoC as ioc
+from glim.core import Facade, Config as C, IoC as ioc, View as view
 from glim.db import Database as D, Orm as O
-from glim.facades import Config, Database, Orm, Session, Cookie, IoC
+from glim.facades import Config, Database, Orm, Session, Cookie, IoC, View
 
 from werkzeug.serving import run_simple
 from werkzeug.wrappers import Request, Response
@@ -155,6 +155,7 @@ class App:
         self.boot_facades()
         self.boot_extensions()
         self.boot_ioc()
+        self.boot_view()
 
         # find out start
         mstart = import_module('app.start', 'start')
@@ -225,6 +226,9 @@ class App:
 
     def boot_ioc(self):
         IoC.boot(ioc)
+
+    def boot_view(self):
+        View.boot(view, Config.get('glim.views'))
 
     def start(self, host = '127.0.0.1', port = '8080', env = 'development'):
 

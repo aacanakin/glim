@@ -2,6 +2,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
+from jinja2 import Environment, PackageLoader
+
+from werkzeug.wrappers import Response
+
 # registry class is for generic framework components register function with configuration
 class Registry:
 
@@ -83,6 +87,26 @@ class RestController(Controller):
 class Service:
     pass
 
+class View:
+
+    def __init__(self, config):
+        self.config = config
+        paths = self.config['path'].split('/')
+        self.env = Environment(
+            loader = PackageLoader(paths[0],paths[1]
+        ))
+
+    # returns a template object given file
+    def get(self, file):
+        return self.env.get_template(file + '.html')
+
+    def source(self, file, *args, **kwargs):
+        tpl = self.get(file)
+        return tpl.render(*args, **kwargs)
+
+    def render(self, file, *args, **kwargs):
+        return Response(self.source(file, *args, **kwargs), mimetype='text/html')
+
 class IoC:
 
     def __init__(self, instances = {}):
@@ -108,10 +132,10 @@ class DeflectToInstance(type):
             # Not found, so try to inquiry the instance attribute:
             return getattr(selfcls.instance, a)
 
-class ClassNameDescriptor:
+# class ClassNameDescriptor:
 
-    def __get__(self, instance, owner):
-        return owner.__name__
+#     def __get__(self, instance, owner):
+#         return owner.__name__
 
 # facade that is used to hold instances statically with boot method
 class Facade:
