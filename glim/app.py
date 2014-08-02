@@ -10,6 +10,7 @@ from werkzeug.routing import Map, Rule
 from werkzeug.exceptions import HTTPException, NotFound
 from werkzeug.wsgi import SharedDataMiddleware
 from werkzeug.utils import redirect
+from werkzeug.contrib.sessions import FilesystemSessionStore
 
 from termcolor import colored
 
@@ -27,7 +28,14 @@ def import_module(module, frm):
 
 class Glim:
 
-    def __init__(self, urls = {}):
+    def __init__(self, urls = {}, config = {}):
+
+        self.config = config
+
+        try:
+            self.session_store = FilesystemSessionStore(self.config['sessions']['path'])
+        except:
+            self.session_store = None
 
         ruleset = self.flatten_urls(urls)
         rule_map = []
@@ -74,7 +82,7 @@ class Glim:
                     fpieces = f.split('.')
                     cls = fpieces[0]
                     fnc = fpieces[1]
-                    mfilter = __import__('app.controllers', fromlist = ['controllers'])
+                    mfilter = import_module('app.controllers', 'controllers')
                     obj = getattr(mfilter, cls)
                     ifilter = obj(request)
                     raw = getattr(ifilter, fnc)(** values)
@@ -104,17 +112,9 @@ class Glim:
                 raw = getattr(instance, fnc)(** values)
 
             if isinstance(raw, Response):
-
-                print 'response is Response()'
                 return raw
-
-            elif isinstance(raw, basestring):
-
-                print 'response is string'
-                return Response(raw)
-
             else:
-                return Response('not found')
+                return Response(raw)
 
         except HTTPException, e:
             return e
@@ -122,7 +122,22 @@ class Glim:
     def wsgi_app(self, environ, start_response):
 
         request = Request(environ)
+
+        if self.session_store is not None:
+
+            sid = request.cookies.get(self.config['sessions']['id_header'])
+
+            if sid is None:
+                request.session = self.session_store.new()
+            else:
+                request.session = self.session_store.get(sid)
+
         response = self.dispatch_request(request)
+
+        if self.session_store is not None:
+            if request.session.should_save:
+                self.session_store.save(request.session)
+                response.set_cookie(self.config['sessions']['id_header'], request.session.sid)
 
         return response(environ, start_response)
 
@@ -143,7 +158,7 @@ class App:
 
         # find out start
         mstart = import_module('app.start', 'start')
-        self.before = mstart.before    
+        self.before = mstart.before
 
     def boot_config(self):
 
@@ -169,8 +184,8 @@ class App:
 
                 fromlist = facade
 
-                core_module = __import__(core_mstr, fromlist = [facade])
-                facade_module = __import__(facade_mstr, fromlist = [fromlist])
+                core_module = import_module(core_mstr, facade)
+                facade_module = import_module(facade_mstr, facade)
 
                 core_class = getattr(core_module, facade)
                 facade_class = getattr(facade_module, facade)
@@ -217,7 +232,7 @@ class App:
 
             self.before()
             mroutes = import_module('app.routes', 'routes')
-            app = Glim(mroutes.urls)
+            app = Glim(mroutes.urls, Config.get('glim'))
             print colored('Glim server started on %s environment' % env, 'green')
             run_simple(host, int(port), app, use_debugger = Config.get('glim.debugger'), use_reloader = Config.get('glim.reloader'))
 
