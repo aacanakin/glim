@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from termcolor import colored
 from glim.app import App
 # glim with use of click
