@@ -37,6 +37,10 @@ config = {
 
 	'glim' : {
 		'reloader' : True,
-		'debugger' : True
+		'debugger' : True,
+		'sessions' : {
+			'id_header' : 'glim_session',
+			'path' : 'storage/sessions'
+		}
 	}
 }
