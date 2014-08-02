@@ -1,4 +1,17 @@
 ```
+---------------------- v0.7.8 02/08/2014 ----------------------
+- implemented session & cookie support
+- implemented view layer with jinja2
+- moved usable framework components to component module
+- moved storage folder into app
+- removed redis dependancy
+- removed ClassNameDescriptor
+- renamed registry class imports
+- updated config in prototype project
+- fixed a bug that prevents starting glim without python call
+- removed some prints
+---------------------------------------------------------------
+
 ---------------------- v0.5.5 02/08/2014 ----------------------
 - added IoC facade for instance binding & resolving
 - added feature for returning either Response object or basestring in controllers
