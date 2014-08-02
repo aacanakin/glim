@@ -3,4 +3,4 @@ SQLAlchemy
 click
 termcolor
 mysql-python
-redis
+jinja2
