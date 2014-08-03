@@ -1,5 +1,5 @@
-glim - 0.7.8
-============
+glim - 0.7.11
+=============
 Latest Documentation: http://aacanakin.github.io/glim
 
 Changelog: https://github.com/aacanakin/glim/blob/master/CHANGELOG.md

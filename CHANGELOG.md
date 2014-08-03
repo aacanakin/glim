@@ -1,4 +1,11 @@
 ```
+---------------------- v0.7.11 02/08/2014 ----------------------
+- added feature for static files to be loaded directly by /static route
+- added static folder to project prototype
+- fixed a bug that prevents static folder scripts from directly loading
+- made non-functional changes in code format(trailing spaces, comments)
+---------------------------------------------------------------
+
 ---------------------- v0.7.8 02/08/2014 ----------------------
 - implemented session & cookie support
 - implemented view layer with jinja2

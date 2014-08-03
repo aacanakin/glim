@@ -1,5 +1,7 @@
 tada
 ----
+- parametrized paths
+    - parametrized static folder
 - facades could be more extensible
     - accessor should be implemented
     - add onboot function 
