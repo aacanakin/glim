@@ -26,7 +26,7 @@ glim is
 - build on top of werkzeug
 - dependent on some great open source python projects (See reqs file)
 - great for API development
-- also great 
+- also great
 
 glim isn't
 ----------
