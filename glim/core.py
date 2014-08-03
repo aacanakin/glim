@@ -61,7 +61,8 @@ class IoC:
 # metaclass for facade class
 class DeflectToInstance(type):
 
-    def __getattr__(selfcls, a): # selfcls in order to make clear it is a class object (as we are a metaclass)
+    # selfcls in order to make clear it is a class object (as we are a metaclass)
+    def __getattr__(selfcls, a):
         try:
             # first, inquiry the class itself
             return super(DeflectToInstance, selfcls).__getattr__(a)
