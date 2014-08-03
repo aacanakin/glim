@@ -243,7 +243,6 @@ class App:
                 dirname = os.path.dirname
                 static_path = os.path.join(dirname(dirname(__file__)), 'app/static')
                 app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
-                    # '/static' : os.path.join(os.path.dirname(), 'app/static')
                     '/static' : static_path
                 })
             print colored('Glim server started on %s environment' % env, 'green')
