@@ -231,13 +231,21 @@ class App:
     def boot_view(self):
         View.boot(view, Config.get('glim.views'))
 
-    def start(self, host = '127.0.0.1', port = '8080', env = 'development'):
+    def start(self, host = '127.0.0.1', port = '8080', env = 'development', with_static = True):
 
         try:
 
             self.before()
             mroutes = import_module('app.routes', 'routes')
             app = Glim(mroutes.urls, Config.get('glim'))
+
+            if with_static:
+                dirname = os.path.dirname
+                static_path = os.path.join(dirname(dirname(__file__)), 'app/static')
+                app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
+                    # '/static' : os.path.join(os.path.dirname(), 'app/static')
+                    '/static' : static_path
+                })
             print colored('Glim server started on %s environment' % env, 'green')
             run_simple(host, int(port), app, use_debugger = Config.get('glim.debugger'), use_reloader = Config.get('glim.reloader'))
 
