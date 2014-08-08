@@ -20,13 +20,12 @@ $ python glim.py new inside project folder
 $ cp app/config/default.py app/config/development.py
 $ python glim.py start
 ```
-- that's it!
 
 glim is
 -------
 - small & lightweight
 - great for painless web app development
-- great for web api development
+- great for api development
 
 glim isn't
 ----------
@@ -34,3 +33,5 @@ glim isn't
 - django
 - flask
 - not stable currently :(
+
+NOTE: I'm changing lots of things currently. So the web server may not even start but feel free to play with it!
