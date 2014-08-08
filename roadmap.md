@@ -5,6 +5,8 @@
     + parametrized paths (i.e parametric static folder)
 - helpers
     + add helper functions to be used everywhere in framework
+- config
+    + the framework component configurations may be placed outside the `glim` dict
 - extension system
     + extensions should be folders not
     + extensions to develop
