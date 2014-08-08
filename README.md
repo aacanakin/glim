@@ -17,7 +17,8 @@ quick start
 - clone the repo
 - inside the folder run following;
 ```
-$ virtualenv venv & $. venv/bin/activate
+$ virtualenv venv
+$ . venv/bin/activate
 $ pip install -r requirements
 $ python glim.py new inside project folder
 $ cp app/config/default.py app/config/development.py
