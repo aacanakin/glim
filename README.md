@@ -12,11 +12,14 @@ The project depends on great open source python projects like SQLAlchemy, werkze
 quick start
 -----------
 - clone the repo
-- run `$ virtualenv venv` & `$. venv/bin/activate`
-- run `$ pip install -r requirements`
-- run `$ python glim.py new` inside project folder
-- run `$ cp app/config/default.py app/config/development.py`
-- run `$ python glim.py start`
+- inside the folder run following;
+```
+$ virtualenv venv & $. venv/bin/activate
+$ pip install -r requirements
+$ python glim.py new inside project folder
+$ cp app/config/default.py app/config/development.py
+$ python glim.py start
+```
 - that's it!
 
 glim is
