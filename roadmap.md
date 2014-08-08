@@ -15,6 +15,7 @@
         + Message Queue (AWSQ, Rabbit, Iron, etc)
     + command line functions to create extension
     + command line functions to publish extension config (that one may be tricky)
+    + extensions should be able to have commands (such as job producing/consuming, message queue stuff)
 - facades
     + should be more extensible
     + use (*args, **kwargs) in booting
