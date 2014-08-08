@@ -8,7 +8,7 @@
 - config
     + the framework component configurations may be placed outside the `glim` dict
 - extension system
-    + extensions should be folders not
+    + extensions should be folders, not standalone files
     + extensions to develop
         + Memcached
         + Mail
@@ -18,7 +18,7 @@
     + extensions should be able to have commands (such as job producing/consuming, message queue stuff)
 - facades
     + should be more extensible
-    + use (*args, **kwargs) in booting
+    + use `(*args, **kwargs)` in booting
     + facades should be registered not booted
     + accessor property for facades to hold instances with different names
     + support for w/ w/out configuration
@@ -37,4 +37,4 @@
 - performance
     + optimization
     + benchmarks
-        + apache bench
+
