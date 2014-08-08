@@ -1,6 +1,6 @@
 glim - 0.6.7
 =============
-Latest Documentation: http://aacanakin.github.io/glim
+Latest Documentation(not complete): http://aacanakin.github.io/glim
 Roadmap: https://github.com/aacanakin/glim/blob/master/roadmap.md
 
 Changelog: https://github.com/aacanakin/glim/blob/master/CHANGELOG.md
