@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
   name = 'glim',
   packages = ['glim'], # this must be the same as the name above
-  version = '0.7.8',
+  version = '0.6.7',
   description = 'An elegant mvc(s) framework',
   author = 'Aras Can Akin',
   author_email = 'aacanakin@gmail.com',

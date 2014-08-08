@@ -1,12 +1,12 @@
 ```
----------------------- v0.7.11 02/08/2014 ----------------------
+---------------------- v0.6.7 02/08/2014 ----------------------
 - added feature for static files to be loaded directly by /static route
 - added static folder to project prototype
 - fixed a bug that prevents static folder scripts from directly loading
-- made non-functional changes in code format(trailing spaces, comments)
+- minor non-functional changes
 ---------------------------------------------------------------
 
----------------------- v0.7.8 02/08/2014 ----------------------
+---------------------- v0.6.4 02/08/2014 ----------------------
 - implemented session & cookie support
 - implemented view layer with jinja2
 - moved usable framework components to component module
@@ -19,7 +19,7 @@
 - removed some prints
 ---------------------------------------------------------------
 
----------------------- v0.5.5 02/08/2014 ----------------------
+---------------------- v0.4.5 02/08/2014 ----------------------
 - added IoC facade for instance binding & resolving
 - added feature for returning either Response object or basestring in controllers
 - added feature for registering a callback before web server starts
@@ -28,21 +28,21 @@
 - fixed a bug causing problems for root route filters
 ---------------------------------------------------------------
 
----------------------- v0.4.2 29/07/2014 ----------------------
+---------------------- v0.3.3 29/07/2014 ----------------------
 - introduced new command for generating a new glim app
 - app related folders removed from repo
 - database related files moved into glim.db module
 - added project prototype structure in glim/proto/project folder
 ---------------------------------------------------------------
 
----------------------- v0.3.1 25/07/2014 ----------------------
+---------------------- v0.2.1 25/07/2014 ----------------------
 - initial extension system is finished!
 - written a sample extension namely "gredis" for test purposes
 - optional bootup for extension system implemented
-- deleted production config from code base
+- unnecessary file removals
 ---------------------------------------------------------------
 
----------------------- v0.2.12 23/07/2014 ----------------------
+---------------------- v0.1.12 23/07/2014 ----------------------
 - added storage folder for keeping logs, etc.
 - added initial prototypes for generating controllers, models & services from command line
 - removed cookie, session support from first stable release
@@ -71,8 +71,8 @@
 - added mysql-python dependancy
 - removed cli.py, command line tools will be implemented w/ click
 - changed routes data structure
-- add feature for connecting multiple databases in config
-- add samples for glim app usage
+- added feature for connecting multiple databases in config
+- added samples for glim app usage
 - services are changed into facades
 - Service layer is introduced in app context
 ---------------------------------------------------------------
