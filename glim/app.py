@@ -148,9 +148,14 @@ class Glim:
 
 class App:
 
-    def __init__(self, host = '127.0.0.1', port = 8080,  env = 'development'):
-
+    def __init__(self, env = 'development'):
         self.mconfig = import_module(module = 'app.config.%s' % env, frm = 'config')
+        if self.mconfig is None:
+            print colored('Configuration for %s not found' % env, 'red')
+            print colored('Run the following;', 'yellow')
+            print colored('$ cp app/config/default.py app/config/%s.py' % env, 'yellow')
+            exit()
+
         self.boot_config()
         self.boot_db()
         self.boot_facades()
