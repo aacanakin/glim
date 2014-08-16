@@ -11,7 +11,7 @@
 #
 # author: Aras Can Akin
 # description: An elegant python framework for the web
-# version: 0.6.7
+# version: 0.7.2
 
 from glim.app import App
 from glim.utils import import_module

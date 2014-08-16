@@ -1,4 +1,20 @@
 ```
+---------------------- v0.7.2 17/08/2014 ----------------------
+- updated gitignore not to include app related folders
+- removed not implemented Schema & Migration classes
+- added ascii glim!
+- added the new command layer for glim!
+- implemented start & new commands with the new command layer
+- added feature to create custom commands with use of booted objects
+- added feature to create commands with app object
+- moved host,port options to App.run() functions from constructor
+- fixed new command not generating a new app
+- copytree(), import_module() moved to glim.utils
+- removed click dependancy
+- made other small changes
+- rewritten app boot script
+---------------------------------------------------------------
+
 ---------------------- v0.6.7 02/08/2014 ----------------------
 - added feature for static files to be loaded directly by /static route
 - added static folder to project prototype

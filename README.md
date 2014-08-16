@@ -1,4 +1,4 @@
-glim - 0.6.7
+glim - 0.7.2
 =============
 [Documentation(not complete)](http://aacanakin.github.io/glim)
 
@@ -20,7 +20,7 @@ quick start
 $ virtualenv venv
 $ . venv/bin/activate
 $ pip install -r requirements
-$ python glim.py new inside project folder
+$ python glim.py new # inside project folder
 $ cp app/config/default.py app/config/development.py
 $ python glim.py start
 ```
