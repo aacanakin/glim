@@ -1,6 +1,18 @@
 #!/usr/bin/env python
+#          _
+#       | (_)          
+#   __ _| |_ _ __ ___  
+#  / _` | | | '_ ` _ \ 
+# | (_| | | | | | | | |
+#  \__, |_|_|_| |_| |_|
+#   __/ |              
+#  |___/               
+#
+#
+# author: Aras Can Akin
+# description: An elegant python framework for the web
+# version: 0.6.7
 
-from termcolor import colored
 from glim.app import App
 from glim.utils import import_module
 from glim.command import CommandAdapter
