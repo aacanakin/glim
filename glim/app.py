@@ -250,7 +250,7 @@ class App:
                 app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
                     '/static' : static_path
                 })
-            print colored('Glim server started on %s environment' % env, 'green')
+
             run_simple(host, int(port), app, use_debugger = Config.get('glim.debugger'), use_reloader = Config.get('glim.reloader'))
 
         except Exception, e:
