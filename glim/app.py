@@ -4,6 +4,7 @@ from glim.core import Facade, Config as config, IoC as ioc
 from glim.component import View as view
 from glim.db import Database as database, Orm as orm
 from glim.facades import Config, Database, Orm, Session, Cookie, IoC, View
+from glim.utils import import_module
 
 from werkzeug.serving import run_simple
 from werkzeug.wrappers import Request, Response
@@ -14,18 +15,6 @@ from werkzeug.utils import redirect
 from werkzeug.contrib.sessions import FilesystemSessionStore
 
 from termcolor import colored
-
-def import_module(module, frm):
-
-    try:
-
-        m = __import__(module, fromlist = [frm])
-        return m
-
-    except Exception, e:
-
-        print traceback.format_exc()
-        exit()
 
 class Glim:
 
