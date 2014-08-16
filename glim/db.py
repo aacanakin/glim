@@ -83,27 +83,3 @@ class Orm:
     def session(key = 'default'):
         self.active = key
         return self
-
-
-# class Migration:
-# 	def __init__(self, connection):
-# 		self.connection = connection
-
-# 	def up(self):
-# 		return
-
-# 	def down(self):
-# 		return
-
-# class Schema:
-# 	def __init__(self, connection):
-# 		self.connection = connection
-
-# 	def create(self):
-# 		pass
-
-# 	def alter(self):
-# 		pass
-
-# 	def drop(self):
-# 		pass
