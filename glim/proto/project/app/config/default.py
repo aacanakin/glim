@@ -30,20 +30,21 @@ config = {
 	# 		'password' : '',
 	# 	},
 	# },
+	'views' : {
+		'path' : 'app/views',
+	},
+
+	'sessions' : {
+		'id_header' : 'glim_session',
+		'path' : 'app/storage/sessions',
+	},
 	
 	# app specific configurations
 	# reloader: detects changes in the code base and automatically restarts web server
 	# debugger: enable werkzeug's default debugger
 
-	'glim' : {
+	'app' : {
 		'reloader' : True,
-		'debugger' : True,
-		'sessions' : {
-			'id_header' : 'glim_session',
-			'path' : 'app/storage/sessions'
-		},
-		'views' : {
-			'path' : 'app/views'
-		}
+		'debugger' : True,		
 	}
 }
