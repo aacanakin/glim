@@ -18,10 +18,10 @@ roadmap
     + command line functions to create extension
     + command line functions to publish extension config (that one may be tricky)
     + extensions should be able to have commands (such as job producing/consuming, message queue stuff)
-    + command line functions to create extensions
 - facades
     + should be more extensible
     + use `(*args, **kwargs)` in booting
+    + command line functions to create extensions
     + facades should be registered not booted
     + accessor property for facades to hold instances with different names
     + support for w/ w/out configuration
