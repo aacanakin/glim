@@ -4,6 +4,7 @@ from glim.core import Facade, Config as config, IoC as ioc
 from glim.component import View as view
 from glim.db import Database as database, Orm as orm
 from glim.facades import Config, Database, Orm, Session, Cookie, IoC, View
+
 from glim.utils import import_module
 
 from werkzeug.serving import run_simple
@@ -138,39 +139,37 @@ class Glim:
 class App:
 
     def __init__(self, env = 'development'):
-        self.mconfig = import_module(module = 'app.config.%s' % env, frm = 'config')
+        self.mconfig = import_module('app.config.%s' % env, 'config')
         if self.mconfig is None:
             print colored('Configuration for %s not found' % env, 'red')
             print colored('Run the following;', 'yellow')
+            print colored('$ python glim.py new', 'yellow')
             print colored('$ cp app/config/default.py app/config/%s.py' % env, 'yellow')
             exit()
 
-        self.boot_config()
-        self.boot_db()
-        self.boot_facades()
-        self.boot_extensions()
-        self.boot_ioc()
-        self.boot_view()
+        self.config = self.mconfig.config
+
+        self.register_config()
+        self.register_database()
+        self.register_facades()
+        self.register_extensions()
+        self.register_ioc()
+        self.register_view()
 
         # find out start
         mstart = import_module('app.start', 'start')
         self.before = mstart.before
 
-    def boot_config(self):
+    def register_config(self):
+        Config.register(config, self.config)
 
-        registry = self.mconfig.config
-        Config.boot(config, registry)
+    def register_database(self):
+        if 'db' in self.config.keys():
+            Database.register(database, self.config['db'])
+            Orm.register(orm, Database.engines)
 
-    def boot_db(self):
-
-        if Config.get('db'):
-            Database.boot(database, Config.get('db'))
-            Orm.boot(orm, Database.engines)
-
-    def boot_facades(self):
-
+    def register_facades(self):
         try:
-
             facades = self.mconfig.facades
 
             # boot facades
@@ -186,52 +185,46 @@ class App:
                 core_class = getattr(core_module, facade)
                 facade_class = getattr(facade_module, facade)
 
-                cfg = Config.get(facade.lower())
-                facade_class.boot(core_class, cfg)
+                cfg = self.config[facade.lower()]
+                facade_class.register(core_class, cfg)
 
         except Exception, e:
-
             print traceback.format_exc()
             exit()
 
-    def boot_extensions(self, extensions = []):
-
+    def register_extensions(self, extensions = []):
         try:
-
             extensions = self.mconfig.extensions
 
             for extension in extensions:
 
-                extension_config = Config.get('extensions.%s' % extension)
-                extension_mstr = 'ext.%s' % extension
+                extension_config = self.config['extensions.%s' % extension]
+                extension_mstr = 'app.ext.%s' % extension
                 extension_module = import_module(extension_mstr, extension)
 
                 extension_class = getattr(extension_module, extension.title())
 
                 # check if extension is bootable
                 if issubclass(extension_class, Facade):
-
                     cextension_class = getattr(extension_module, '%sExtension' % (extension.title()))
-                    extension_class.boot(cextension_class, extension_config)
+                    extension_class.register(cextension_class, extension_config)
 
         except Exception, e:
-
             print traceback.format_exc()
             exit()
 
-    def boot_ioc(self):
-        IoC.boot(ioc)
+    def register_ioc(self):
+        IoC.register(ioc)
 
-    def boot_view(self):
-        View.boot(view, Config.get('glim.views'))
+    def register_view(self):
+        if 'views' in self.config['views']:
+            View.register(view, self.config['views'])
 
     def start(self, host = '127.0.0.1', port = '8080', env = 'development', with_static = True):
-
         try:
-
             self.before()
             mroutes = import_module('app.routes', 'routes')
-            app = Glim(mroutes.urls, Config.get('glim'))
+            app = Glim(mroutes.urls, self.config['app'])
 
             if with_static:
                 dirname = os.path.dirname
@@ -240,7 +233,7 @@ class App:
                     '/static' : static_path
                 })
 
-            run_simple(host, int(port), app, use_debugger = Config.get('glim.debugger'), use_reloader = Config.get('glim.reloader'))
+            run_simple(host, int(port), app, use_debugger = self.config['app']['debugger'], use_reloader = self.config['app']['reloader'])
 
         except Exception, e:
 

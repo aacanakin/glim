@@ -77,7 +77,10 @@ class Facade:
 
     instance = None
 
+    # accessor is the object which will be registered during runtime
+    accessor = None
+
     @classmethod
-    def boot(cls, object, configuration = {}):
+    def register(cls, object, configuration = {}):
         if cls.instance is None:
             cls.instance = object(configuration)
