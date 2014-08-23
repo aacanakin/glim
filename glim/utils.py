@@ -1,13 +1,18 @@
 import shutil
 import os
+import traceback
 
 # function performs a parametric import statement, returns None if not found
-def import_module(module, frm):
+def import_module(module, frm, pass_errors = False):
     try:
         m = __import__(module, fromlist = [frm])
         return m
     except Exception, e:
-        return None
+        if pass_errors:
+            return None
+        else:
+            print traceback.format_exc()
+            return None
 
 # function performs a recursive copy of files and folders in the filesystem
 def copytree(src, dst, symlinks = False, ignore = None):

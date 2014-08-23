@@ -34,7 +34,7 @@ commandadapter = CommandAdapter(subparsers)
 commandadapter.register(glim.commands)
 
 # register app commands
-commandadapter.register(import_module('app.commands', 'commands'))
+commandadapter.register(import_module('app.commands', 'commands', pass_errors = True))
 
 # parse the args
 args = parser.parse_args()
