@@ -1,39 +1,48 @@
-roadmap
+Roadmap
 =======
+- package release for PyPI
+- logging
+    + no prints. use logging module
+- migrations
+    + rdb migrations to hold rdb changes
+    + custom migrate & rollback functions
+    + isolated connection that uses default connection but holds migrations in different db, sqlite db would be convenient
+    + should be an extension to glim
+- seeding
+    + Seeds could add/remove db mock rows
+    + seed & rollback functions
+    + isolated connection that uses default connection but holds migrations in different db, sqlite db would be convenient
+    + should be an extension to glim
 - app structure
-    + app folder should be completely seperate with extensions
-    + app folder may not be app folder but parametric
-    + generating new app from file tree instead of proto
     + parametrized paths (i.e parametric static folder)
-- helpers
-    + add helper functions to be used everywhere in framework
 - config
     + the framework component configurations may be placed outside the `glim` dict
+    + facades should be removed from config
+    + providers should be added to config after ServiceProvider implementation
 - extension system
-    + extensions should be folders, not standalone files
+    + extension should have an option to be;
+        * folders
+        * standalone files
     + extensions to develop
-        + Memcached
-        + Mail
-        + Message Queue (AWSQ, Rabbit, Iron, etc)
+        * Memcached
+        * Mail
+        * Message Queue (AWSQ, Rabbit, Iron, ZeroMQ etc)
     + command line functions to create extension
-    + command line functions to publish extension config (that one may be tricky)
     + extensions should be able to have commands (such as job producing/consuming, message queue stuff)
 - facades
     + should be more extensible
-    + use `(*args, **kwargs)` in booting
-    + command line functions to create extensions
-    + facades should be registered not booted
+    + should have an option to be registered by ServiceProvider
     + accessor property for facades to hold instances with different names
-    + support for w/ w/out configuration
 - exception handling
     + more verbose errors
+    + option not to print 
     + custom exceptions to specify the errors
     + colored exceptions :)
 - testing
     + Mockery implementation
     + unit tests (maybe)
-- package release for PyPI
 - performance
     + optimization
     + benchmarks
-
+- removing ego from project
+- add core features to readme
