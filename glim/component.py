@@ -3,7 +3,7 @@ from jinja2 import Environment, PackageLoader
 from werkzeug.wrappers import Response
 
 # Extension class
-class Extension(Registry):
+class Extension():
     pass
 
 # Base conroller class that extends all the controllers
