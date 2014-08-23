@@ -198,10 +198,9 @@ class App:
 
             for extension in extensions:
 
-                extension_config = self.config['extensions.%s' % extension]
-                extension_mstr = 'app.ext.%s' % extension
+                extension_config = self.config['extensions'][extension]
+                extension_mstr = 'ext.%s' % extension
                 extension_module = import_module(extension_mstr, extension)
-
                 extension_class = getattr(extension_module, extension.title())
 
                 # check if extension is bootable
@@ -236,6 +235,5 @@ class App:
             run_simple(host, int(port), app, use_debugger = self.config['app']['debugger'], use_reloader = self.config['app']['reloader'])
 
         except Exception, e:
-
             print traceback.format_exc()
             exit()
