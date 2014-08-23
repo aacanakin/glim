@@ -1,3 +1,5 @@
+from werkzeug.wrappers import Response as response
+
 # registry class is for generic framework components register function with configuration
 class Registry:
 
@@ -43,6 +45,8 @@ class Session(Registry):
 # Cookie Class
 class Cookie(Registry):
     pass
+
+Response = response
 
 class IoC:
 
