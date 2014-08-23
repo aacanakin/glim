@@ -1,3 +1,3 @@
 urls = {
-	#'/' : 'BaseController.hello'
+	'/' : 'BaseController.hello'
 }
