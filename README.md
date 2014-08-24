@@ -12,16 +12,36 @@ glim is the lightweight MVC(S) (Model, View, Controller, (Service)) framework on
 
 The project depends on great open source python projects like SQLAlchemy, werkzeug, jinja2, etc.
 
-quick start
+Features
+--------
+- A powerful routing system which has grouping & filtering
+- A model layer with use of SQLAlchemy's `declarative_base()`
+- A controller layer for request handling, service calling, etc.
+- A service layer to seperate database layer logic from models
+- An object oriented command line layer with use of `argparse`
+- An extension system that developers can integrate to the framework
+
+Quick Start
 -----------
 - clone the repo
-- inside the folder run following;
+- inside the project folder run following statements;
 ```
+# create a virtualenv
 $ virtualenv venv
+
+# activate the virtualenv
 $ . venv/bin/activate
+
+# install the package dependencies
 $ pip install -r requirements
-$ python glim.py new # inside project folder
+
+# initialize a new glim app
+$ python glim.py new
+
+# copy the sample configuration into the defined environment
 $ cp app/config/default.py app/config/development.py
+
+# start the web server
 $ python glim.py start
 ```
 
@@ -33,7 +53,6 @@ glim is
 
 glim isn't
 ----------
-- full-stack
 - django
 - flask
 - not stable currently :(
