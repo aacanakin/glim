@@ -1,6 +1,7 @@
 from command import GlimCommand
 from termcolor import colored
 from utils import copytree
+from glim.facades import Log
 import os
 import traceback
 
@@ -15,10 +16,9 @@ class NewCommand(GlimCommand):
 
 		try:
 			copytree(proto_path, currentpath)
-			print colored('Created new glim app', 'green')
+			Log.info('Created new glim app')
 		except Exception, e:
-			print colored('App already exists', 'red')
-		
+			Log.error('App already exists')
 
 class StartCommand(GlimCommand):
 
@@ -30,5 +30,5 @@ class StartCommand(GlimCommand):
 		self.add_argument("--port", help = "enter port", default = '8080')
 
 	def run(self, app):
-		print colored('Glim server started on %s environment' % self.args.env, 'green')
+		Log.info('Glim server started on %s environment' % self.args.env)
 		app.start(host = self.args.host, port = self.args.port)
