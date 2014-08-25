@@ -1,8 +1,6 @@
 Roadmap
 =======
 - package release for PyPI
-- logging
-    + no prints. use logging module
 - migrations
     + rdb migrations to hold rdb changes
     + custom migrate & rollback functions
@@ -20,9 +18,6 @@ Roadmap
     + facades should be removed from config
     + providers should be added to config after ServiceProvider implementation
 - extension system
-    + extension should have an option to be;
-        * folders
-        * standalone files
     + extensions to develop
         * Memcached
         * Mail
