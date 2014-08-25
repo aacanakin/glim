@@ -30,6 +30,13 @@ config = {
 	# 		'password' : '',
 	# 	},
 	# },
+	
+	'log' : {
+		'level' : 'info',
+		'format' : '[%(levelname)s] : %(message)s',
+		# 'file' : 'app/storage/logs/debug.log'
+	},
+
 	'views' : {
 		'path' : 'app/views',
 	},

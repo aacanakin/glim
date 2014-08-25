@@ -1,9 +1,13 @@
 # application initiation script
 import os, sys, traceback
+
 from glim.core import Facade, Config as config, IoC as ioc
+
 from glim.component import View as view
 from glim.db import Database as database, Orm as orm
-from glim.facades import Config, Database, Orm, Session, Cookie, IoC, View
+from glim.log import Log as log
+
+from glim.facades import Config, Database, Orm, Session, Cookie, IoC, View, Log
 
 from glim.utils import import_module
 
@@ -155,6 +159,7 @@ class App:
         self.register_extensions()
         self.register_ioc()
         self.register_view()
+        self.register_log()
 
         # find out start
         mstart = import_module('app.start', 'start')
@@ -218,6 +223,10 @@ class App:
     def register_view(self):
         if 'views' in self.config['views']:
             View.register(view, self.config['views'])
+
+    def register_log(self):
+        if 'log' in self.config:
+            Log.register(log, self.config['log'])
 
     def start(self, host = '127.0.0.1', port = '8080', env = 'development', with_static = True):
         try:

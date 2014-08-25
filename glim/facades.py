@@ -20,3 +20,6 @@ class IoC(Facade):
 
 class View(Facade):
 	pass
+
+class Log(Facade):
+	pass
