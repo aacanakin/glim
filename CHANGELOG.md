@@ -11,7 +11,7 @@
 - added feature for extensions to have command line utils
 - bunch of fixes in app startup
 - other minor fixes
--------------------------------------------------------------
+---------------------------------------------------------------
 
 ---------------------- v0.7.2 17/08/2014 ----------------------
 - updated gitignore not to include app related folders
