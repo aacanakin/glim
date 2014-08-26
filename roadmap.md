@@ -29,6 +29,8 @@ Roadmap
         * Memcached
         * Mail
         * Message Queue (AWSQ, Rabbit, Iron, ZeroMQ etc)
+        * MongoDB
+        * Cassandra
 - facades
     + should be more extensible
     + should have an option to be registered by ServiceProvider
