@@ -11,6 +11,13 @@ Roadmap
     + seed & rollback functions
     + isolated connection that uses default connection but holds migrations in different db, sqlite db would be convenient
     + should be an extension to glim
+- model layer
+    + renewing db connections & orm connections after db fails
+- tests
+    + facade tests
+    + component tests
+    + command layer tests
+    + ORM and DB API stress tests
 - app structure
     + parametrized paths (i.e parametric static folder)
 - config
