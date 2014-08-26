@@ -22,8 +22,6 @@ Roadmap
         * Memcached
         * Mail
         * Message Queue (AWSQ, Rabbit, Iron, ZeroMQ etc)
-    + command line functions to create extension
-    + extensions should be able to have commands (such as job producing/consuming, message queue stuff)
 - facades
     + should be more extensible
     + should have an option to be registered by ServiceProvider
