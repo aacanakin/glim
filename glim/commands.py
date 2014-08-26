@@ -16,9 +16,9 @@ class NewCommand(GlimCommand):
 
 		try:
 			copytree(proto_path, currentpath)
-			Log.info('Created new glim app')
+			print colored('A new glim app created successfully!', 'green')
 		except Exception, e:
-			Log.error('App already exists')
+			print colored('App already exists', 'red')
 
 class StartCommand(GlimCommand):
 
