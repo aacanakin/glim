@@ -25,6 +25,16 @@ class CommandAdapter:
                 cmd = c(self.subparsers)
                 self.commands.append(cmd)
 
+    def register_extension(self, module, extension):
+        if module is not None:
+            cmds = self.retrieve_commands(module)
+            commands = []
+
+            for c in cmds:
+                name = '%s:%s' % (extension, c.name)
+                cmd = c(self.subparsers, name)
+                self.commands.append(cmd)
+
     def match(self, args):
         command = None
         for c in self.commands:
@@ -49,7 +59,10 @@ class Command:
     description = 'base command'
 
     # parser is the root parser
-    def __init__(self, subparsers):
+    def __init__(self, subparsers, name = None):
+
+        if name is not None:
+            self.name = name
 
         self.subparsers = subparsers
         self.parser = self.subparsers.add_parser(

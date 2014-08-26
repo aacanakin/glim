@@ -24,10 +24,18 @@ import argparse
 
 description = "glim (0.6.7) ~ an elegant python framework for the web"
 
-parser = argparse.ArgumentParser(description = description)
-parser.add_argument('--env', '-e', default = 'development', help = 'choose application environment(development)')
-subparsers = parser.add_subparsers(help = 'commands')
+# register the global parser
+preparser = argparse.ArgumentParser(description = description, add_help = False)
+preparser.add_argument('--env', '-e', dest = 'env', default = 'development', help = 'choose application environment')
 
+# parse existing options
+namespace, extra = preparser.parse_known_args()
+env = namespace.env
+
+parser = argparse.ArgumentParser(parents = [preparser], description = description, add_help = True)
+subparsers = parser.add_subparsers(title = 'commands', help = 'commands')
+
+# initialize a command adapter with subparsers
 commandadapter = CommandAdapter(subparsers)
 
 # register glim commands
@@ -36,13 +44,14 @@ commandadapter.register(glim.commands)
 # register app commands
 commandadapter.register(import_module('app.commands', 'commands', pass_errors = True))
 
-# parse the args
-args = parser.parse_args()
+# check if a new app is being created
+new = True if 'new' in extra else False
+if new:
+	app = None
+else:
+	app = App(commandadapter, env)
 
-# try to create the app, if not make it None
-app = None
-if args.which != 'new':
-	app = App(args.env)
+args = parser.parse_args()
 
 command = commandadapter.match(args)
 commandadapter.dispatch(command, app)

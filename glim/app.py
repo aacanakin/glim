@@ -142,7 +142,8 @@ class Glim:
 
 class App:
 
-    def __init__(self, env = 'development'):
+    def __init__(self, commandadapter, env = 'development'):
+        self.commandadapter = commandadapter
         self.mconfig = import_module('app.config.%s' % env, 'config')
         if self.mconfig is None:
             print colored('Configuration for %s not found' % env, 'red')
@@ -154,13 +155,13 @@ class App:
         self.config = self.mconfig.config
 
         self.register_config()
+        self.register_log()
         self.register_database()
         self.register_facades()
         self.register_extensions()
         self.register_ioc()
         self.register_view()
-        self.register_log()
-
+        
         # find out start
         mstart = import_module('app.start', 'start')
         self.before = mstart.before
@@ -203,15 +204,28 @@ class App:
 
             for extension in extensions:
 
-                extension_config = self.config['extensions'][extension]
-                extension_mstr = 'ext.%s' % extension
-                extension_module = import_module(extension_mstr, extension)
-                extension_class = getattr(extension_module, extension.title())
+                ext_config = self.config['extensions'][extension]
+
+                # extension module base string
+                ext_bstr = 'ext.%s' % (extension)
+                # extension core module string
+                ext_cmstr = '%s.%s' % (ext_bstr, extension)
+                # extension module object
+                ext_module = import_module(ext_cmstr, extension)
+                # extension class
+                ext_class = getattr(ext_module, extension.title())
 
                 # check if extension is bootable
-                if issubclass(extension_class, Facade):
-                    cextension_class = getattr(extension_module, '%sExtension' % (extension.title()))
-                    extension_class.register(cextension_class, extension_config)
+                if issubclass(ext_class, Facade):
+                    cext_class = getattr(ext_module, '%sExtension' % (extension.title()))
+                    ext_class.register(cext_class, ext_config)
+
+                # register extension commands if exists
+                ext_cmdstr = '%s.%s' % (ext_bstr, 'commands')
+                ext_cmd_module = import_module(ext_cmdstr, 'commmands', True)
+                if ext_cmd_module is not None:
+                    self.commandadapter.register_extension(ext_cmd_module, extension)
+                
 
         except Exception, e:
             print traceback.format_exc()
@@ -227,6 +241,8 @@ class App:
     def register_log(self):
         if 'log' in self.config:
             Log.register(log, self.config['log'])
+        else:
+            Log.register(log)
 
     def start(self, host = '127.0.0.1', port = '8080', env = 'development', with_static = True):
         try:
