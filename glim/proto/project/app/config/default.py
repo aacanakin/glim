@@ -32,8 +32,8 @@ config = {
 	# },
 	
 	'log' : {
-		'level' : 'info',
-		'format' : '[%(levelname)s] : %(message)s',
+		# 'level' : 'info',
+		# 'format' : '[%(levelname)s] : %(message)s',
 		# 'file' : 'app/storage/logs/debug.log'
 	},
 

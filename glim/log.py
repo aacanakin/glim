@@ -11,8 +11,16 @@ class Log:
 		'critical': logging.CRITICAL
 	}
 
+	CONFIG = {
+		'level' : 'debug',
+		'format' : '%(message)s',
+	}
+
 	def __init__(self, config = {}):
-		self.config = config
+		if config:
+			self.config = config
+		else:
+			self.config = Log.CONFIG
 
 		lvl = Log.LEVELS[self.config['level']] if ('level' in self.config) else Log.LEVELS['info']
 		filepath = self.config['file'] if 'file' in self.config else None
