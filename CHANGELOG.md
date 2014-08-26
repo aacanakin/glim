@@ -1,4 +1,18 @@
 ```
+---------------------- v0.7.7 26/08/2014 ----------------------
+- refactored Facade booting into Facade registering
+- seperated sessions, views from glim config
+- added pass_errors variable to utils.import_module()
+- removed Extension class extending Registry
+- added Response to core module
+- disabled comments in the proto to make app say hello
+- added colorful logging with Log facade
+- added logging configuration to proto/default config
+- added feature for extensions to have command line utils
+- bunch of fixes in app startup
+- other minor fixes
+-------------------------------------------------------------
+
 ---------------------- v0.7.2 17/08/2014 ----------------------
 - updated gitignore not to include app related folders
 - removed not implemented Schema & Migration classes
