@@ -22,7 +22,7 @@ import glim.commands
 import traceback
 import argparse
 
-description = "glim (0.6.7) ~ an elegant python framework for the web"
+description = "glim ~ an elegant python framework for the web"
 
 # register the global parser
 preparser = argparse.ArgumentParser(description = description, add_help = False)
