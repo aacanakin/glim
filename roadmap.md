@@ -46,5 +46,3 @@ Roadmap
 - performance
     + optimization
     + benchmarks
-- removing ego from project
-- add core features to readme
