@@ -1,16 +1,24 @@
 Roadmap
 =======
 - package release for PyPI
-- migrations
-    + rdb migrations to hold rdb changes
-    + custom migrate & rollback functions
-    + isolated connection that uses default connection but holds migrations in different db, sqlite db would be convenient
-    + should be an extension to glim
-- seeding
-    + Seeds could add/remove db mock rows
-    + seed & rollback functions
-    + isolated connection that uses default connection but holds migrations in different db, sqlite db would be convenient
-    + should be an extension to glim
+- the framework should understand if its running in dev mode
+    + a dev mode switch maybe to run glim/cli.py
+    + automatically detect if glim is inside a virtual environment
+- extension system
+    + extensions to develop
+        * Memcached
+        * Mail
+        * Message Queue (AWSQ, Rabbit, Iron, ZeroMQ etc)
+        * MongoDB
+        * Cassandra
+        * migrations
+            + rdb migrations to hold rdb changes
+            + custom migrate & rollback functions
+            + isolated connection that uses default connection for migrating
+        * seeding
+            + Seeds could add/remove db mock rows
+            + seed & rollback functions
+            + isolated connection that uses default connection for seeding
 - model layer
     + renewing db connections & orm connections after db fails
 - tests
@@ -24,13 +32,6 @@ Roadmap
     + the framework component configurations may be placed outside the `glim` dict
     + facades should be removed from config
     + providers should be added to config after ServiceProvider implementation
-- extension system
-    + extensions to develop
-        * Memcached
-        * Mail
-        * Message Queue (AWSQ, Rabbit, Iron, ZeroMQ etc)
-        * MongoDB
-        * Cassandra
 - facades
     + should be more extensible
     + should have an option to be registered by ServiceProvider
