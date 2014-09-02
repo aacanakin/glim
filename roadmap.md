@@ -19,6 +19,8 @@ Roadmap
             + Seeds could add/remove db mock rows
             + seed & rollback functions
             + isolated connection that uses default connection for seeding
+        * job system
+            + job producing/consuming using redis, rmq or zmq
 - model layer
     + renewing db connections & orm connections after db fails
 - tests
@@ -29,7 +31,6 @@ Roadmap
 - app structure
     + parametrized paths (i.e parametric static folder)
 - config
-    + the framework component configurations may be placed outside the `glim` dict
     + facades should be removed from config
     + providers should be added to config after ServiceProvider implementation
 - facades
