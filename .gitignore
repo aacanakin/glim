@@ -59,3 +59,5 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+
+register.py
