@@ -1,9 +1,11 @@
-from command import GlimCommand
-from termcolor import colored
-from utils import copytree
-from glim.facades import Log
 import os
-import traceback
+from termcolor import colored
+
+from glim.command import GlimCommand
+from glim.utils import copytree
+from glim.facades import Log
+
+import glim.paths as paths
 
 class NewCommand(GlimCommand):
 
@@ -11,13 +13,14 @@ class NewCommand(GlimCommand):
 	description = 'generates a new glim app'
 
 	def run(self, app):
-		proto_path = 'glim/proto/project'
-		currentpath = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+		project_path = os.getcwd()
+		proto_path = paths.PROTO_PATH
 
 		try:
-			copytree(proto_path, currentpath)
+			copytree(proto_path, project_path)
 			print colored('A new glim app created successfully!', 'green')
 		except Exception, e:
+			print e
 			print colored('App already exists', 'red')
 
 class StartCommand(GlimCommand):
