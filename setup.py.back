@@ -15,10 +15,16 @@ except ImportError:
 
 setup(
   name = 'glim',
+<<<<<<< HEAD
   packages = find_packages(),
   version = '0.7.7',
   description = 'A new mvc(s) framework for the web',
   long_description = read('README.rst'),
+=======
+  packages = ['glim'], # this must be the same as the name above
+  version = '0.7.7',
+  description = 'An elegant mvc(s) framework',
+>>>>>>> FETCH_HEAD
   author = 'Aras Can Akin',
   author_email = 'aacanakin@gmail.com',
   entry_points={
