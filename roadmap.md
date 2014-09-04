@@ -5,6 +5,7 @@ Roadmap
     + a dev mode switch maybe to run glim/cli.py
     + automatically detect if glim is inside a virtual environment
 - extension system
+    + remove extensions list from config, auto detect from config dict
     + extensions to develop
         * Memcached
         * Mail
