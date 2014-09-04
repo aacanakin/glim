@@ -1,4 +1,16 @@
 ```
+---------------------- v0.7.8 04/09/2014 ----------------------
+- PYPI package release !!
+- fixed loads of pypi bugs
+- fixed loads of import bugs when loaded from pypi
+- added detection of dev or pypi mode
+- added paths module to find out framework, projects paths
+- refactored glim.py into glim/cli.py
+- moved proto into protoype
+- improved import_module() in glim.utils
+- seperated glim.app module into glim.app & glim.dispatch
+---------------------------------------------------------------
+
 ---------------------- v0.7.7 26/08/2014 ----------------------
 - refactored Facade booting into Facade registering
 - seperated sessions, views from glim config

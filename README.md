@@ -1,4 +1,4 @@
-glim - 0.7.7
+glim - 0.7.8
 ============
 
 [Documentation(not complete)](http://aacanakin.github.io/glim)

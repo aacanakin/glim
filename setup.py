@@ -18,7 +18,7 @@ setup(
   author_email = 'aacanakin@gmail.com',
   name = 'glim',
   packages = find_packages(),
-  version = '0.7.7',
+  version = '0.7.8',
   description = 'A new mvc(s) framework for the web',
   long_description = read('README.rst'),
   entry_points={
