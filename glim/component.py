@@ -1,6 +1,7 @@
-from glim.core import Registry
 from jinja2 import Environment, PackageLoader
 from werkzeug.wrappers import Response
+
+from glim.core import Registry
 
 # Extension class
 class Extension():
@@ -51,4 +52,4 @@ class View:
         return tpl.render(*args, **kwargs)
 
     def render(self, file, *args, **kwargs):
-        return Response(self.source(file, *args, **kwargs), mimetype='text/html')
+        return Response(self.source(file, *args, **kwargs), mimetype = 'text/html')
