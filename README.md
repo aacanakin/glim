@@ -58,7 +58,7 @@ $ virtualenv venv
 $ . venv/bin/activate
 
 # install dependencies
-$ pip install -r glim/requirements
+$ pip install -r requirements
 
 # generate a new app
 $ python glim/cli.py new
