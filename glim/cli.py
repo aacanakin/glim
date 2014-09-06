@@ -27,7 +27,7 @@ import argparse
 import os
 import sys
 
-description = "glim ~ an elegant python framework for the web"
+description = "glim ~ a modern python framework for the web"
 
 def main():
 	# register the global parser
