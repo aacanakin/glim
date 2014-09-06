@@ -53,6 +53,13 @@ Alternative Installation (dev mode)
 # clone the repo inside the project folder
 $ git clone git@github.com:aacanakin/glim.git
 
+# create & virtualenv
+$ virtualenv venv
+$ . venv/bin/activate
+
+# install dependencies
+$ pip install -r glim/requirements
+
 # generate a new app
 $ python glim/cli.py new
 
