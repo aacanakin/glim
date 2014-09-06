@@ -47,6 +47,22 @@ $ cp app/config/default.py app/config/development.py
 $ glim start
 ```
 
+Alternative Installation (dev mode)
+-----------------------------------
+```
+# clone the repo inside the project folder
+$ git clone git@github.com:aacanakin/glim.git
+
+# generate a new app
+$ python glim/cli.py new
+
+# copy the sample configuration
+$ cp app/config/default.py app/config/development.py 
+
+# run the web server
+$ python glim/cli.py start
+```
+
 glim is
 -------
 - small & lightweight
