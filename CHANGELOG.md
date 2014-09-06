@@ -1,4 +1,12 @@
 ```
+---------------------- v0.7.9 06/09/2014 ----------------------
+- fixed static path not registering SharedDataMiddleware
+- added feature for static paths to be dynamically configured with url
+- fixed a bug on app that prevents view layer from booting
+- removed facades, extensions from default config
+- added feature for extensions to be smartly registered from config
+---------------------------------------------------------------
+
 ---------------------- v0.7.8 04/09/2014 ----------------------
 - PYPI package release !!
 - fixed loads of pypi bugs
