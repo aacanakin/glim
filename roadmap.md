@@ -1,9 +1,5 @@
 Roadmap
 =======
-- facades
-    + should be more extensible
-    + should have an option to be registered by Provider with custom registrations
-    + accessor property for facades to hold instances with different names
 - extension system
     + extensions to develop
         * Memcached
@@ -21,6 +17,10 @@ Roadmap
             + isolated connection that uses default connection for seeding
         * job system
             + job producing/consuming using redis, rmq or zmq
+- facades
+    + should be more extensible
+    + should have an option to be registered by Provider with custom registrations
+    + accessor property for facades to hold instances with different names
 - model layer
     + renewing db connections & orm connections after db fails
 - tests
