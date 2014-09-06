@@ -29,7 +29,8 @@ config = {
 	},
 
 	'views' : {
-		'path' : 'app/views',
+		# package to be loaded by jinja2
+		'package' : 'app.views'
 	},
 
 	'sessions' : {

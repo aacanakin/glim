@@ -82,7 +82,7 @@ class App:
         IoC.register(ioc)
 
     def register_view(self):
-        if 'views' in self.config['views']:
+        if 'views' in self.config:
             View.register(view, self.config['views'])
 
     def register_log(self):
