@@ -49,11 +49,7 @@ class App:
 
     def register_extensions(self, extensions = []):
         try:
-            extensions = self.mconfig.extensions
-
-            for extension in extensions:
-
-                ext_config = self.config['extensions'][extension]
+            for extension, config in self.config['extensions'].items():
 
                 # extension module base string
                 ext_bstr = 'ext.%s' % (extension)
@@ -70,7 +66,7 @@ class App:
                 # check if extension is bootable
                 if issubclass(ext_class, Facade):
                     cext_class = getattr(ext_module, '%sExtension' % (extension.title()))
-                    ext_class.register(cext_class, ext_config)
+                    ext_class.register(cext_class, config)
 
                 # register extension commands if exists
                 ext_cmdstr = '%s.%s' % (ext_bstr, 'commands')
@@ -78,10 +74,9 @@ class App:
                 ext_cmd_module = import_module(ext_cmdstr, pass_errors = True)
                 if ext_cmd_module is not None:
                     self.commandadapter.register_extension(ext_cmd_module, extension)
-                
+
         except Exception, e:
-            print traceback.format_exc()
-            exit()
+            Log.error(e)
 
     def register_ioc(self):
         IoC.register(ioc)

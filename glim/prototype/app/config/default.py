@@ -1,12 +1,3 @@
-facades = [
-	# bunch of services to be loaded up when web server starts
-]
-
-extensions = [
-	# bunch of extensions to be loaded up when web server starts
-	# 'gredis'
-]
-
 config = {
 
 	'extensions' : {
