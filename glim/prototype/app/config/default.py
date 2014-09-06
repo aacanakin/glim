@@ -1,3 +1,6 @@
+import os
+import glim.paths
+
 config = {
 
 	'extensions' : {
@@ -44,6 +47,10 @@ config = {
 
 	'app' : {
 		'reloader' : True,
-		'debugger' : True,		
+		'debugger' : True,
+		'static' : {
+			'path' : glim.paths.STATIC_PATH,
+			'url'  : '/static'
+		}
 	}
 }

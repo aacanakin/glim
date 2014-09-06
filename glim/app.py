@@ -91,17 +91,15 @@ class App:
         else:
             Log.register(log)
 
-    def start(self, host = '127.0.0.1', port = '8080', env = 'development', with_static = True):
+    def start(self, host = '127.0.0.1', port = '8080', env = 'development'):
         try:
             self.before()
             mroutes = import_module('app.routes')
             app = Glim(mroutes.urls, self.config['app'])
 
-            if with_static:
-                dirname = os.path.dirname
-                static_path = os.path.join(dirname(dirname(__file__)), 'app/static')
+            if 'static' in self.config['app']:
                 app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
-                    '/static' : static_path
+                    self.config['app']['static']['url'] : self.config['app']['static']['path']
                 })
 
             run_simple(host, int(port), app, use_debugger = self.config['app']['debugger'], use_reloader = self.config['app']['reloader'])

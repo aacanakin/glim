@@ -3,9 +3,13 @@ from termcolor import colored
 
 PROJECT_PATH = os.getcwd()
 APP_PATH = os.path.join(PROJECT_PATH, 'app')
-EXT_PATH = os.path.join(PROJECT_PATH, 'ext')
 GLIM_ROOT_PATH = os.path.dirname(os.path.dirname(__file__))
 PROTO_PATH = os.path.join(os.path.dirname(__file__), 'prototype')
+
+EXT_PATH = os.path.join(PROJECT_PATH, 'ext')
+VIEWS_PATH = os.path.join(APP_PATH, 'views')
+STATIC_PATH = os.path.join(APP_PATH, 'static')
+STORAGE_PATH = os.path.join(APP_PATH, 'storage')
 
 import sys
 from pprint import pprint as p
