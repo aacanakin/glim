@@ -4,11 +4,10 @@ import glim.paths
 config = {
 
 	'extensions' : {
-
 		# 'gredis' : {
 		# 	'default' : {
 		# 		'host' : 'localhost',
-		# 		'port' : '1234',
+		# 		'port' : '6379',
 		# 		'db'   : 0
 		# 	}
 		# }
