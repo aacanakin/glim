@@ -1,11 +1,16 @@
 Roadmap
 =======
-- package release for PyPI
-- the framework should understand if its running in dev mode
-    + a dev mode switch maybe to run glim/cli.py
-    + automatically detect if glim is inside a virtual environment
-- extension system
+- app structure
+    + parametrized paths (i.e parametric static folder)
+- config
     + remove extensions list from config, auto detect from config dict
+    + facades should be removed from config
+    + providers should be added to config after implementation
+- facades
+    + should be more extensible
+    + should have an option to be registered by Provider with custom registrations
+    + accessor property for facades to hold instances with different names
+- extension system
     + extensions to develop
         * Memcached
         * Mail
@@ -29,15 +34,6 @@ Roadmap
     + component tests
     + command layer tests
     + ORM and DB API stress tests
-- app structure
-    + parametrized paths (i.e parametric static folder)
-- config
-    + facades should be removed from config
-    + providers should be added to config after ServiceProvider implementation
-- facades
-    + should be more extensible
-    + should have an option to be registered by ServiceProvider
-    + accessor property for facades to hold instances with different names
 - exception handling
     + more verbose errors
     + option not to print 
