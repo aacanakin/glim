@@ -38,9 +38,10 @@ class View:
 
     def __init__(self, config):
         self.config = config
-        paths = self.config['path'].split('/')
+        package, folder = self.config['package'].split('.')
+
         self.env = Environment(
-            loader = PackageLoader(paths[0],paths[1]
+            loader = PackageLoader(package, folder
         ))
 
     # returns a template object given file

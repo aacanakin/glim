@@ -45,15 +45,13 @@ class App:
     def register_database(self):
         if 'db' in self.config.keys():
             Database.register(database, self.config['db'])
-            Orm.register(orm, Database.engines)
+            if 'orm' in self.config.keys():
+                if self.config['orm']:
+                    Orm.register(orm, Database.engines)
 
     def register_extensions(self, extensions = []):
         try:
-            extensions = self.mconfig.extensions
-
-            for extension in extensions:
-
-                ext_config = self.config['extensions'][extension]
+            for extension, config in self.config['extensions'].items():
 
                 # extension module base string
                 ext_bstr = 'ext.%s' % (extension)
@@ -70,7 +68,7 @@ class App:
                 # check if extension is bootable
                 if issubclass(ext_class, Facade):
                     cext_class = getattr(ext_module, '%sExtension' % (extension.title()))
-                    ext_class.register(cext_class, ext_config)
+                    ext_class.register(cext_class, config)
 
                 # register extension commands if exists
                 ext_cmdstr = '%s.%s' % (ext_bstr, 'commands')
@@ -78,16 +76,15 @@ class App:
                 ext_cmd_module = import_module(ext_cmdstr, pass_errors = True)
                 if ext_cmd_module is not None:
                     self.commandadapter.register_extension(ext_cmd_module, extension)
-                
+
         except Exception, e:
-            print traceback.format_exc()
-            exit()
+            Log.error(e)
 
     def register_ioc(self):
         IoC.register(ioc)
 
     def register_view(self):
-        if 'views' in self.config['views']:
+        if 'views' in self.config:
             View.register(view, self.config['views'])
 
     def register_log(self):
@@ -96,17 +93,15 @@ class App:
         else:
             Log.register(log)
 
-    def start(self, host = '127.0.0.1', port = '8080', env = 'development', with_static = True):
+    def start(self, host = '127.0.0.1', port = '8080', env = 'development'):
         try:
             self.before()
             mroutes = import_module('app.routes')
             app = Glim(mroutes.urls, self.config['app'])
 
-            if with_static:
-                dirname = os.path.dirname
-                static_path = os.path.join(dirname(dirname(__file__)), 'app/static')
+            if 'static' in self.config['app']:
                 app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
-                    '/static' : static_path
+                    self.config['app']['static']['url'] : self.config['app']['static']['path']
                 })
 
             run_simple(host, int(port), app, use_debugger = self.config['app']['debugger'], use_reloader = self.config['app']['reloader'])

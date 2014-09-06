@@ -1,11 +1,5 @@
 Roadmap
 =======
-- app structure
-    + parametrized paths (i.e parametric static folder)
-- config
-    + remove extensions list from config, auto detect from config dict
-    + facades should be removed from config
-    + providers should be added to config after implementation
 - facades
     + should be more extensible
     + should have an option to be registered by Provider with custom registrations
