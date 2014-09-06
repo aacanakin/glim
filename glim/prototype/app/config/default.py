@@ -43,10 +43,6 @@ config = {
 		'path' : glim.paths.STORAGE_PATH,
 	},
 	
-	# app specific configurations
-	# reloader: detects changes in the code base and automatically restarts web server
-	# debugger: enable werkzeug's default debugger
-
 	'app' : {
 		'reloader' : True,
 		'debugger' : True,
