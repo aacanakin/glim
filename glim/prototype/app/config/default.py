@@ -38,8 +38,9 @@ config = {
 	},
 
 	'sessions' : {
+		# session id prefix
 		'id_header' : 'glim_session',
-		'path' : 'app/storage/sessions',
+		'path' : glim.paths.STORAGE_PATH,
 	},
 	
 	# app specific configurations
