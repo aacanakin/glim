@@ -45,7 +45,10 @@ class App:
     def register_database(self):
         if 'db' in self.config.keys():
             Database.register(database, self.config['db'])
-            Orm.register(orm, Database.engines)
+            if 'orm' in self.config.keys():
+                if self.config['orm']:
+                    Log.info("Registering orm..")
+                    Orm.register(orm, Database.engines)
 
     def register_extensions(self, extensions = []):
         try:

@@ -14,15 +14,17 @@ config = {
 	},
 
 	# database configuration
-	# 'db' : {
-	# 	'default' : {
-	# 		'driver' : 'mysql',
-	# 		'host' : 'localhost',
-	# 		'schema' : 'test',
-	# 		'user' : 'root',
-	# 		'password' : '',
-	# 	},
-	# },
+	'db' : {
+		# 'default' : {
+		# 	'driver' : 'mysql',
+		# 	'host' : 'localhost',
+		# 	'schema' : 'test',
+		# 	'user' : 'root',
+		# 	'password' : '',
+		# },
+	},
+
+	'orm' : True,
 	
 	'log' : {
 		# 'level' : 'info',
