@@ -10,7 +10,7 @@
 #
 #
 # author: Aras Can Akin
-# description: An elegant python framework for the web
+# description: A modern python framework for the web
 # version: 0.7.9
 
 import paths

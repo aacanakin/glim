@@ -19,7 +19,7 @@ setup(
   name = 'glim',
   packages = find_packages(),
   version = '0.7.9',
-  description = 'A new mvc(s) framework for the web',
+  description = 'A modern framework for the web',
   long_description = read('README.rst'),
   entry_points={
     'console_scripts':['glim=glim.cli:main']

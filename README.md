@@ -7,7 +7,7 @@ glim - 0.7.9
 
 [Changelog](https://github.com/aacanakin/glim/blob/master/CHANGELOG.md)
 
-glim is the lightweight MVC(S) (Model, View, Controller, (Service)) framework on top of werkzeug inspired from play & laravel. The aim is to build a lightweight architecture for web app development. The development philosophy here is to make the core small as possible but still not featureless. It has an extension system that can boot objects with configuration.(See [gredis](https://github.com/aacanakin/gredis) - a redis extension for glim)
+glim is a modern web framework on top of werkzeug inspired from play & laravel. The aim is to build a lightweight architecture for web app development. The development philosophy here is to make the core small as possible but still not featureless. It has an extension system that can boot objects with configuration.(See [gredis](https://github.com/aacanakin/gredis) - a redis extension for glim)
 
 The project depends on great open source python projects like SQLAlchemy, werkzeug, jinja2, etc.
 
