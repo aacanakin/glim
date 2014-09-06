@@ -25,7 +25,7 @@ setup(
     'console_scripts':['glim=glim.cli:main']
   },
   url = 'https://github.com/aacanakin/glim',
-  download_url = 'https://github.com/aacanakin/glim/tarball/0.7.7',
+  download_url = 'https://github.com/aacanakin/glim/archive/v0.7.8.zip',
   keywords = [
     'mvc',
     'mvc(s)',
