@@ -85,6 +85,17 @@ class Facade:
     accessor = None
 
     @classmethod
-    def register(cls, object, configuration = {}):
-        if cls.instance is None:
-            cls.instance = object(configuration)
+    def boot(cls, *args, **kwargs):
+        if cls.accessor is not None:
+            if cls.instance is None:
+                cls.instance = cls.accessor(*args, **kwargs)
+
+    @classmethod
+    def register(cls, config = {}):
+        if cls.accessor is not None:
+            if cls.instance is None:
+                cls.instance = cls.accessor(config)
+
+    @classmethod
+    def _get(cls):
+        return cls.instance

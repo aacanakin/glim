@@ -1,7 +1,10 @@
-from glim.core import Facade
+from glim.core import Facade, Config as config, IoC as ioc
+from glim.db import Database as database, Orm as orm
+from glim.component import View as view
+from glim.log import Log as log
 
 class Config(Facade):
-	pass
+	accessor = config
 
 class Session(Facade):
 	pass
@@ -10,16 +13,16 @@ class Cookie(Facade):
 	pass
 
 class Database(Facade):
-	pass
+	accessor = database
 
 class Orm(Facade):
-	pass
+	accessor = orm
 
 class IoC(Facade):
-	pass
+	accessor = ioc
 
 class View(Facade):
-	pass
+	accessor = view
 
 class Log(Facade):
-	pass
+	accessor = log

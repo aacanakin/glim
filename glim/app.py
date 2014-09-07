@@ -1,10 +1,6 @@
 # application initiation script
 import os, sys, traceback
 
-from glim.core import Facade, Config as config, IoC as ioc
-from glim.component import View as view
-from glim.db import Database as database, Orm as orm
-from glim.log import Log as log
 from glim.facades import Config, Database, Orm, Session, Cookie, IoC, View, Log
 from glim.utils import import_module
 from glim.dispatch import Glim
@@ -40,14 +36,15 @@ class App:
         self.before = mstart.before
 
     def register_config(self):
-        Config.register(config, self.config)
+        Config.register(self.config)
 
     def register_database(self):
         if 'db' in self.config.keys():
-            Database.register(database, self.config['db'])
-            if 'orm' in self.config.keys():
-                if self.config['orm']:
-                    Orm.register(orm, Database.engines)
+            if self.config['db']:
+                Database.register(self.config['db'])
+                if 'orm' in self.config.keys():
+                    if self.config['orm']:
+                        Orm.register(Database.engines)
 
     def register_extensions(self, extensions = []):
         try:
@@ -81,7 +78,7 @@ class App:
             Log.error(e)
 
     def register_ioc(self):
-        IoC.register(ioc)
+        IoC.register()
 
     def register_view(self):
         if 'views' in self.config:
@@ -89,9 +86,9 @@ class App:
 
     def register_log(self):
         if 'log' in self.config:
-            Log.register(log, self.config['log'])
+            Log.register(self.config['log'])
         else:
-            Log.register(log)
+            Log.register()
 
     def start(self, host = '127.0.0.1', port = '8080', env = 'development'):
         try:
