@@ -2,7 +2,6 @@ Roadmap
 =======
 - extension system
     + extensions to develop
-        * Memcached
         * Mail
         * Message Queue (AWSQ, Rabbit, Iron, ZeroMQ etc)
         * MongoDB
