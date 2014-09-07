@@ -1,6 +1,11 @@
 Roadmap
 =======
 - add comparison matrix of other python frameworks to glim
+- no more manual tests, write some tests for;
+    + facade tests
+    + component tests
+    + command layer tests
+    + ORM and DB API stress tests
 - extension system
     + extensions to develop
         * Mail
@@ -17,11 +22,6 @@ Roadmap
             + isolated connection that uses default connection for seeding
 - model layer
     + renewing db connections & orm connections after db fails
-- tests
-    + facade tests
-    + component tests
-    + command layer tests
-    + ORM and DB API stress tests
 - exception handling
     + more verbose errors
     + option not to print 

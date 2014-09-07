@@ -18,14 +18,14 @@ setup(
   author_email = 'aacanakin@gmail.com',
   name = 'glim',
   packages = find_packages(),
-  version = '0.7.9',
+  version = '0.8.4',
   description = 'A modern framework for the web',
   long_description = read('README.rst'),
   entry_points={
     'console_scripts':['glim=glim.cli:main']
   },
   url = 'https://github.com/aacanakin/glim',
-  download_url = 'https://github.com/aacanakin/glim/archive/v0.7.9.zip',
+  download_url = 'https://github.com/aacanakin/glim/archive/v0.8.4.zip',
   keywords = [
     'mvc',
     'mvc(s)',

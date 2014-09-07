@@ -11,7 +11,7 @@
 #
 # author: Aras Can Akin
 # description: A modern python framework for the web
-# version: 0.7.9
+# version: 0.8.4
 
 import paths
 paths.configure_sys_path()

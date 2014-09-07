@@ -1,4 +1,13 @@
 ```
+---------------------- v0.8.4 08/09/2014 ----------------------
+- added accessor implementation to Facade
+- added lower level boot() function to register facades with dynamic size of parameters. Facade registering is much more flexible now
+- removed auto booting extensions
+- added start.before() loading in extensions just like app.start
+- from now on, every extension should be responsible for their own loading
+- added _get() function to get facade instance
+---------------------------------------------------------------
+
 ---------------------- v0.7.9 06/09/2014 ----------------------
 - fixed static path not registering SharedDataMiddleware
 - added feature for static paths to be dynamically configured with url
