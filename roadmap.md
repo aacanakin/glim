@@ -1,6 +1,7 @@
 Roadmap
 =======
 - add comparison matrix of other python frameworks to glim
+- log module should have one internal logger one app logger
 - no more manual tests, write some tests for;
     + facade tests
     + component tests
