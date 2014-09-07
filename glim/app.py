@@ -53,19 +53,13 @@ class App:
                 # extension module base string
                 ext_bstr = 'ext.%s' % (extension)
 
-                # extension core module string
-                ext_cmstr = '%s.%s' % (ext_bstr, extension)
+                # start script
+                ext_sstr = '%s.start' % ext_bstr
 
-                # extension module object
-                ext_module = import_module(ext_cmstr)
-
-                # extension class
-                ext_class = getattr(ext_module, extension.title())
-
-                # check if extension is bootable
-                if issubclass(ext_class, Facade):
-                    cext_class = getattr(ext_module, '%sExtension' % (extension.title()))
-                    ext_class.register(cext_class, config)
+                ext_startmodule = import_module(ext_sstr, pass_errors = True)
+                if ext_startmodule is not None:
+                    before = getattr(ext_startmodule, 'before')
+                    before(config)
 
                 # register extension commands if exists
                 ext_cmdstr = '%s.%s' % (ext_bstr, 'commands')
@@ -75,6 +69,7 @@ class App:
                     self.commandadapter.register_extension(ext_cmd_module, extension)
 
         except Exception, e:
+            print traceback.format_exc()
             Log.error(e)
 
     def register_ioc(self):
