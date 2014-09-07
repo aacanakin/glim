@@ -7,13 +7,11 @@ from glim.core import Registry
 class Database:
 
     def __init__(self, config):
-
         self.active = 'default'
-
         self.config = config
         self.connections = {}
         self.sessions = {}
-        self.engines = {}        
+        self.engines = {}
 
         for k, config in self.config.items():
 
