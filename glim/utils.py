@@ -13,16 +13,20 @@ def import_source(module, path, pass_errors = False):
 
 # function performs a parametric import statement, returns None if not found
 def import_module(module, pass_errors = False):
+
     frm = module.split('.')
     try:
         m = __import__(module, fromlist = [frm[1]])
         return m
-    except Exception, e:
+    except ImportError, e:
         if pass_errors:
             return None
         else:
             print traceback.format_exc()
             return None
+    except Exception, e:
+        print traceback.format_exc()
+        return None
 
 # function performs a recursive copy of files and folders in the filesystem
 def copytree(src, dst, symlinks = False, ignore = None):
