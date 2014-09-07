@@ -77,7 +77,7 @@ class App:
 
     def register_view(self):
         if 'views' in self.config:
-            View.register(view, self.config['views'])
+            View.register(self.config['views'])
 
     def register_log(self):
         if 'log' in self.config:
