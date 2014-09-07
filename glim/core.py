@@ -18,7 +18,7 @@ class Registry:
 
     def set(self, key, value):
         target = self.registrar
-        for element in key.split(".")[:-1]:
+        for element in key.split('.')[:-1]:
             target = target.setdefault(element, dict())
         target[key.split(".")[-1]] = value
 
