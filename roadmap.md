@@ -1,5 +1,6 @@
 Roadmap
 =======
+- add comparison matrix of other python frameworks to glim
 - extension system
     + extensions to develop
         * Mail
