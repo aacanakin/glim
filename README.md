@@ -20,7 +20,7 @@ Features
 
 Quick Start
 -----------
-```
+```sh
 # create project folder
 $ mkdir <project>
 
@@ -47,7 +47,7 @@ $ glim start
 
 Alternative Installation (dev mode)
 -----------------------------------
-```
+```sh
 # clone the repo inside the project folder
 $ git clone git@github.com:aacanakin/glim.git
 
@@ -59,13 +59,13 @@ $ . venv/bin/activate
 $ pip install -r requirements
 
 # generate a new app
-$ python glim/cli.py new
+$ python glim.py new
 
 # copy the sample configuration
 $ cp app/config/default.py app/config/development.py 
 
 # run the web server
-$ python glim/cli.py start
+$ python glim.py start
 ```
 
 glim is
