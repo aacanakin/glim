@@ -10,7 +10,6 @@ import glim.paths as paths
 class Glim:
 
     def __init__(self, urls = {}, config = {}):
-
         self.config = config
 
         try:
@@ -26,7 +25,6 @@ class Glim:
         self.url_map = Map(rule_map)
 
     def flatten_urls(self, urls, current_key = "", ruleset = {}):
-
         for key in urls:
             # If the value is of type `dict`, then recurse with the
             # value
@@ -42,7 +40,6 @@ class Glim:
         return ruleset
 
     def dispatch_request(self, request):
-
         adapter = self.url_map.bind_to_environ(request.environ)
 
         try:
