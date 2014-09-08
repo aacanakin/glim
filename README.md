@@ -3,8 +3,6 @@ glim - 0.8.4
 
 [Documentation(not complete)](http://aacanakin.github.io/glim)
 
-[Roadmap](https://github.com/aacanakin/glim/blob/master/roadmap.md)
-
 [Changelog](https://github.com/aacanakin/glim/blob/master/CHANGELOG.md)
 
 glim is a modern web framework on top of [Werkzeug](http://werkzeug.pocoo.org/), [SQLAlchemy](http://www.sqlalchemy.org/) and [Jinja2](http://jinja.pocoo.org/docs/dev/) inspired from [play](https://www.playframework.com/) & [laravel](http://laravel.com/). The aim is to build a lightweight architecture for web app development. The development philosophy here is to make the core small as possible but still not featureless. It has an extension system that can boot objects with configuration.(See [gredis](https://github.com/aacanakin/gredis) - a redis extension for glim)
