@@ -21,8 +21,7 @@ Quick Start
 ```sh
 # create project folder
 $ mkdir <project>
-
-# inside project folder, run the following;
+$ cd <project>
 
 # create a virtualenv
 $ virtualenv venv
