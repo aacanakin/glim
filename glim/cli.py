@@ -9,9 +9,9 @@
 #  |___/               
 #
 #
-# author: Aras Can Akin
-# description: A modern python framework for the web
-# version: 0.8.4
+# A modern python framework for the web
+
+__author__ = "Aras Can Akin"
 
 import paths
 paths.configure()
