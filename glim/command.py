@@ -20,7 +20,6 @@ class CommandAdapter:
     def register(self, module):
         if module is not None:
             cmds = self.retrieve_commands(module)
-            commands = []
 
             for c in cmds:
                 cmd = c(self.subparsers)
