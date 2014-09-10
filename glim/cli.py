@@ -31,15 +31,16 @@ description = "glim ~ a modern python framework for the web"
 
 def main():
 	# register the global parser
-	preparser = argparse.ArgumentParser(description = description, add_help = False)
-	preparser.add_argument('--env', '-e', dest = 'env', default = 'development', help = 'choose application environment')
+	preparser = argparse.ArgumentParser(description=description, add_help=False)
+	preparser.add_argument('--env', '-e', dest='env', default='development', help='choose application environment')
 
 	# parse existing options
 	namespace, extra = preparser.parse_known_args()
 	env = namespace.env
 
-	parser = argparse.ArgumentParser(parents = [preparser], description = description, add_help = True)
-	subparsers = parser.add_subparsers(title = 'commands', help = 'commands')
+	# register the subparsers
+	parser = argparse.ArgumentParser(parents=[preparser], description=description, add_help=True)
+	subparsers = parser.add_subparsers(title='commands', help='commands')
 
 	# initialize a command adapter with subparsers
 	commandadapter = CommandAdapter(subparsers)
@@ -48,7 +49,7 @@ def main():
 	commandadapter.register(glim.commands)
 
 	# register app commands
-	appcommands = import_module('app.commands', pass_errors = True)
+	appcommands = import_module('app.commands', pass_errors=True)
 	commandadapter.register(appcommands)
 
 	# check if a new app is being created
