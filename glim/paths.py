@@ -14,13 +14,16 @@ STORAGE_PATH = os.path.join(APP_PATH, 'storage')
 import sys
 from pprint import pprint as p
 
-def configure_sys_path():
+def configure():
 	if GLIM_ROOT_PATH == PROJECT_PATH:
 		print colored('Development mode is on, sys.path is being configured', 'yellow')
 		sys.path.pop(0)
 		sys.path.insert(0, GLIM_ROOT_PATH)
 	else:
 		sys.path.insert(0, PROJECT_PATH)
+
+def app_exists():
+	return os.path.exists(APP_PATH) and os.path.exists(EXT_PATH)
 
 def controllers():
 	return os.path.join(APP_PATH, 'controllers.py')

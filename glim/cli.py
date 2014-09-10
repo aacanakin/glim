@@ -14,7 +14,7 @@
 # version: 0.8.4
 
 import paths
-paths.configure_sys_path()
+paths.configure()
 
 from glim.app import App
 from glim.utils import import_module
