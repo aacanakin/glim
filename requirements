@@ -1,5 +1,4 @@
 Werkzeug
 SQLAlchemy
 termcolor
-mysql-python
 jinja2
