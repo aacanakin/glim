@@ -30,6 +30,8 @@ def import_module(module, pass_errors = False):
 
 # function performs a recursive copy of files and folders in the filesystem
 def copytree(src, dst, symlinks = False, ignore = None):
+    if not os.path.exists(dst):
+        os.mkdir(dst)
     for item in os.listdir(src):
         s = os.path.join(src, item)
         d = os.path.join(dst, item)

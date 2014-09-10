@@ -12,8 +12,14 @@ class NewCommand(GlimCommand):
 	name = 'new'
 	description = 'generates a new glim app'
 
+	def configure(self):
+		self.add_argument("name", nargs='?', help="enter project name", default=None)
+
 	def run(self, app):
 		project_path = os.getcwd()
+		if self.args.name is not None:
+			project_path = os.path.join(project_path, self.args.name)
+
 		proto_path = paths.PROTO_PATH
 
 		try:
