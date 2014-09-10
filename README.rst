@@ -17,7 +17,7 @@ Features
 Quick Start
 -----------
 
-.. highlight:: sh
+::
 
     # create project folder
     $ mkdir <project>
