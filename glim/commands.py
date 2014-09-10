@@ -1,3 +1,11 @@
+"""
+
+This module holds commands of internal
+glim framework commands to manipulate 
+a typical glim framework app.
+
+"""
+
 import os
 from termcolor import colored
 
@@ -8,14 +16,24 @@ from glim.facades import Log
 import glim.paths as paths
 
 class NewCommand(GlimCommand):
+	"""
 
+	This class is responsible for generating a new glim app.
+
+	Attributes
+	----------
+	  glim.command.GlimCommand Attributes
+
+	"""
 	name = 'new'
 	description = 'generates a new glim app'
 
 	def configure(self):
+		"""Function adds the optional name argument for creating an app with project name."""
 		self.add_argument("name", nargs='?', help="enter project name", default=None)
 
 	def run(self, app):
+		"""Function copies the prototype folder into os.getcwd() path."""
 		project_path = os.getcwd()
 		if self.args.name is not None:
 			project_path = os.path.join(project_path, self.args.name)
@@ -30,14 +48,24 @@ class NewCommand(GlimCommand):
 			print colored('App already exists', 'red')
 
 class StartCommand(GlimCommand):
+	"""
 
+	This class is responsible for starting wsgi of glim framework app.
+
+	Attributes
+	----------
+	  glim.command.GlimCommand Attributes
+
+	"""
 	name = 'start'
 	description = 'start the glim app web server'
 
 	def configure(self):
+		"""Function adds optional host, port variables."""
 		self.add_argument("--host", help = "enter host", default = '127.0.0.1')
 		self.add_argument("--port", help = "enter port", default = '8080')
 
 	def run(self, app):
+		"""Function starts the web server given configuration."""
 		Log.info('Glim server started on %s environment' % self.args.env)
 		app.start(host = self.args.host, port = self.args.port)
