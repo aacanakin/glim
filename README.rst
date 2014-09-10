@@ -2,7 +2,7 @@
 
 `Changelog <https://github.com/aacanakin/glim/blob/master/CHANGELOG.md>`__
 
-glim is a modern web framework on top of `Werkzeug <http://werkzeug.pocoo.org/>`__,`SQLAlchemy <http://www.sqlalchemy.org/>`__ and `Jinja2 <http://jinja.pocoo.org/docs/dev/>`__ inspired from `play <https://www.playframework.com/>`__ & `laravel <http://laravel.com/>`__. The aim is to build a lightweight architecture for web app development. The development philosophy here is to make the core small as possible but still not featureless. It has an extension system that can boot objects with configuration.(See `gredis <https://github.com/aacanakin/gredis>`__ - a redis extension for glim)
+glim is a modern web framework on top of `Werkzeug <http://werkzeug.pocoo.org/>`__, `SQLAlchemy <http://www.sqlalchemy.org/>`__ and `Jinja2 <http://jinja.pocoo.org/docs/dev/>`__ inspired from `play <https://www.playframework.com/>`__ & `laravel <http://laravel.com/>`__. The aim is to build a lightweight architecture for web app development. The development philosophy here is to make the core small as possible but still not featureless. It has an extension system that can boot objects with configuration.(See `gredis <https://github.com/aacanakin/gredis>`__ - a redis extension for glim)
 
 Features
 --------
