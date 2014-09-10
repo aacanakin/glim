@@ -11,8 +11,9 @@ class CommandAdapter:
 
         for name, obj in inspect.getmembers(module):
             if name != 'Command' and 'Command' in name:
-                cobject = getattr(module, name)
-                commands.append(cobject)
+                if name != 'GlimCommand':
+                    cobject = getattr(module, name)
+                    commands.append(cobject)
 
         return commands
 
