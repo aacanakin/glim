@@ -53,12 +53,16 @@ def main():
 
 	# check if a new app is being created
 	new = True if 'new' in extra else False
-	if new:
-		app = None
-	else:
-		app = App(commandadapter, env)
+	help = True if 'help' in extra else False
 
+	# check if help is being called when the app is not created
+	if paths.app_exists() is False and help is True:
+		parser.print_help()
+		exit()
 
+	# create the app
+	app = None if new else App(commandadapter, env)
+	
 	args = parser.parse_args()
 
 	command = commandadapter.match(args)
