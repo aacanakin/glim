@@ -68,7 +68,8 @@ $ python glim.py start
 
 Roadmap
 -------
-- do not register base command
+- glim new should optionally have <project> variable
+    + glim start <project>
 - add comparison matrix of other python frameworks to glim
 - log module should have one internal logger one app logger
 - no more manual tests, write some tests for;
