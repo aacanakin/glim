@@ -30,6 +30,18 @@ import sys
 description = "glim ~ a modern python framework for the web"
 
 def main():
+	"""The single entry point to glim command line interface
+
+	Main method is called from pypi console_scripts key or by glim.py on root
+
+	Usage
+	-----
+	  $ python glim/cli.py start
+	  $ python glim.py start (on root folder)
+
+	This function initializes a new app given the glim commands and app commands
+	if app exists.
+	"""
 	# register the global parser
 	preparser = argparse.ArgumentParser(description=description, add_help=False)
 	preparser.add_argument('--env', '-e', dest='env', default='development', help='choose application environment')
