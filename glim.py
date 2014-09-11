@@ -11,7 +11,7 @@
 #
 # author: Aras Can Akin
 # description: A modern python framework for the web
-# version: 0.8.4
+# version: 0.8.5
 
 from glim.cli import main
 main()

@@ -1,4 +1,16 @@
 ```
+---------------------- v0.8.5 11/09/2014 ----------------------
+- added exception.py module initially
+- added feature to create project folders on $ glim new <project>
+- added loads of documentation into code using PEP8 docstrings
+- adopted PEP8 code style guide
+- fixed $ glim --help giving errors (issue #3)
+- renamed paths.configure_sys_path() into paths.configure()
+- added app_exists() function to glim.paths for issue #3
+- removed version number in glim/cli.py
+- added __author__ to glim/cli.py
+---------------------------------------------------------------
+
 ---------------------- v0.8.4 08/09/2014 ----------------------
 - added accessor implementation to Facade
 - added lower level boot() function to register facades with dynamic size of parameters. Facade registering is much more flexible now
