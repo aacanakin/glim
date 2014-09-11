@@ -66,7 +66,11 @@ def main():
 
 	# check if a new app is being created
 	new = True if 'new' in extra else False
-	help = True if 'help' in extra else False
+
+	if ('help' in extra) or ('--help' in extra) or ('-h' in extra):
+		help = True
+	else:
+		help = False
 
 	# check if help is being called when the app is not created
 	if paths.app_exists() is False and help is True:
