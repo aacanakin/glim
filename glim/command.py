@@ -44,7 +44,7 @@ class CommandAdapter:
         Returns
         -------
           commands (list):
-            A list of Command classes
+            A list of Command instances
 
         Note:
           This function will not register any command class
