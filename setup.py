@@ -41,7 +41,6 @@ setup(
     "Werkzeug >= 0.9",
     "Jinja2 >= 2.7.3",
     "SQLAlchemy >= 0.9.7",
-    "MySQL-python >= 1.2.5",
     "termcolor >= 1.1.0"
   ],
   classifiers = [
