@@ -105,6 +105,6 @@ glim isn't
 ----------
 - django
 - flask
-- not stable currently :(
+- stable currently :(
 
 NOTE: I'm changing lots of things currently. So the web server may not even start but feel free to play with it!
