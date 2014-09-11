@@ -1,3 +1,15 @@
+"""
+
+This module holds the Facade classes of core objects. These
+facades are registered by the glim.app.App in constructor.
+
+Usage
+-----
+from glim.facades import Config
+Config.get('hello') # calls the function of glim.core.Config
+
+"""
+
 from glim.core import Facade, Config as config, IoC as ioc
 from glim.db import Database as database, Orm as orm
 from glim.component import View as view

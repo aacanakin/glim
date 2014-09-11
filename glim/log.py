@@ -1,7 +1,28 @@
+"""
+
+This module provides logging inside glim framework.
+
+"""
+
 from termcolor import colored
 import logging
 
 class Log:
+	"""
+
+	This class is the base for logging feature in glim.
+
+	Attributes
+	----------
+	  config (dict): holds the configuration of logging.
+
+	Usage
+	-----
+	  log = Log(config)
+	  log.info("glim rocks") # prints a yellow colored msg
+	  log.error("whoopz") # prints a red colored msg
+
+	"""
 
 	LEVELS = {
 		'debug'   : logging.DEBUG,
@@ -16,7 +37,7 @@ class Log:
 		'format' : '%(message)s',
 	}
 
-	def __init__(self, config = {}):
+	def __init__(self, config={}):
 		if config:
 			self.config = config
 		else:

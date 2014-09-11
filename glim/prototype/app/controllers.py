@@ -1,5 +1,24 @@
+"""
+
+The controllers of a typical glim app.
+
+Example
+-------
 from glim.component import Controller
 from glim.facades import View
+
+class HelloController(Controller):
+	def hello(self):
+		# render the jinja template by binding data
+		# renders app/views/hello.html
+		return View.render('hello', name = 'Aras')
+
+# for ajax requests, if you tend to send html source 
+# of a rendered template, use View.source(*args, **kwargs)
+
+"""
+
+from glim.component import Controller
 import json
 
 class BaseController(Controller):

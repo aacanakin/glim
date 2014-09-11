@@ -1,3 +1,9 @@
+"""
+
+This module is responsible for the wsgi part of glim framework.
+
+"""
+
 from werkzeug.wrappers import Request, Response
 from werkzeug.routing import Map, Rule
 from werkzeug.exceptions import HTTPException, NotFound
@@ -8,7 +14,25 @@ from glim.utils import import_module
 import glim.paths as paths
 
 class Glim:
+    """
 
+    The class that holds the wsgi app of glim framework.
+
+    Attributes
+    ----------
+      config (dict): The 'glim' key of app.config.<env>.
+      session_store (werkzeug.contrib.sessions.FilesystemSessionStore):
+        The session store in case of session usage.
+      url_map (werkzeug.routing.Map): The url map of wsgi app.
+
+    Usage
+    -----
+      app = Glim(urls, config)
+
+      # start the web server
+      run_simple(host, int(port), app, use_debugger=True, use_reloader=True)
+
+    """
     def __init__(self, urls = {}, config = {}):
         self.config = config
 
@@ -25,6 +49,24 @@ class Glim:
         self.url_map = Map(rule_map)
 
     def flatten_urls(self, urls, current_key = "", ruleset = {}):
+        """
+
+        Function flatten urls for route grouping feature of glim. Thanks
+        for the stackoverflow guy!
+
+        Args
+        ----
+          urls (dict): a dict of url definitions.
+          current_key (unknown type): a dict or a string marking the
+            current key that is used for recursive calls.
+          ruleset (dict): the ruleset that is eventually returned to
+            dispatcher.
+
+        Returns
+        -------
+          ruleset (dict): the ruleset to be bound.
+
+        """
         for key in urls:
             # If the value is of type `dict`, then recurse with the
             # value
@@ -40,6 +82,22 @@ class Glim:
         return ruleset
 
     def dispatch_request(self, request):
+        """
+
+        Function dispatches the request. It also handles route
+        filtering.
+
+        Args
+        ----
+          request (werkzeug.wrappers.Request): the request
+            object.
+
+        Returns
+        -------
+          response (werkzeug.wrappers.Response): the response
+            object.
+
+        """
         adapter = self.url_map.bind_to_environ(request.environ)
 
         try:
@@ -99,6 +157,22 @@ class Glim:
             return e
 
     def wsgi_app(self, environ, start_response):
+        """
+
+        Function returns the wsgi app of glim framework.
+
+        Args
+        ----
+          environ (unknown type): The werkzeug environment.
+          start_response (function): The werkzeug's start_response
+            function.
+
+        Returns
+        -------
+          response (werkzeug.wrappers.Response): the dispatched response
+            object.
+
+        """
 
         request = Request(environ)
 

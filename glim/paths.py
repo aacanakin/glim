@@ -1,3 +1,32 @@
+"""
+
+This module is responsible for handling paths of glim framework.
+
+Usage
+-----
+import glim.paths
+
+glim.paths.PROJECT_PATH # returns the project path
+glim.paths.APP_PATH # returns the app folder path
+glim.paths.GLIM_ROOT_PATH # returns the glim root path
+glim.paths.PROTO_PATH # returns the prototype folder path
+glim.paths.EXT_PATH # returns the extension folder path
+glim.paths.VIEWS_PATH # returns the views folder path
+glim.paths.STATIC_PATH # returns the static folder path
+glim.paths.STORAGE_PATH # returns the storage folder path
+
+glim.paths.configure() # detect dev mode & configures the sys path
+glim.paths.app_exists() # detects if the app is created
+glim.paths.controllers() # returns the controllers path
+glim.paths.config(env) # returns the configuration path given environment
+glim.paths.start() # returns the app.start path
+glim.paths.commands() # returns the app.commands path
+glim.paths.routes() # returns the app.routes path
+glim.paths.extensions(ext) #returns the extension path given extension name
+glim.paths.extension_commands(ext) # returns the ext.<ext>.commands path
+
+"""
+
 import os
 from termcolor import colored
 
