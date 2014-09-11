@@ -9,6 +9,7 @@
 - added app_exists() function to glim.paths for issue #3
 - removed version number in glim/cli.py
 - added __author__ to glim/cli.py
+- removed mysql dependency
 ---------------------------------------------------------------
 
 ---------------------- v0.8.4 08/09/2014 ----------------------
