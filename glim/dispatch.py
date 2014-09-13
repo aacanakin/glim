@@ -33,7 +33,7 @@ class Glim:
       run_simple(host, int(port), app, use_debugger=True, use_reloader=True)
 
     """
-    def __init__(self, urls = {}, config = {}):
+    def __init__(self, urls={}, config={}):
         self.config = config
 
         try:
@@ -44,11 +44,11 @@ class Glim:
         ruleset = self.flatten_urls(urls)
         rule_map = []
         for url,rule in ruleset.items():
-            rule_map.append(Rule(url, endpoint = rule))
+            rule_map.append(Rule(url, endpoint=rule))
 
         self.url_map = Map(rule_map)
 
-    def flatten_urls(self, urls, current_key = "", ruleset = {}):
+    def flatten_urls(self, urls, current_key="", ruleset={}):
         """
 
         Function flatten urls for route grouping feature of glim. Thanks

@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 #          _
-#       | (_)          
-#   __ _| |_ _ __ ___  
-#  / _` | | | '_ ` _ \ 
+#       | (_)
+#   __ _| |_ _ __ ___
+#  / _` | | | '_ ` _ \
 # | (_| | | | | | | | |
 #  \__, |_|_|_| |_| |_|
-#   __/ |              
-#  |___/               
+#   __/ |
+#  |___/
 #
 #
 # A modern python framework for the web
@@ -30,17 +30,17 @@ import sys
 description = "glim ~ a modern python framework for the web"
 
 def main():
-	"""The single entry point to glim command line interface
+	"""
 
-	Main method is called from pypi console_scripts key or by glim.py on root
+	The single entry point to glim command line interface.Main method is called
+	from pypi console_scripts key or by glim.py on root.This function initializes
+	a new app given the glim commands and app commands if app exists.
 
 	Usage
 	-----
 	  $ python glim/cli.py start
 	  $ python glim.py start (on root folder)
 
-	This function initializes a new app given the glim commands and app commands
-	if app exists.
 	"""
 	# register the global parser
 	preparser = argparse.ArgumentParser(description=description, add_help=False)
@@ -79,7 +79,7 @@ def main():
 
 	# create the app
 	app = None if new else App(commandadapter, env)
-	
+
 	args = parser.parse_args()
 
 	command = commandadapter.match(args)

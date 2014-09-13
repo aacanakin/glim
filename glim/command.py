@@ -1,4 +1,4 @@
-"""The command module
+"""
 
 This module is responsible for registering, dispatching
 command line utilities of glim framework. It also has a
@@ -194,7 +194,7 @@ class Command:
     description = 'base command'
 
     # parser is the root parser
-    def __init__(self, subparsers, name = None):
+    def __init__(self, subparsers, name=None):
 
         if name is not None:
             self.name = name
@@ -204,7 +204,7 @@ class Command:
             self.name,
             help = self.description
         )
-        self.parser.set_defaults(which = self.name)
+        self.parser.set_defaults(which=self.name)
 
         self.args = None
         self.configure()

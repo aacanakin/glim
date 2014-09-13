@@ -178,7 +178,7 @@ class IoC:
       yet.
 
     """
-    def __init__(self, instances = {}):
+    def __init__(self, instances={}):
         self.instances = instances
 
     def bind(self, key, value):
@@ -269,7 +269,7 @@ class Facade:
                 cls.instance = cls.accessor(*args, **kwargs)
 
     @classmethod
-    def register(cls, config = {}):
+    def register(cls, config={}):
         """
 
         This function is basically a shortcut of boot for accessors

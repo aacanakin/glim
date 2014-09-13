@@ -179,7 +179,7 @@ class Orm:
     def __getattr__(self, attr):
         return getattr(self.sessions[self.active], attr)
 
-    def session(key = 'default'):
+    def session(key='default'):
         """
 
         Function sets the active orm session and returns

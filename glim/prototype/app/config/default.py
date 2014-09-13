@@ -45,7 +45,7 @@ config = {
 
 	# the orm switch for orm to be disabled or not
 	'orm' : True,
-	
+
 	# logging configuration, it has a default configuration
 	# if you don't provide one.
 	'log' : {
@@ -66,7 +66,7 @@ config = {
 		'id_header' : 'glim_session',
 		'path' : glim.paths.STORAGE_PATH,
 	},
-	
+
 	# the glim.app.App configuration
 	'app' : {
 		'reloader' : True,

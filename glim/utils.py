@@ -78,7 +78,7 @@ def import_module(module, pass_errors=False):
         return None
 
 # function performs a recursive copy of files and folders in the filesystem
-def copytree(src, dst, symlinks = False, ignore = None):
+def copytree(src, dst, symlinks=False, ignore=None):
     """
 
     Function recursively copies from directory to directory.

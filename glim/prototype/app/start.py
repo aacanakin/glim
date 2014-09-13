@@ -1,7 +1,7 @@
 """
 
 This module provides hooks for a typical glim application.
-before function is called between app object registers all 
+before function is called between app object registers all
 the components and the web server start.
 
 TODO: There will be more hooks soon.

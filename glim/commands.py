@@ -62,10 +62,10 @@ class StartCommand(GlimCommand):
 
 	def configure(self):
 		"""Function adds optional host, port variables."""
-		self.add_argument("--host", help = "enter host", default = '127.0.0.1')
-		self.add_argument("--port", help = "enter port", default = '8080')
+		self.add_argument("--host", help="enter host", default='127.0.0.1')
+		self.add_argument("--port", help="enter port", default='8080')
 
 	def run(self, app):
 		"""Function starts the web server given configuration."""
 		Log.info('Glim server started on %s environment' % self.args.env)
-		app.start(host = self.args.host, port = self.args.port)
+		app.start(host=self.args.host, port=self.args.port)

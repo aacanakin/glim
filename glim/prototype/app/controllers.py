@@ -13,7 +13,7 @@ class HelloController(Controller):
 		# renders app/views/hello.html
 		return View.render('hello', name = 'Aras')
 
-# for ajax requests, if you tend to send html source 
+# for ajax requests, if you tend to send html source
 # of a rendered template, use View.source(*args, **kwargs)
 
 """
