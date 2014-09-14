@@ -94,7 +94,7 @@ class Database:
 
         """
         if key:
-            return self.engines[k]
+            return self.engines[key]
         else:
             return self.engines[self.active]
 
