@@ -27,8 +27,6 @@ setup(
   url = 'https://github.com/aacanakin/glim',
   download_url = 'https://github.com/aacanakin/glim/archive/v0.8.5.zip',
   keywords = [
-    'mvc',
-    'mvc(s)',
     'framework',
     'web framework',
     'api development',
