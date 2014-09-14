@@ -52,9 +52,9 @@ class App:
         self.register_config()
         self.register_log()
         self.register_database()
-        self.register_extensions()
         self.register_ioc()
         self.register_view()
+        self.register_extensions()        
 
         # find out start
         mstart = import_module('app.start')
