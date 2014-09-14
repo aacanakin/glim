@@ -83,14 +83,6 @@ Roadmap
         * Message Queue (AWSQ, Rabbit, Iron, ZeroMQ etc)
         * MongoDB
         * Cassandra
-        * migrations
-            + rdb migrations to hold rdb changes
-            + custom migrate & rollback functions
-            + isolated connection that uses default connection for migrating
-        * seeding
-            + Seeds could add/remove db mock rows
-            + seed & rollback functions
-            + isolated connection that uses default connection for seeding
 - model layer
     + renewing db connections & orm connections after db fails
 
