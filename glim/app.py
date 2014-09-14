@@ -98,7 +98,7 @@ class App:
         Raises
         ------
           Exception: Raises exception when extension can't be loaded
-                     properly.
+            properly.
 
         """
         try:
