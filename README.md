@@ -67,7 +67,7 @@ $ python glim.py start
 
 Roadmap
 -------
-- extension commands should have config passed on run() ?
+- prevent command registering when name is '' or None
 - add comparison matrix of other python frameworks to glim
 - log module should have one internal logger one app logger
 - no more manual tests, write some tests for;
