@@ -13,7 +13,9 @@ from werkzeug.contrib.sessions import FilesystemSessionStore
 from glim.utils import import_module
 import glim.paths as paths
 
+
 class Glim:
+
     """
 
     The class that holds the wsgi app of glim framework.
@@ -33,17 +35,19 @@ class Glim:
       run_simple(host, int(port), app, use_debugger=True, use_reloader=True)
 
     """
+
     def __init__(self, urls={}, config={}):
         self.config = config
 
         try:
-            self.session_store = FilesystemSessionStore(self.config['sessions']['path'])
+            self.session_store = FilesystemSessionStore(
+                self.config['sessions']['path'])
         except:
             self.session_store = None
 
         ruleset = self.flatten_urls(urls)
         rule_map = []
-        for url,rule in ruleset.items():
+        for url, rule in list(ruleset.items()):
             rule_map.append(Rule(url, endpoint=rule))
 
         self.url_map = Map(rule_map)
@@ -104,7 +108,7 @@ class Glim:
 
             endpoint, values = adapter.match()
             mcontroller = import_module('app.controllers')
-            
+
             # detect filters
             filters = endpoint.split(',')
             endpoint_pieces = filters[-1].split('.')
@@ -124,7 +128,7 @@ class Glim:
                     ifilter = obj(request)
                     raw = getattr(ifilter, fnc)(** values)
 
-                    if isinstance(raw, basestring):
+                    if isinstance(raw, str):
                         return Response(raw)
 
                     if isinstance(raw, Response):
@@ -153,7 +157,7 @@ class Glim:
             else:
                 return Response(raw)
 
-        except HTTPException, e:
+        except HTTPException as e:
             return e
 
     def wsgi_app(self, environ, start_response):
@@ -200,4 +204,3 @@ class Glim:
     def __call__(self, environ, start_response):
 
         return self.wsgi_app(environ, start_response)
-

@@ -1,6 +1,6 @@
 """
 
-This module holds the components of a typical glim 
+This module holds the components of a typical glim
 framework app.
 
 """
@@ -12,7 +12,10 @@ from werkzeug.wrappers import Response
 from glim.core import Registry
 
 # Extension class
+
+
 class Extension():
+
     """
 
     The core extension component of glim. This class must
@@ -23,7 +26,10 @@ class Extension():
     pass
 
 # Base conroller class that extends all the controllers
+
+
 class Controller:
+
     """
 
     The controller component is responsible for handling requests
@@ -36,11 +42,15 @@ class Controller:
         module.
 
     """
+
     def __init__(self, request):
         self.request = request
 
 # Rest controller that
+
+
 class RestController(Controller):
+
     """
 
     The rest controller is simply a shortcut to make the controller
@@ -64,7 +74,9 @@ class RestController(Controller):
     def delete(self):
         pass
 
+
 class Service:
+
     """
 
     The base class of Service layer. Currently, it is optional to extend.
@@ -75,7 +87,9 @@ class Service:
     """
     pass
 
+
 class View:
+
     """
 
     The view layer base class is responsible for Jinja2 integration, template
@@ -86,13 +100,14 @@ class View:
       config (dict): the 'view' key in your app.config.<env>.
 
     """
+
     def __init__(self, config):
         self.config = config
         package, folder = self.config['package'].split('.')
 
         self.env = Environment(
-            loader = PackageLoader(package, folder
-        ))
+            loader=PackageLoader(package, folder
+                                 ))
 
     def get(self, file):
         """
@@ -167,4 +182,5 @@ class View:
           Controller class because of possible path issues.
 
         """
-        return Response(self.source(file, *args, **kwargs), mimetype = 'text/html')
+        return Response(self.source(file, *args, **kwargs),
+                        mimetype='text/html')

@@ -7,8 +7,12 @@ They're used inside glim framework and glim framework extensions.
 
 from werkzeug.wrappers import Response as response
 
-# registry class is for generic framework components register function with configuration
+# registry class is for generic framework components register function
+# with configuration
+
+
 class Registry:
+
     """
 
     This class is basically a dictionary supercharged with
@@ -16,7 +20,7 @@ class Registry:
 
     Attributes
     ----------
-      registrar (dict): A registrar to hold a generic 
+      registrar (dict): A registrar to hold a generic
         configuration of a class.
 
     Usage
@@ -34,6 +38,7 @@ class Registry:
       reg.get('f') # returns g
 
     """
+
     def __init__(self, registrar):
         self.registrar = registrar
 
@@ -52,7 +57,7 @@ class Registry:
             type.
 
         """
-        try :
+        try:
             layers = key.split('.')
             value = self.registrar
             for key in layers:
@@ -123,7 +128,10 @@ class Registry:
         return self.registrar
 
 # Config class
+
+
 class Config(Registry):
+
     """
 
     The configuration class is to hold framework level constants.
@@ -133,7 +141,10 @@ class Config(Registry):
     pass
 
 # Session class
+
+
 class Session(Registry):
+
     """
 
     This class is not currently used anywhere. It's not implemented
@@ -143,7 +154,10 @@ class Session(Registry):
     pass
 
 # Cookie Class
+
+
 class Cookie(Registry):
+
     """
 
     This class is not currently used anywhere. It's not implemented
@@ -155,7 +169,9 @@ class Cookie(Registry):
 # an alias of werkzeug.wrappers.Response
 Response = response
 
+
 class IoC:
+
     """
 
     This class is used for dependency injection in glim framework. It's
@@ -178,6 +194,7 @@ class IoC:
       yet.
 
     """
+
     def __init__(self, instances={}):
         self.instances = instances
 
@@ -216,7 +233,10 @@ class IoC:
             return None
 
 # metaclass for facade class
+
+
 class DeflectToInstance(type):
+
     """
 
     The magical class to deflect object calls to instances. This
@@ -224,7 +244,9 @@ class DeflectToInstance(type):
     guy!
 
     """
-    # selfcls in order to make clear it is a class object (as we are a metaclass)
+    # selfcls in order to make clear it is a class object (as we are a
+    # metaclass)
+
     def __getattr__(selfcls, a):
         try:
             # first, inquiry the class itself
@@ -234,7 +256,10 @@ class DeflectToInstance(type):
             return getattr(selfcls.instance, a)
 
 # facade that is used to hold instances statically with boot method
-class Facade:
+
+
+class Facade(metaclass=DeflectToInstance):
+
     """
 
     This magical class is basically a singleton implementation without
@@ -242,7 +267,6 @@ class Facade:
     instances for only once and reach the class without disturbing readability.
 
     """
-    __metaclass__ = DeflectToInstance
 
     instance = None
 

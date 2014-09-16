@@ -8,7 +8,9 @@ Command class for other commands to extend it.
 
 import inspect
 
+
 class CommandAdapter:
+
     """
 
     This class is responsible for detecting, registering
@@ -27,6 +29,7 @@ class CommandAdapter:
         A list of Command objects
 
     """
+
     def __init__(self, subparsers):
         self.subparsers = subparsers
         self.commands = []
@@ -169,7 +172,9 @@ class CommandAdapter:
         else:
             command.run()
 
+
 class Command:
+
     """
 
     The base Command class is the base of all
@@ -202,7 +207,7 @@ class Command:
         self.subparsers = subparsers
         self.parser = self.subparsers.add_parser(
             self.name,
-            help = self.description
+            help=self.description
         )
         self.parser.set_defaults(which=self.name)
 
@@ -244,12 +249,15 @@ class Command:
         """
         return
 
+
 class GlimCommand(Command):
+
     """
 
     This class is an alias of glim.command.Command which has feature
     to access glim.app.App object on run()
 
     """
+
     def run(self, app):
         pass

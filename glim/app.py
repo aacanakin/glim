@@ -6,9 +6,12 @@ It registers glim framework components, extensions and wsgi app.
 """
 
 # application initiation script
-import os, sys, traceback
+import os
+import sys
+import traceback
 
-from glim.facades import Config, Database, Orm, Session, Cookie, IoC, View, Log
+from glim.facades import (Config, Database, Orm, Session, Cookie, IoC, View,
+                          Log)
 from glim.utils import import_module
 from glim.dispatch import Glim
 
@@ -18,7 +21,9 @@ from werkzeug.serving import run_simple
 from werkzeug.wsgi import SharedDataMiddleware
 from termcolor import colored
 
+
 class App:
+
     """
 
     This class is responsible for registering the components of
@@ -33,18 +38,20 @@ class App:
       mconfig (module):
         The configuration module imported from app.config.<env>
       config (dict):
-        The configuration dictionary by environment which resides in app.config.<env>
+        The configuration dictionary by environment which resides in
+            app.config.<env>
       before (method):
         The before hook function for registering a function before app starts
 
     """
+
     def __init__(self, commandadapter, env='development'):
 
         self.commandadapter = commandadapter
 
         self.mconfig = import_module('app.config.%s' % env)
         if self.mconfig is None:
-            print colored('Configuration for %s not found' % env, 'red')
+            print(colored('Configuration for %s not found' % env, 'red'))
             exit()
 
         self.config = self.mconfig.config
@@ -54,7 +61,7 @@ class App:
         self.register_database()
         self.register_ioc()
         self.register_view()
-        self.register_extensions()        
+        self.register_extensions()
 
         # find out start
         mstart = import_module('app.start')
@@ -71,7 +78,8 @@ class App:
         using glim.db.Orm and glim.db.Database.
 
         Note:
-          It registers db.Database when 'db' key is defined in app.config.<env>.
+          It registers db.Database when 'db' key is defined in
+            app.config.<env>.
           It registers db.Orm when 'orm' : True exists in app.config.<env>.
 
         Note:
@@ -79,14 +87,14 @@ class App:
           if 'db' key is absent in app.config.<env>.
 
         """
-        if 'db' in self.config.keys():
+        if 'db' in list(self.config.keys()):
             if self.config['db']:
                 Database.register(self.config['db'])
-                if 'orm' in self.config.keys():
+                if 'orm' in list(self.config.keys()):
                     if self.config['orm']:
                         Orm.register(Database.engines)
 
-    def register_extensions(self, extensions = []):
+    def register_extensions(self, extensions=[]):
         """
 
         Function registers extensions given extensions list
@@ -102,7 +110,7 @@ class App:
 
         """
         try:
-            for extension, config in self.config['extensions'].items():
+            for extension, config in list(self.config['extensions'].items()):
 
                 # extension module base string
                 ext_bstr = 'ext.%s' % (extension)
@@ -120,10 +128,11 @@ class App:
 
                 ext_cmd_module = import_module(ext_cmdstr, pass_errors=True)
                 if ext_cmd_module is not None:
-                    self.commandadapter.register_extension(ext_cmd_module, extension)
+                    self.commandadapter.register_extension(
+                        ext_cmd_module, extension)
 
-        except Exception, e:
-            print traceback.format_exc()
+        except Exception as e:
+            print(traceback.format_exc())
             Log.error(e)
 
     def register_ioc(self):
@@ -136,7 +145,8 @@ class App:
         Function registers View facade using configuration in app.config.<env>.
 
         Note:
-          The view layer will be disabled there isn't any 'view' key in app.config.<env>.
+          The view layer will be disabled there isn't any 'view' key in
+            app.config.<env>.
 
         """
         if 'views' in self.config:
@@ -157,14 +167,15 @@ class App:
         else:
             Log.register()
 
-    def start(self, host = '127.0.0.1', port = '8080', env = 'development'):
+    def start(self, host='127.0.0.1', port='8080', env='development'):
         """
 
         Function initiates a werkzeug wsgi app using app.routes.py.
 
         Note:
           Function will register a static path for css, js, img, etc. files
-          using SharedDataMiddleware, else it won't register any static script path.
+          using SharedDataMiddleware, else it won't register any static script
+          path.
 
         Args
         ----
@@ -184,11 +195,14 @@ class App:
 
             if 'static' in self.config['app']:
                 app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
-                    self.config['app']['static']['url'] : self.config['app']['static']['path']
+                    self.config['app']['static']['url']:
+                    self.config['app']['static']['path']
                 })
 
-            run_simple(host, int(port), app, use_debugger=self.config['app']['debugger'], use_reloader=self.config['app']['reloader'])
+            run_simple(host, int(port), app,
+                       use_debugger=self.config['app']['debugger'],
+                       use_reloader=self.config['app']['reloader'])
 
-        except Exception, e:
-            print traceback.format_exc()
+        except Exception as e:
+            print(traceback.format_exc())
             exit()

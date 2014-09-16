@@ -11,7 +11,9 @@ from sqlalchemy.orm import sessionmaker
 
 from glim.core import Registry
 
+
 class Database:
+
     """
 
     The class that holds & manipulates database connections
@@ -30,12 +32,13 @@ class Database:
     Usage
     -----
     db = Database(config)
-    sql = "INSERT INTO users (full_name, title) 
+    sql = "INSERT INTO users (full_name, title)
            VALUES ('%s','%s')" % (full_name, title))"
     db.execute(sql)
     db.connection('name').execute(sql)
 
     """
+
     def __init__(self, config):
         self.active = 'default'
         self.config = config
@@ -43,7 +46,7 @@ class Database:
         self.sessions = {}
         self.engines = {}
 
-        for k, config in self.config.items():
+        for k, config in list(self.config.items()):
 
             cstring = '%s://%s@%s/%s' % (
                 config['driver'],
@@ -144,13 +147,15 @@ class Database:
 
     def close(self):
         """Function closes the database connections."""
-        for connection in self.config.items():
+        for connection in list(self.config.items()):
             connection.close()
 
 # an alias of sqlalchemy.ext.declarative.declarative_base
 Model = declarative_base()
 
+
 class Orm:
+
     """
 
     This class is responsible for handling orm operations
@@ -167,13 +172,14 @@ class Orm:
         ORM.commit() # commits the transaction
 
     """
+
     def __init__(self, engines):
         self.active = 'default'
         self.engines = engines
         self.sessions = {}
         DBSession = sessionmaker()
-        for k, engine in engines.items():
-            DBSession.configure(bind = engine)
+        for k, engine in list(engines.items()):
+            DBSession.configure(bind=engine)
             self.sessions[k] = DBSession()
 
     def __getattr__(self, attr):

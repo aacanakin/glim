@@ -8,7 +8,8 @@ TODO: There will be more hooks soon.
 
 """
 
+
 def before():
-	# This function is called right before the web server starts
-	# IoC bindings may be used here
-	pass
+    # This function is called right before the web server starts
+    # IoC bindings may be used here
+    pass
