@@ -110,7 +110,7 @@ class App:
 
         """
         try:
-            for extension, config in self.config['extensions'].items()):
+            for extension, config in self.config['extensions'].items():
 
                 # extension module base string
                 ext_bstr = 'ext.%s' % (extension)
