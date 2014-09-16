@@ -7,6 +7,7 @@ Command class for other commands to extend it.
 """
 
 import inspect
+from termcolor import colored
 
 
 class CommandAdapter:
@@ -67,6 +68,23 @@ class CommandAdapter:
 
         return commands
 
+    def valid_name(self, name):
+        """
+
+        Function returns if command name is valid or not.
+
+        Args
+        ----
+          name (string): The command line utility name.
+
+        Returns
+        -------
+          valid (boolean): Returns true when valid, else false.
+
+        """
+        invalid = name is None or name == ''
+        return not invalid
+
     def register(self, module):
         """
 
@@ -81,8 +99,13 @@ class CommandAdapter:
             cmds = self.retrieve_commands(module)
 
             for c in cmds:
-                cmd = c(self.subparsers)
-                self.commands.append(cmd)
+                if self.valid_name(c.name):
+                    cmd = c(self.subparsers)
+                    self.commands.append(cmd)
+                else:
+                    print(colored(
+                          "Warning: Command %s has empty name. It won't be registered"
+                          % c, 'yellow'))
 
     def register_extension(self, module, extension):
         """
@@ -108,9 +131,10 @@ class CommandAdapter:
             commands = []
 
             for c in cmds:
-                name = '%s:%s' % (extension, c.name)
-                cmd = c(self.subparsers, name)
-                self.commands.append(cmd)
+                if self.valid_name(c.name):
+                    name = '%s:%s' % (extension, c.name)
+                    cmd = c(self.subparsers, name)
+                    self.commands.append(cmd)
 
     def match(self, args):
         """
@@ -195,7 +219,7 @@ class Command:
 
     """
 
-    name = 'base'
+    name = None
     description = 'base command'
 
     # parser is the root parser
