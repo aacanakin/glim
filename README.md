@@ -67,7 +67,8 @@ $ python glim.py start
 
 Roadmap
 -------
-- prevent command registering when name is '' or None
+- all commands should not be registered when the name field is None or "".
+- travis-ci & nose integrations
 - add comparison matrix of other python frameworks to glim
 - log module should have one internal logger one app logger
 - no more manual tests, write some tests for;
