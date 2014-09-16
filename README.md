@@ -67,7 +67,8 @@ $ python glim.py start
 
 Roadmap
 -------
-- extension commands should have config passed on run() ?
+- all commands should not be registered when the name field is None or ''.
+- travis-ci & nose integrations
 - add comparison matrix of other python frameworks to glim
 - log module should have one internal logger one app logger
 - no more manual tests, write some tests for;
