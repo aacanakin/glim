@@ -255,10 +255,18 @@ class DeflectToInstance(type):
             # Not found, so try to inquiry the instance attribute:
             return getattr(selfcls.instance, a)
 
+
+# we are creating this MetaMixin class instance because Python 3 does not
+# support the __metaclass__ attribute (as in Python 2), while Python 2 does not
+# support the metaclass=DeflectToInstance keyword argument (as in Python 3). To
+# solve the issue we create a basic class which is constructed with the right
+# metaclass and then make Facade inherit from it.
+MetaMixin = DeflectToInstance('MetaMixin', (object,), {})
+
+
 # facade that is used to hold instances statically with boot method
 
-
-class Facade(metaclass=DeflectToInstance):
+class Facade(MetaMixin):
 
     """
 

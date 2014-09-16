@@ -46,7 +46,7 @@ class Database:
         self.sessions = {}
         self.engines = {}
 
-        for k, config in list(self.config.items()):
+        for k, config in self.config.items():
 
             cstring = '%s://%s@%s/%s' % (
                 config['driver'],
@@ -147,7 +147,7 @@ class Database:
 
     def close(self):
         """Function closes the database connections."""
-        for connection in list(self.config.items()):
+        for connection in self.config.items():
             connection.close()
 
 # an alias of sqlalchemy.ext.declarative.declarative_base
@@ -178,7 +178,7 @@ class Orm:
         self.engines = engines
         self.sessions = {}
         DBSession = sessionmaker()
-        for k, engine in list(engines.items()):
+        for k, engine in engines.items():
             DBSession.configure(bind=engine)
             self.sessions[k] = DBSession()
 

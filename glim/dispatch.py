@@ -13,6 +13,12 @@ from werkzeug.contrib.sessions import FilesystemSessionStore
 from glim.utils import import_module
 import glim.paths as paths
 
+try:
+    basestring
+except NameError:
+    # 'basestring' is undefined, so it must be Python 3
+    basestring = (str, bytes)
+
 
 class Glim:
 
@@ -41,13 +47,14 @@ class Glim:
 
         try:
             self.session_store = FilesystemSessionStore(
-                self.config['sessions']['path'])
+                self.config['sessions']['path']
+            )
         except:
             self.session_store = None
 
         ruleset = self.flatten_urls(urls)
         rule_map = []
-        for url, rule in list(ruleset.items()):
+        for url, rule in ruleset.items():
             rule_map.append(Rule(url, endpoint=rule))
 
         self.url_map = Map(rule_map)
@@ -128,7 +135,7 @@ class Glim:
                     ifilter = obj(request)
                     raw = getattr(ifilter, fnc)(** values)
 
-                    if isinstance(raw, str):
+                    if isinstance(raw, basestring):
                         return Response(raw)
 
                     if isinstance(raw, Response):

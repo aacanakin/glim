@@ -106,8 +106,8 @@ class View:
         package, folder = self.config['package'].split('.')
 
         self.env = Environment(
-            loader=PackageLoader(package, folder
-                                 ))
+            loader=PackageLoader(package, folder)
+        )
 
     def get(self, file):
         """

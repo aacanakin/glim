@@ -87,10 +87,10 @@ class App:
           if 'db' key is absent in app.config.<env>.
 
         """
-        if 'db' in list(self.config.keys()):
+        if 'db' in self.config.keys():
             if self.config['db']:
                 Database.register(self.config['db'])
-                if 'orm' in list(self.config.keys()):
+                if 'orm' in self.config.keys():
                     if self.config['orm']:
                         Orm.register(Database.engines)
 
@@ -110,7 +110,7 @@ class App:
 
         """
         try:
-            for extension, config in list(self.config['extensions'].items()):
+            for extension, config in self.config['extensions'].items()):
 
                 # extension module base string
                 ext_bstr = 'ext.%s' % (extension)
