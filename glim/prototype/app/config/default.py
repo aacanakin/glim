@@ -21,59 +21,59 @@ import glim.paths
 
 config = {
 
-	# the configurations of extensions
-	'extensions' : {
-		# 'gredis' : {
-		# 	'default' : {
-		# 		'host' : 'localhost',
-		# 		'port' : '6379',
-		# 		'db'   : 0
-		# 	}
-		# }
-	},
+    # the configurations of extensions
+    'extensions': {
+        # 'gredis' : {
+        # 	'default' : {
+        # 		'host' : 'localhost',
+        # 		'port' : '6379',
+        # 		'db'   : 0
+        # 	}
+        # }
+    },
 
-	# database configuration
-	'db' : {
-		# 'default' : {
-		# 	'driver' : 'mysql',
-		# 	'host' : 'localhost',
-		# 	'schema' : 'test',
-		# 	'user' : 'root',
-		# 	'password' : '',
-		# },
-	},
+    # database configuration
+    'db': {
+        # 'default' : {
+        # 	'driver' : 'mysql',
+        # 	'host' : 'localhost',
+        # 	'schema' : 'test',
+        # 	'user' : 'root',
+        # 	'password' : '',
+        # },
+    },
 
-	# the orm switch for orm to be disabled or not
-	'orm' : True,
+    # the orm switch for orm to be disabled or not
+    'orm': True,
 
-	# logging configuration, it has a default configuration
-	# if you don't provide one.
-	'log' : {
-		# 'level' : 'info',
-		# 'format' : '[%(levelname)s] : %(message)s',
-		# 'file' : 'app/storage/logs/debug.log'
-	},
+    # logging configuration, it has a default configuration
+    # if you don't provide one.
+    'log': {
+        # 'level' : 'info',
+        # 'format' : '[%(levelname)s] : %(message)s',
+        # 'file' : 'app/storage/logs/debug.log'
+    },
 
-	# view configuration
-	'views' : {
-		# package to be loaded by jinja2
-		'package' : 'app.views'
-	},
+    # view configuration
+    'views': {
+        # package to be loaded by jinja2
+        'package': 'app.views'
+    },
 
-	# werkzeug sessions configuration
-	'sessions' : {
-		# session id prefix
-		'id_header' : 'glim_session',
-		'path' : glim.paths.STORAGE_PATH,
-	},
+    # werkzeug sessions configuration
+    'sessions': {
+        # session id prefix
+        'id_header': 'glim_session',
+        'path': glim.paths.STORAGE_PATH,
+    },
 
-	# the glim.app.App configuration
-	'app' : {
-		'reloader' : True,
-		'debugger' : True,
-		'static' : {
-			'path' : glim.paths.STATIC_PATH,
-			'url'  : '/static'
-		}
-	}
+    # the glim.app.App configuration
+    'app': {
+        'reloader': True,
+        'debugger': True,
+        'static': {
+            'path': glim.paths.STATIC_PATH,
+            'url': '/static'
+        }
+    }
 }

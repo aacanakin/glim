@@ -11,7 +11,9 @@ from sqlalchemy.orm import sessionmaker
 
 from glim.core import Registry
 
+
 class Database:
+
     """
 
     The class that holds & manipulates database connections
@@ -30,12 +32,13 @@ class Database:
     Usage
     -----
     db = Database(config)
-    sql = "INSERT INTO users (full_name, title) 
+    sql = "INSERT INTO users (full_name, title)
            VALUES ('%s','%s')" % (full_name, title))"
     db.execute(sql)
     db.connection('name').execute(sql)
 
     """
+
     def __init__(self, config):
         self.active = 'default'
         self.config = config
@@ -150,7 +153,9 @@ class Database:
 # an alias of sqlalchemy.ext.declarative.declarative_base
 Model = declarative_base()
 
+
 class Orm:
+
     """
 
     This class is responsible for handling orm operations
@@ -167,13 +172,14 @@ class Orm:
         ORM.commit() # commits the transaction
 
     """
+
     def __init__(self, engines):
         self.active = 'default'
         self.engines = engines
         self.sessions = {}
         DBSession = sessionmaker()
         for k, engine in engines.items():
-            DBSession.configure(bind = engine)
+            DBSession.configure(bind=engine)
             self.sessions[k] = DBSession()
 
     def __getattr__(self, attr):

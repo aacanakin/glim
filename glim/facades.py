@@ -15,26 +15,34 @@ from glim.db import Database as database, Orm as orm
 from glim.component import View as view
 from glim.log import Log as log
 
+
 class Config(Facade):
-	accessor = config
+    accessor = config
+
 
 class Session(Facade):
-	pass
+    pass
+
 
 class Cookie(Facade):
-	pass
+    pass
+
 
 class Database(Facade):
-	accessor = database
+    accessor = database
+
 
 class Orm(Facade):
-	accessor = orm
+    accessor = orm
+
 
 class IoC(Facade):
-	accessor = ioc
+    accessor = ioc
+
 
 class View(Facade):
-	accessor = view
+    accessor = view
+
 
 class Log(Facade):
-	accessor = log
+    accessor = log
