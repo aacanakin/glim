@@ -48,7 +48,7 @@ def main():
     preparser = argparse.ArgumentParser(
         description=description, add_help=False)
     preparser.add_argument(
-        '--env', '-e', dest='env', default='development',
+        '--env', '-e', dest='env', default='default',
         help='choose application environment'
     )
 
