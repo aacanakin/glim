@@ -9,6 +9,7 @@ glim is a modern web framework on top of [Werkzeug](http://werkzeug.pocoo.org/),
 
 Features
 --------
+- Convention over configuration
 - A powerful routing system which has grouping & filtering
 - A model layer with use of SQLAlchemy's `declarative_base()`
 - A controller layer for request handling, service calling, etc.
@@ -90,7 +91,7 @@ glim is
 -------
 - small & lightweight
 - great for painless web app development
-- great for api development
+- great for api/web-service development
 
 glim isn't
 ----------
