@@ -37,11 +37,11 @@ $ pip install glim
 # generate a new glim app
 $ glim new
 
-# copy the sample configuration into the defined environment
-$ cp app/config/default.py app/config/development.py
-
-# start the web server
+# start the web server with development environment
 $ glim start
+
+# start the web server with configured environment
+$ glim start --env production
 ```
 
 Alternative Installation (dev mode)
@@ -59,9 +59,6 @@ $ pip install -r requirements
 
 # generate a new app
 $ python glim.py new
-
-# copy the sample configuration
-$ cp app/config/default.py app/config/development.py 
 
 # run the web server
 $ python glim.py start
