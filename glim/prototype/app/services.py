@@ -22,4 +22,4 @@ class UserService(Service):
         ORM.commit()
 """
 
-from glim.core import Service
+from glim.component import Service

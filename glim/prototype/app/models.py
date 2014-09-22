@@ -20,4 +20,4 @@ class User(Model):
 
 """
 
-from glim.core import Model
+from glim.db import Model
