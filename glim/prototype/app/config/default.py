@@ -5,7 +5,8 @@ The configuration module
 NOTE:
   This is a SAMPLE of configuration. This configuration
   can't be run on glim. It's needed to copy this configuration into
-  defined environment. Run the following;
+  defined environment. If development.py doesn't exist,
+  Run the following;
 
   $ cp app/config/default.py app/config/development.py
 
