@@ -1,5 +1,5 @@
 [![Stories in Ready](https://badge.waffle.io/aacanakin/glim.png?label=ready&title=Ready)](https://waffle.io/aacanakin/glim)
-glim - 0.8.5
+glim - 0.8.6
 ============
 
 [Documentation(not complete)](http://aacanakin.github.io/glim)

@@ -1,4 +1,17 @@
 ```
+---------------------- v0.8.6 28/09/2014 ----------------------
+- adopted more into PEP8
+- fixed issue #8
+- fixed issue #11
+- added python 3 compatibility
+- fixed in docstring format
+- fixed a bug that crashes db engines when key is defined
+- changed order of registering extensions
+- added feature for not registering empty named command line utilites
+- added development.py into config for easy installation
+- removed __init__.py from root folder
+---------------------------------------------------------------
+
 ---------------------- v0.8.5 11/09/2014 ----------------------
 - added exception.py module initially
 - added feature to create project folders on $ glim new <project>
