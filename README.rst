@@ -35,9 +35,6 @@ Quick Start
     # generate a new glim app
     $ glim new
 
-    # copy the sample configuration into the defined environment
-    $ cp app/config/default.py app/config/development.py
-
     # start the web server
     $ glim start
 
