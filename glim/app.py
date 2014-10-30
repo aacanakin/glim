@@ -45,7 +45,7 @@ class App:
 
     """
 
-    def __init__(self, commandadapter, env='default'):
+    def __init__(self, commandadapter, config = None, env='default'):
 
         self.commandadapter = commandadapter
 

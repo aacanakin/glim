@@ -16,6 +16,8 @@ __author__ = "Aras Can Akin"
 from . import paths
 paths.configure()
 
+from termcolor import colored
+
 from glim.app import App
 from glim.utils import import_module
 from glim.command import CommandAdapter
@@ -84,8 +86,16 @@ def main():
         parser.print_help()
         exit()
 
+    # load the config module
+    mconfig = import_module('app.config.%s' % env)
+
+    # check if mconfig is None
+    if mconfig is None:
+        print(colored('Configuration for "%s" environment is not found' % env, 'red'))
+        exit()
+
     # create the app
-    app = None if new else App(commandadapter, env)
+    app = None if new else App(commandadapter, mconfig, env)
 
     args = parser.parse_args()
 
