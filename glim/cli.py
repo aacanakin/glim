@@ -96,8 +96,12 @@ def main():
         print(colored('Configuration for "%s" environment is not found' % env, 'red'))
         exit()
 
+    # load the start hook
+    mstart = import_module('app.start')
+    before = mstart.before
+
     # create the app
-    app = None if new else App(commandadapter, mconfig, env)
+    app = None if new else App(commandadapter, mconfig, env, before)
 
     args = parser.parse_args()
 

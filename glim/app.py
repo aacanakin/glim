@@ -44,16 +44,10 @@ class App:
 
     """
 
-    def __init__(self, commandadapter, config = None, env='default'):
+    def __init__(self, commandadapter, mconfig=None, env='default', before=None):
 
         self.commandadapter = commandadapter
-
-        self.mconfig = import_module('app.config.%s' % env)
-        if self.mconfig is None:
-            print(colored('Configuration for %s not found' % env, 'red'))
-            exit()
-
-        self.config = self.mconfig.config
+        self.config = mconfig.config
 
         self.register_config()
         self.register_log()
@@ -62,9 +56,7 @@ class App:
         self.register_view()
         self.register_extensions()
 
-        # find out start
-        mstart = import_module('app.start')
-        self.before = mstart.before
+        self.before = before
 
     def register_config(self):
         """Function registers the Config facade using Config(Registry)."""
