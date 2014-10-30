@@ -18,18 +18,19 @@ setup(
     author_email='aacanakin@gmail.com',
     name='glim',
     packages=find_packages(exclude=['app', 'ext']),
-    version='0.8.6',
+    version=glim.version,
     description='A modern framework for the web',
     long_description=read('README.rst'),
     entry_points={
         'console_scripts': ['glim=glim.cli:main']
     },
     url='https://github.com/aacanakin/glim',
-    download_url='https://github.com/aacanakin/glim/archive/v0.8.6.zip',
+    download_url='https://github.com/aacanakin/glim/archive/v%s.zip' % glim.version,
     keywords=[
         'framework',
         'web framework',
         'api development',
+        'model view controller',
         'Werkzeug',
         'SQLAlchemy',
         'Jinja2',
