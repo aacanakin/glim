@@ -138,33 +138,6 @@ class Config(Registry):
     It holds the dict in app.config.<env>.config.
 
     """
-    pass
-
-# Session class
-
-
-class Session(Registry):
-
-    """
-
-    This class is not currently used anywhere. It's not implemented
-    yet.
-
-    """
-    pass
-
-# Cookie Class
-
-
-class Cookie(Registry):
-
-    """
-
-    This class is not currently used anywhere. It's not implemented
-    yet.
-
-    """
-    pass
 
 # an alias of werkzeug.wrappers.Response
 Response = response
