@@ -2,7 +2,7 @@
 glim - 0.8.6
 ============
 
-[Documentation(not complete)](http://aacanakin.github.io/glim)
+[Documentation(not complete)](http://glim.readme.io)
 
 [Roadmap](http://glim.readme.io/v0.8.6/docs/roadmap)
 

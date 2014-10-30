@@ -1,4 +1,6 @@
-`Documentation(not complete) <http://aacanakin.github.io/glim>`__
+`Documentation <http://glim.readme.io>`__
+
+`Roadmap <http://glim.readme.io/v0.8.6/docs/roadmap>`__
 
 `Changelog <https://github.com/aacanakin/glim/blob/master/CHANGELOG.md>`__
 
