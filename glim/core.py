@@ -7,9 +7,6 @@ They're used inside glim framework and glim framework extensions.
 
 from werkzeug.wrappers import Response as response
 
-# registry class is for generic framework components register function
-# with configuration
-
 
 class Registry:
 
@@ -127,8 +124,6 @@ class Registry:
     def __str__(self):
         return self.registrar
 
-# Config class
-
 
 class Config(Registry):
 
@@ -141,7 +136,6 @@ class Config(Registry):
 
 # an alias of werkzeug.wrappers.Response
 Response = response
-
 
 class IoC:
 
@@ -204,8 +198,6 @@ class IoC:
             return self.instances[key]
         except:
             return None
-
-# metaclass for facade class
 
 
 class DeflectToInstance(type):
