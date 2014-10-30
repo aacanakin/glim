@@ -10,8 +10,7 @@ import os
 import sys
 import traceback
 
-from glim.facades import (Config, Database, Orm, Session, Cookie, IoC, View,
-                          Log)
+from glim.facades import Config, Database, Orm, IoC, View, Log
 from glim.utils import import_module
 from glim.dispatch import Glim
 

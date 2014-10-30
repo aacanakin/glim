@@ -4,6 +4,8 @@ glim - 0.8.6
 
 [Documentation(not complete)](http://aacanakin.github.io/glim)
 
+[Roadmap](http://glim.readme.io/v0.8.6/docs/roadmap)
+
 [Changelog](https://github.com/aacanakin/glim/blob/master/CHANGELOG.md)
 
 glim is a modern web framework on top of [Werkzeug](http://werkzeug.pocoo.org/), [SQLAlchemy](http://www.sqlalchemy.org/) and [Jinja2](http://jinja.pocoo.org/docs/dev/) inspired from [play](https://www.playframework.com/) & [laravel](http://laravel.com/). The aim is to build a lightweight architecture for web app development. The development philosophy here is to make the core small as possible but still not featureless. It has an extension system that can boot objects with configuration.(See [gredis](https://github.com/aacanakin/gredis) - a redis extension for glim)
@@ -63,27 +65,6 @@ $ python glim.py new
 # run the web server
 $ python glim.py start
 ```
-
-Roadmap
--------
-- travis-ci & nose integrations
-- add comparison matrix of other python frameworks to glim
-- log module should have one internal logger one app logger
-- no more manual tests, write some tests for;
-    + facade tests
-    + component tests
-    + command layer tests
-    + ORM and DB API stress tests
-- exceptions
-    + GlimError and its extensions
-- extension system
-    + extensions to develop
-        * Mail
-        * Message Queue (AWSQ, Rabbit, Iron, ZeroMQ etc)
-        * MongoDB
-        * Cassandra
-- model layer
-    + renewing db connections & orm connections after db fails
 
 glim is
 -------

@@ -14,7 +14,7 @@ from glim.core import Registry
 # Extension class
 
 
-class Extension():
+class Extension:
 
     """
 

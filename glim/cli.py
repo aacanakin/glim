@@ -59,8 +59,10 @@ def main():
     env = namespace.env
 
     # register the subparsers
-    parser = argparse.ArgumentParser(
-        parents=[preparser], description=description, add_help=True)
+    parser = argparse.ArgumentParser(parents=[preparser],
+                                     description=description, 
+                                     add_help=True)
+
     subparsers = parser.add_subparsers(title='commands', help='commands')
 
     # initialize a command adapter with subparsers

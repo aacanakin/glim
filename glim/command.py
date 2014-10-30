@@ -15,7 +15,7 @@ class CommandAdapter:
     """
 
     This class is responsible for detecting, registering
-    and dispathing command line utilities of glim framework.
+    and dispatching command line utilities of glim framework.
     In glim, there are two types of commands namely Command and
     GlimCommand. The only difference of them is GlimCommand can
     access to app object in the runtime. The class is used for
@@ -103,9 +103,8 @@ class CommandAdapter:
                     cmd = c(self.subparsers)
                     self.commands.append(cmd)
                 else:
-                    print(colored(
-                          "Warning: Command %s has empty name. It won't be registered"
-                          % c, 'yellow'))
+                    print(colored("Warning: Command %s has empty name. It won't be registered"
+                                  % c, 'yellow'))
 
     def register_extension(self, module, extension):
         """
@@ -183,7 +182,7 @@ class CommandAdapter:
         Args
         ----
           command (glim.command.Command): the command object.
-          app (glim.app.App):
+          app (glim.app.App): the glim app object.
 
         Note:
           Exception handling should be done in Command class
