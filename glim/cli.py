@@ -47,12 +47,12 @@ def main():
 
     """
     # register the global parser
-    preparser = argparse.ArgumentParser(
-        description=description, add_help=False)
-    preparser.add_argument(
-        '--env', '-e', dest='env', default='development',
-        help='choose application environment'
-    )
+    preparser = argparse.ArgumentParser(description=description,
+                                        add_help=False)
+
+    preparser.add_argument('--env', '-e', dest='env',
+                           default='development',
+                           help='choose application environment')
 
     # parse existing options
     namespace, extra = preparser.parse_known_args()
