@@ -1,3 +1,10 @@
+"""
+
+The view module is responsible for the server side
+view layer of glim framework.
+
+"""
+
 
 from jinja2 import Environment, PackageLoader
 
