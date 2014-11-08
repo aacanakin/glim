@@ -6,6 +6,7 @@ Command class for other commands to extend it.
 
 """
 
+
 import inspect
 from termcolor import colored
 

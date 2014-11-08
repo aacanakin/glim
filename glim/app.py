@@ -1,4 +1,4 @@
-"""Module for app object
+"""
 
 This module is responsible for instantiating a typical glim framework app.
 It registers glim framework components, extensions and wsgi app.

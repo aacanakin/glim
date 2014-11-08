@@ -27,6 +27,7 @@ glim.paths.extension_commands(ext) # returns the ext.<ext>.commands path
 
 """
 
+
 import os
 from termcolor import colored
 
