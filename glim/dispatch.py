@@ -14,6 +14,7 @@ from werkzeug.contrib.sessions import FilesystemSessionStore
 from glim.utils import import_module
 import glim.paths as paths
 
+
 try:
     basestring
 except NameError:

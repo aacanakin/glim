@@ -11,7 +11,7 @@ import os
 import sys
 import traceback
 
-from glim.facades import Config, Database, Orm, IoC, View, Log
+from glim import Config, Database, Orm, IoC, View, Log
 from glim.utils import import_module
 from glim.dispatch import Glim
 

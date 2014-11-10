@@ -125,18 +125,6 @@ class Registry:
         return self.registrar
 
 
-class Config(Registry):
-
-    """
-
-    The configuration class is to hold framework level constants.
-    It holds the dict in app.config.<env>.config.
-
-    """
-
-# an alias of werkzeug.wrappers.Response
-Response = response
-
 class IoC:
 
     """
@@ -230,7 +218,6 @@ MetaMixin = DeflectToInstance('MetaMixin', (object,), {})
 
 
 # facade that is used to hold instances statically with boot method
-
 class Facade(MetaMixin):
 
     """
@@ -285,3 +272,9 @@ class Facade(MetaMixin):
     def _get(cls):
         """Function returns the instance"""
         return cls.instance
+
+
+class IoCFacade(Facade):
+    accessor = IoC
+
+

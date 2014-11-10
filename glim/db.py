@@ -5,6 +5,7 @@ of glim framework.
 
 """
 
+from glim.core import Facade
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -148,6 +149,10 @@ class Database:
         for connection in self.config.items():
             connection.close()
 
+
+class DatabaseFacade(Facade):
+    accessor = Database
+
 # an alias of sqlalchemy.ext.declarative.declarative_base
 Model = declarative_base()
 
@@ -200,3 +205,6 @@ class Orm:
         """
         self.active = key
         return self
+
+class OrmFacade(Facade):
+    accessor = Orm

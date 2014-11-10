@@ -4,8 +4,7 @@ The view module is responsible for the server side
 view layer of glim framework.
 
 """
-
-
+from glim.core import Facade
 from jinja2 import Environment, PackageLoader
 
 
@@ -105,3 +104,7 @@ class View:
         """
         return Response(self.source(file, *args, **kwargs),
                         mimetype='text/html')
+
+
+class ViewFacade(Facade):
+    accessor = View

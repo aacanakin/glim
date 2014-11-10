@@ -12,7 +12,7 @@ from termcolor import colored
 
 from glim.command import GlimCommand
 from glim.utils import copytree
-from glim.facades import Log
+from glim import Log
 
 import glim.paths as paths
 

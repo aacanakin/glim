@@ -4,7 +4,7 @@ This module provides logging inside glim framework.
 
 """
 
-
+from glim.core import Facade
 from termcolor import colored
 import logging
 
@@ -67,3 +67,7 @@ class Log:
 
     def critical(self, msg):
         logging.critical(colored(msg, 'red', attrs=['reverse']))
+
+
+class LogFacade(Facade):
+    accessor = Log
