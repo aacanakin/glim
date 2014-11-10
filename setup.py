@@ -17,7 +17,7 @@ setup(
     author='Aras Can Akin',
     author_email='aacanakin@gmail.com',
     name='glim',
-    packages=find_packages(exclude=['app', 'ext']),
+    packages=find_packages(),
     version=glim.version,
     description='A modern framework for the web',
     long_description=read('README.rst'),
