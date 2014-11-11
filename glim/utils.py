@@ -112,3 +112,21 @@ def copytree(src, dst, symlinks=False, ignore=None):
     else:
         raise FolderExistsError("Folder already exists in %s" % dst)
 
+
+def empty(key, dict):
+    """
+
+    Function determines if the dict key exists or it is empty
+
+    Args
+    ----
+    key (string): the dict key
+    dict (dict): the dict to be searched
+
+    """
+    if key in dict.keys():
+        if dict[key]:
+            return False
+    return True
+
+
