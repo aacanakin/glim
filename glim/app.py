@@ -11,8 +11,8 @@ import os
 import sys
 import traceback
 
-from glim import Config, Database, Orm, IoC, View, Log
-from glim.utils import import_module
+from glim import Config, Database, Orm, IoC, View, Log, GlimLog
+from glim.utils import import_module, empty
 from glim.dispatch import Glim
 
 import glim.paths as paths
@@ -125,7 +125,7 @@ class App:
 
         except Exception as e:
             print(traceback.format_exc())
-            Log.error(e)
+            GlimLog.error(e)
 
     def register_ioc(self):
         """Function registers IoC facade using IoC class in glim.core.IoC."""
@@ -154,10 +154,20 @@ class App:
           if there isn't any 'log' key in app.config.<env>.
 
         """
-        if 'log' in self.config:
-            Log.register(self.config['log'])
+        if not empty('log', self.config):
+
+            if not empty('glim', self.config['log']):
+                GlimLog.boot(name='glim', config=self.config['log']['glim'])
+            else:
+                GlimLog.boot(name='glim')
+
+            if not empty('app', self.config['log']):
+                Log.boot(name='app', config=self.config['log']['app'])
+            else:
+                Log.boot(name='app')
         else:
-            Log.register()
+            Log.boot(name='app')
+            GlimLog.boot(name='glim')
 
     def start(self, host='127.0.0.1', port='8080', env='development'):
         """

@@ -5,9 +5,32 @@ This module provides logging inside glim framework.
 """
 
 from glim.core import Facade
+from glim.exception import InvalidLoggerError
 from termcolor import colored
 import logging
 
+LEVELS = {
+    'debug': logging.DEBUG,
+    'info': logging.INFO,
+    'warning': logging.WARNING,
+    'error': logging.ERROR,
+    'critical': logging.CRITICAL
+}
+
+CONFIG = {
+    'glim': {
+        'level': 'info',
+        'format': '%(message)s',
+        'colored': True,
+        'file': None
+    },
+    'app': {
+        'level': 'debug',
+        'format': '%(message)s',
+        'colored': True,
+        'file': None
+    }
+}
 
 class Log:
 
@@ -27,47 +50,62 @@ class Log:
 
     """
 
-    LEVELS = {
-        'debug': logging.DEBUG,
-        'info': logging.INFO,
-        'warning': logging.WARNING,
-        'error': logging.ERROR,
-        'critical': logging.CRITICAL
-    }
+    def __init__(self, name, config={}):
 
-    CONFIG = {
-        'level': 'debug',
-        'format': '%(message)s',
-    }
+        if name not in CONFIG.keys():
+            raise InvalidLoggerError("Invalid logger name %s" % name)
 
-    def __init__(self, config={}):
         if config:
             self.config = config
         else:
-            self.config = Log.CONFIG
+            self.config = CONFIG[name]
 
-        lvl = Log.LEVELS[self.config['level']] if (
-            'level' in self.config) else Log.LEVELS['info']
+        self.logger = logging.getLogger(name)
+
+        # set level
+        level = LEVELS[self.config['level']] if 'level' in self.config else LEVELS['info']
+        self.logger.setLevel(level)
+
+        # create a log handler
         filepath = self.config['file'] if 'file' in self.config else None
-        fmt = self.config['format'] if 'format' in self.config else None
+        handler = None
+        if filepath is None:
+            handler = logging.StreamHandler()
+        else:
+            handler = logging.FileHandler(filepath)
 
-        logging.basicConfig(filename=filepath, level=lvl, format=fmt)
+        # set log format
+        form = self.config['format'] if 'format' in self.config else None 
+        formatter = logging.Formatter(form)
+        handler.setFormatter(formatter)
 
-    def info(self, msg):
-        logging.info(colored(msg, 'green'))
-
-    def warning(self, msg):
-        logging.warning(colored(msg, 'yellow', attrs=['reverse']))
+        self.logger.addHandler(handler)
 
     def debug(self, msg):
-        logging.debug(colored(msg, 'cyan', attrs=['blink']))
+        self.write(msg, LEVELS['debug'], 'cyan', attrs=['blink'])
+
+    def info(self, msg):
+        self.write(msg, LEVELS['info'], 'green')
+
+    def warn(self, msg):
+        self.write(msg, LEVELS['warning'], 'yellow', attrs=['reverse'])
 
     def error(self, msg):
-        logging.debug(colored(msg, 'red'))
+        self.write(msg, LEVELS['error'], 'error')
 
     def critical(self, msg):
-        logging.critical(colored(msg, 'red', attrs=['reverse']))
+        self.write(msg, LEVELS['critical'], 'red', attrs=['reverse'])
+
+    def write(self, msg, level=LEVELS['debug'], color=None, attrs=[]):
+        message = msg
+        if color is not None and self.config['colored']:
+            message = colored(message, color, attrs=attrs)
+        self.logger.log(level, message)
 
 
 class LogFacade(Facade):
+    accessor = Log
+
+
+class GlimLogFacade(Facade):
     accessor = Log

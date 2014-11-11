@@ -12,7 +12,7 @@ from termcolor import colored
 
 from glim.command import GlimCommand
 from glim.utils import copytree
-from glim import Log
+from glim import GlimLog
 
 import glim.paths as paths
 
@@ -75,5 +75,5 @@ class StartCommand(GlimCommand):
 
     def run(self, app):
         """Function starts the web server given configuration."""
-        Log.info('Glim server started on %s environment' % self.args.env)
+        GlimLog.info('Glim server started on %s environment' % self.args.env)
         app.start(host=self.args.host, port=self.args.port)

@@ -17,6 +17,7 @@ Orm = db.OrmFacade
 IoC = core.IoCFacade
 View = view.ViewFacade
 Log = log.LogFacade
+GlimLog = log.GlimLogFacade
 
 Response = response.Response
 
