@@ -23,18 +23,18 @@ def import_source(module, path, pass_errors=False):
 
     Args
     ----
-      module (string): the module name
-      path (string): the full path of module
-      pass_errors(boolean): the switch for function
-        to skip errors or not.
+    module (string): the module name
+    path (string): the full path of module
+    pass_errors(boolean): the switch for function
+    to skip errors or not.
 
     Returns
     -------
-      module (module): the module object.
+    module (module): the module object.
 
     Raises
     ------
-      e (Exception): any kind of exceptions during importing.
+    e (Exception): any kind of exceptions during importing.
 
     """
     try:
@@ -53,21 +53,21 @@ def import_module(module, pass_errors=False):
 
     Args
     ----
-      module (string): the module name
-      pass_errors(boolean): the switch for function
-        to skip errors or not.
+    module (string): the module name
+    pass_errors(boolean): the switch for function
+    to skip errors or not.
 
     Returns
     -------
-      module (module): the module object.
+    module (module): the module object.
 
     Raises
     ------
-      exception (Exception): any kind of exceptions during importing.
-      import_error(ImportError): import errors during importing.
+    exception (Exception): any kind of exceptions during importing.
+    import_error(ImportError): import errors during importing.
 
     Note:
-      pass_errors switch will not pass any errors other than ImportError
+    pass_errors switch will not pass any errors other than ImportError
 
     """
     frm = module.split('.')
@@ -94,14 +94,10 @@ def copytree(src, dst, symlinks=False, ignore=None):
 
     Args
     ----
-      src (string): the full path of source directory
-      dst (string): the full path of destination directory
-      symlinks (boolean): the switch for tracking symlinks
-      ignore (list): the ignore list
-
-    Note:
-      After 0.8.4 release, if the source directory doesn't exist,
-      it will create the directory given full path.
+    src (string): the full path of source directory
+    dst (string): the full path of destination directory
+    symlinks (boolean): the switch for tracking symlinks
+    ignore (list): the ignore list
 
     """
     if not os.path.exists(dst):
