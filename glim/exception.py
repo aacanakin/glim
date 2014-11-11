@@ -10,3 +10,6 @@ class GlimError(Exception):
 
 class FolderExistsError(GlimError):
 	pass
+
+class InvalidLoggerError(GlimError):
+	pass
