@@ -49,10 +49,22 @@ config = {
 
     # logging configuration, it has a default configuration
     # if you don't provide one.
-    'log': {
-        # 'level' : 'info',
-        # 'format' : '[%(levelname)s] : %(message)s',
-        # 'file' : 'app/storage/logs/debug.log'
+    'log' : {
+
+        # 'app' : {
+        #   'level': 'info',
+        #   'format': '[%(levelname)s] - application : %(message)s',
+        #   'colored': True,
+        #   # 'file' : 'app/storage/logs/app.log'
+        # },
+
+        # 'glim' : {
+            # 'level' : 'info',
+            # 'format' : '[%(levelname)s] : %(message)s',
+            # 'colored': True
+            # 'file' : 'app/storage/logs/glim.log'  
+        # },
+
     },
 
     # view configuration
