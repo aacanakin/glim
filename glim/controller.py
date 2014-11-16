@@ -23,29 +23,3 @@ class Controller:
 
     def __init__(self, request):
         self.request = request
-
-
-class RestController(Controller):
-
-    """
-
-    The rest controller is simply a shortcut to make the controller
-    restful. The dispatcher calls the following functions according
-    to the request method.
-
-    """
-
-    def get(self):
-        pass
-
-    def post(self):
-        pass
-
-    def put(self):
-        pass
-
-    def patch(self):
-        pass
-
-    def delete(self):
-        pass
