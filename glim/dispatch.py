@@ -157,7 +157,7 @@ class Glim:
 
             raw = None
             if restful:
-                raw = getattr(instance, request.method.lower()(**values))
+                raw = getattr(instance, request.method.lower())(**values)
             else:
                 raw = getattr(instance, fnc)(** values)
 
