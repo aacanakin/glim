@@ -1,25 +1,28 @@
 from glim import paths
+
 paths.configure()
 
-from glim.core import Registry
+from glim.core import Registry, IoC, Facade
 
-config = {
+registry_config = {
 	'a' : 'b',
 	'c' : {
 		'd' : 'e'
 	}
 }
 
+# registry tests
+
 def test_registry_init_all():
 
-	registry = Registry(config)
+	registry = Registry(registry_config)
 
-	assert config == registry.registrar
-	assert config == registry.all()
+	assert registry_config == registry.registrar
+	assert registry_config == registry.all()
 
 def test_registry_get_set():
 
-	registry = Registry(config)
+	registry = Registry(registry_config)
 
 	# ovveride config
 	registry.set('a', 'z')
@@ -40,20 +43,160 @@ def test_registry_get_set():
 
 def test_registry_flush():
 
-	registry = Registry(config)
+	registry = Registry(registry_config)
 	registry.flush()
 
 	assert registry.registrar == {}
 
 def test_registry_update():
 
-	registry = Registry(config)
+	registry = Registry(registry_config)
 	registry.update({
-		'a' : 'b',
+		'a' : 'b2',
 		'c' : {
 			'f' : 'g'
 		}
 	})
 
+	assert registry.get('a') == 'b2'
 	assert registry.get('c.f') == 'g'
+
+# ioc tests
+
+class A:
+	def __init__(self, blah=None):
+		self.blah = blah
+
+ioc_instances = {
+	'a': A(),
+	'a2': A('this is blah')
+}
+
+def test_ioc_init_empty_full():
+
+	ioc_full = IoC(ioc_instances)
+	assert ioc_full.instances == ioc_instances
+
+	ioc_empty = IoC()
+	assert ioc_empty.instances == {}
+
+def test_ioc_bind_resolve():
+
+	ioc = IoC()
+	a_empty_blah = A()
+	a_with_blah = A('blah')
+	ioc.bind('a', a_empty_blah)
+
+	assert ioc.resolve('a') == a_empty_blah
+
+	assert ioc.resolve('non-existent-key') == None
+
+	ioc.bind('a', a_with_blah)
+
+	assert ioc.resolve('a') == a_with_blah
+
+# facade tests
+class Sample:
+
+	def __init__(self, config={}):
+		self.config = config
+
+	def foo(self):
+		return 'bar'
+
+class SampleWithMultipleArguments:
+
+	def __init__(self, arg1, arg2, arg3=None):
+		self.arg1 = arg1
+		self.arg2 = arg2
+		self.arg3 = arg3
+
+	def foo(self):
+		return '%s,%s,%s bar' % (self.arg1, self.arg2, self.arg3)
+
+class SampleFacade(Facade):
+
+	accessor = Sample
+
+	@classmethod
+	def foo_inside_facade(cls):
+		return 'bar inside the facade'
+
+class SampleWithMultipleArgumentsFacade(Facade):
+
+	accessor = SampleWithMultipleArguments
+
+	@classmethod
+	def foo_inside_facade(cls):
+		return 'bar inside the facade'
+
+def test_facade_sample_register():
+
+	sample_config = {
+		'a' : 'b'
+	}
+
+	sample_config2 = {
+		'a' : 'c'
+	}
+
+	SampleFacade.register(sample_config)
+	assert isinstance(SampleFacade.instance, Sample)
+	assert SampleFacade.instance.config == sample_config
+
+	SampleFacade.register(sample_config2)
+	assert SampleFacade.instance.config == sample_config
+
+def test_facade_sample_deflect_to_instance():
+
+	sample_config = {
+		'a' : 'b'
+	}
+
+	SampleFacade.register(sample_config)
+	assert SampleFacade.foo() == 'bar'
+	assert SampleFacade.foo_inside_facade() == 'bar inside the facade'
+
+def test_facade_sample_wma_boot():
+
+	sample_wma_config = {
+		'arg1': 'a1',
+		'arg2': 'a2',
+		'arg3': 'a3'
+	}
+
+	sample_wma_config2 = {
+		'arg1': 'b1',
+		'arg2': 'b2',
+		'arg3': 'b3'
+	}
+
+	SampleWithMultipleArgumentsFacade.boot(sample_wma_config['arg1'],
+									 	   sample_wma_config['arg2'],
+									 	   sample_wma_config['arg3'])
+
+	assert SampleWithMultipleArgumentsFacade.instance.arg1 == sample_wma_config['arg1']
+	assert SampleWithMultipleArgumentsFacade.instance.arg2 == sample_wma_config['arg2']
+	assert SampleWithMultipleArgumentsFacade.instance.arg3 == sample_wma_config['arg3']
+
+	SampleWithMultipleArgumentsFacade.boot(sample_wma_config2['arg1'],
+					  					   sample_wma_config2['arg2'],
+					  					   sample_wma_config2['arg3'])
+
+	assert SampleWithMultipleArgumentsFacade.instance.arg1 != sample_wma_config2['arg1']
+	assert SampleWithMultipleArgumentsFacade.instance.arg2 != sample_wma_config2['arg2']
+	assert SampleWithMultipleArgumentsFacade.instance.arg3 != sample_wma_config2['arg3']
+
+def test_facade_sample_wma_deflect_to_instance():
+
+	sample_wma_config = {
+		'arg1': 'a1',
+		'arg2': 'a2',
+		'arg3': 'a3'
+	}
+
+	SampleWithMultipleArgumentsFacade.boot(sample_wma_config)
+	assert SampleWithMultipleArgumentsFacade.foo() == 'a1,a2,a3 bar'
+	assert SampleWithMultipleArgumentsFacade.foo_inside_facade() == 'bar inside the facade'
+
 
