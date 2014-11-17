@@ -22,6 +22,5 @@ GlimLog = log.GlimLogFacade
 Response = response.Response
 
 Controller = controller.Controller
-RestController = controller.RestController
 Extension = ext.Extension
 Service = service.Service
