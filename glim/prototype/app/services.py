@@ -4,8 +4,8 @@ The optional services layer of app.
 
 Example
 -------
-from glim.core import Service
-from glim.facades import Orm as ORM
+from glim import Service
+from glim import Orm
 from models import User
 
 class UserService(Service):
@@ -16,10 +16,10 @@ class UserService(Service):
         user = User(full_name, title)
 
         # writes a new user to the database session
-        ORM.add(user)
+        Orm.add(user)
 
         # commits the transaction
-        ORM.commit()
+        Orm.commit()
 """
 
 from glim.component import Service

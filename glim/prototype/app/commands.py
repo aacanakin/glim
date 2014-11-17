@@ -5,7 +5,7 @@ to the project.
 
 Example
 -------
-from glim.command import Command
+from glim import Command
 
 class HelloCommand(Command):
 
@@ -27,4 +27,4 @@ $ glim hello --name aras
 # outputs hello aras
 
 """
-from glim.command import Command
+from glim import Command

@@ -4,8 +4,8 @@ The controllers of a typical glim app.
 
 Example
 -------
-from glim.component import Controller
-from glim.facades import View
+from glim import Controller
+from glim import View
 
 class HelloController(Controller):
     def hello(self):
@@ -18,7 +18,7 @@ class HelloController(Controller):
 
 """
 
-from glim.component import Controller
+from glim import Controller
 import json
 
 

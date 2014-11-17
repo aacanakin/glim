@@ -5,7 +5,7 @@ for the app.
 
 Example
 -------
-from glim.db import Model
+from glim import Model
 from sqlalchemy import Column, Integer, String
 
 class User(Model):
@@ -16,7 +16,7 @@ class User(Model):
     title = Column(String(255))
 
     def __repr__(self):
-        return "<User (name = %s,title = %s)" % (self.full_name, self.title)
+        return "<User (name = %s,title = %s)>" % (self.full_name, self.title)
 
 """
 
