@@ -118,8 +118,8 @@ class App:
 
                 ext_cmd_module = import_module(ext_cmdstr, pass_errors=True)
                 if ext_cmd_module is not None:
-                    self.commandadapter.register_extension(
-                        ext_cmd_module, extension)
+                    self.commandadapter.register_extension(ext_cmd_module,
+                                                           extension)
 
         except Exception as e:
             print(traceback.format_exc())
