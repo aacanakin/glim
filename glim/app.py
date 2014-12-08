@@ -172,7 +172,7 @@ class App:
     def start(self, host='127.0.0.1', port='8080', env='development'):
         """
 
-        Function initiates a werkzeug wsgi app using app.routes.py.
+        Function initiates a werkzeug wsgi app using app.routes module.
 
         Note:
           Function will register a static path for css, js, img, etc. files
