@@ -79,12 +79,10 @@ class App:
           if 'db' key is absent in app.config.<env>.
 
         """
-        if 'db' in self.config.keys():
-            if self.config['db']:
-                Database.register(self.config['db'])
-                if 'orm' in self.config.keys():
-                    if self.config['orm']:
-                        Orm.register(Database.engines)
+        if not empty('db', self.config):
+            Database.register(self.config['db'])
+            if not empty('orm', self.config):
+                Orm.register(Database.engines)
 
     def register_extensions(self, extensions=[]):
         """
