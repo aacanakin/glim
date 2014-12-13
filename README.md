@@ -1,4 +1,5 @@
-[![Stories in Ready](https://badge.waffle.io/aacanakin/glim.png?label=ready&title=Ready)](https://waffle.io/aacanakin/glim)
+[![Build
+Status](https://travis-ci.org/aacanakin/glim.svg)](https://travis-ci.org/aacanakin/glim)
 glim - 0.8.6
 ============
 
