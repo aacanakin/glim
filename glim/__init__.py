@@ -1,4 +1,4 @@
-version = "0.8.6"
+version = "0.9.4"
 
 from glim import config
 from glim import db

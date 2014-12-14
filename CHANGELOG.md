@@ -1,4 +1,31 @@
 ```
+---------------------- v0.9.4 14/12/2014 ----------------------
+- removed extension from MANIFEST
+- more testable app.py module
+- fixed docstrings in command.py module
+- removed Session and Cookie registries from core module
+- code cleanup, fix for PEP8 styling
+- added single version usage in setup.py
+- moved before function hook to cli for testability
+- removed facades module.they are distributed among different modules
+- removed component module. it is now separated to smaller fouces
+  modules
+- deleted .gitignore from prototype/ext
+- cleanup in db module
+- added empty function to utils module
+- refactored copytree function, added exception throwing
+- removed RestController, being restful is completely implicit
+- add lots of improvements in the log module. now app, glim has
+  different loggers
+- added bunch of new type of Errors to exception module
+- added module shortcuts to the frameworks __init__.py. now it isnt
+  needed to know the package or module name.
+- added core module tests
+- improved reusability of db booting
+- fix #19
+- added travis integration
+---------------------------------------------------------------
+
 ---------------------- v0.8.6 28/09/2014 ----------------------
 - adopted more into PEP8
 - fixed issue #8
