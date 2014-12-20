@@ -1,6 +1,6 @@
 [![Build
 Status](https://travis-ci.org/aacanakin/glim.svg)](https://travis-ci.org/aacanakin/glim)
-glim - 0.8.6
+glim - 0.9.4
 ============
 
 [Documentation(not complete)](http://glim.readme.io)
