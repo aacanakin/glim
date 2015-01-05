@@ -8,7 +8,7 @@ They're used inside glim framework and glim framework extensions.
 from werkzeug.wrappers import Response as response
 
 
-class Registry:
+class Registry(object):
 
     """
 
@@ -125,7 +125,7 @@ class Registry:
         return self.registrar
 
 
-class IoC:
+class IoC(object):
 
     """
 

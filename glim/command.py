@@ -11,7 +11,7 @@ import inspect
 from termcolor import colored
 
 
-class CommandAdapter:
+class CommandAdapter(object):
 
     """
 
