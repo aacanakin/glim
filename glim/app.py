@@ -63,27 +63,6 @@ class App:
         """Function registers the Config facade using Config(Registry)."""
         Config.register(self.config)
 
-    def register_database(self):
-        """
-
-        Function registers the Orm and Database facades
-        using glim.db.Orm and glim.db.Database.
-
-        Note:
-          It registers db.Database when 'db' key is defined in
-            app.config.<env>.
-          It registers db.Orm when 'orm' : True exists in app.config.<env>.
-
-        Note:
-          In configuration, 'orm' : True won't be able to register
-          if 'db' key is absent in app.config.<env>.
-
-        """
-        if not empty('db', self.config):
-            Database.register(self.config['db'])
-            if not empty('orm', self.config):
-                Orm.register(Database.engines)
-
     def register_extensions(self, extensions=[]):
         """
 
