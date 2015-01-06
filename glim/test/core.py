@@ -2,7 +2,7 @@ from glim import paths
 
 paths.configure()
 
-from glim.core import Registry, IoC, Facade
+from glim.core import Registry, Facade
 
 registry_config = {
     'a' : 'b',
@@ -38,7 +38,6 @@ def test_registry_get_set():
     registry.set('q.q1', 'wn')
 
     assert registry.get('q.q1') == 'wn'
-    assert registry.get('c.d') == 'e'
     assert registry.get('no-key') == None
 
 def test_registry_flush():
@@ -60,40 +59,6 @@ def test_registry_update():
 
     assert registry.get('a') == 'b2'
     assert registry.get('c.f') == 'g'
-
-# ioc tests
-
-class A:
-    def __init__(self, blah=None):
-        self.blah = blah
-
-ioc_instances = {
-    'a': A(),
-    'a2': A('this is blah')
-}
-
-def test_ioc_init_empty_full():
-
-    ioc_full = IoC(ioc_instances)
-    assert ioc_full.instances == ioc_instances
-
-    ioc_empty = IoC()
-    assert ioc_empty.instances == {}
-
-def test_ioc_bind_resolve():
-
-    ioc = IoC()
-    a_empty_blah = A()
-    a_with_blah = A('blah')
-    ioc.bind('a', a_empty_blah)
-
-    assert ioc.resolve('a') == a_empty_blah
-
-    assert ioc.resolve('non-existent-key') == None
-
-    ioc.bind('a', a_with_blah)
-
-    assert ioc.resolve('a') == a_with_blah
 
 # facade tests
 class Sample:

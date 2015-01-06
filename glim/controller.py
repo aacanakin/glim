@@ -6,7 +6,7 @@ a typical glim app.
 """
 
 
-class Controller:
+class Controller(object):
 
     """
 

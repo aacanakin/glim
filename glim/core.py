@@ -8,7 +8,7 @@ They're used inside glim framework and glim framework extensions.
 from werkzeug.wrappers import Response as response
 
 
-class Registry:
+class Registry(object):
 
     """
 
@@ -125,69 +125,6 @@ class Registry:
         return self.registrar
 
 
-class IoC:
-
-    """
-
-    This class is used for dependency injection in glim framework. It's
-    a registrar of any objects that can be passed using bind() resolve()
-    functions.
-
-    Attributes
-    ----------
-      instances (object): Any kind of instances to be held.
-
-    Usage
-    -----
-      ioc = IoC()
-      ioc.bind('request', werkzeug.wrappers.Request())
-      ioc.resolve('request') # returns Request object.
-
-    Note:
-      This function is not being used anywhere inside the glim framework
-      but facades could be registered by this way. However, it's not decided
-      yet.
-
-    """
-
-    def __init__(self, instances={}):
-        self.instances = instances
-
-    def bind(self, key, value):
-        """
-
-        Function binds an object given string based key
-
-        Args
-        ----
-          key (string): The string based key to reach the object
-            later.
-          value (object): Any kind of object to be held.
-
-        """
-        self.instances[key] = value
-
-    def resolve(self, key):
-        """
-
-        Function resolves an object given string based key.
-
-        Args
-        ----
-          key (string): the object key.
-
-        Returns
-        -------
-          instance (object): the instance of object. It returns
-            None if no object is found.
-
-        """
-        try:
-            return self.instances[key]
-        except:
-            return None
-
-
 class DeflectToInstance(type):
 
     """
@@ -272,9 +209,4 @@ class Facade(MetaMixin):
     def _get(cls):
         """Function returns the instance"""
         return cls.instance
-
-
-class IoCFacade(Facade):
-    accessor = IoC
-
 

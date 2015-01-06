@@ -9,7 +9,7 @@ from werkzeug.wrappers import Response
 from glim.core import Registry
 
 
-class Service:
+class Service(object):
 
     """
 

@@ -38,7 +38,7 @@ PROTO_PATH = os.path.join(os.path.dirname(__file__), 'prototype')
 
 EXT_PATH = os.path.join(PROJECT_PATH, 'ext')
 VIEWS_PATH = os.path.join(APP_PATH, 'views')
-STATIC_PATH = os.path.join(APP_PATH, 'static')
+ASSET_PATH = os.path.join(APP_PATH, 'assets')
 STORAGE_PATH = os.path.join(APP_PATH, 'storage')
 
 import sys

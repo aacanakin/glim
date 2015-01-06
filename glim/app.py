@@ -11,7 +11,7 @@ import os
 import sys
 import traceback
 
-from glim import Config, Database, Orm, IoC, View, Log, GlimLog
+from glim import Config, Log, GlimLog
 from glim.utils import import_module, empty
 from glim.dispatch import Glim
 
@@ -52,9 +52,6 @@ class App:
 
         self.register_config()
         self.register_log()
-        self.register_database()
-        self.register_ioc()
-        self.register_view()
         self.register_extensions()
 
         self.before = before
@@ -62,27 +59,6 @@ class App:
     def register_config(self):
         """Function registers the Config facade using Config(Registry)."""
         Config.register(self.config)
-
-    def register_database(self):
-        """
-
-        Function registers the Orm and Database facades
-        using glim.db.Orm and glim.db.Database.
-
-        Note:
-          It registers db.Database when 'db' key is defined in
-            app.config.<env>.
-          It registers db.Orm when 'orm' : True exists in app.config.<env>.
-
-        Note:
-          In configuration, 'orm' : True won't be able to register
-          if 'db' key is absent in app.config.<env>.
-
-        """
-        if not empty('db', self.config):
-            Database.register(self.config['db'])
-            if not empty('orm', self.config):
-                Orm.register(Database.engines)
 
     def register_extensions(self, extensions=[]):
         """
@@ -124,23 +100,6 @@ class App:
         except Exception as e:
             print(traceback.format_exc())
             GlimLog.error(e)
-
-    def register_ioc(self):
-        """Function registers IoC facade using IoC class in glim.core.IoC."""
-        IoC.register()
-
-    def register_view(self):
-        """
-
-        Function registers View facade using configuration in app.config.<env>.
-
-        Note:
-          The view layer will be disabled there isn't any 'view' key in
-            app.config.<env>.
-
-        """
-        if 'views' in self.config:
-            View.register(self.config['views'])
 
     def register_log(self):
         """

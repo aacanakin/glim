@@ -84,9 +84,9 @@ config = {
     'app': {
         'reloader': True,
         'debugger': True,
-        'static': {
-            'path': glim.paths.STATIC_PATH,
-            'url': '/static'
+        'assets': {
+            'path': glim.paths.ASSET_PATH,
+            'url': '/assets'
         }
     }
 }
