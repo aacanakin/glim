@@ -1,4 +1,3 @@
 Werkzeug
-SQLAlchemy
 termcolor
 jinja2
