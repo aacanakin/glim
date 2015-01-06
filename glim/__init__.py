@@ -1,7 +1,6 @@
 version = "0.9.4"
 
 from glim import config
-from glim import db
 from glim import core
 from glim import view
 from glim import log
@@ -13,10 +12,6 @@ from glim import command
 
 # package shortcuts for easy import
 Config = config.ConfigFacade
-
-Database = db.DatabaseFacade
-Orm = db.OrmFacade
-Model = db.Model
 
 IoC = core.IoCFacade
 
