@@ -38,7 +38,6 @@ def test_registry_get_set():
     registry.set('q.q1', 'wn')
 
     assert registry.get('q.q1') == 'wn'
-    assert registry.get('c.d') == 'e'
     assert registry.get('no-key') == None
 
 def test_registry_flush():
