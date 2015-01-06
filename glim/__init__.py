@@ -13,8 +13,6 @@ from glim import command
 # package shortcuts for easy import
 Config = config.ConfigFacade
 
-IoC = core.IoCFacade
-
 View = view.ViewFacade
 
 Log = log.LogFacade
