@@ -1,9 +1,10 @@
 [![Build
 Status](https://travis-ci.org/aacanakin/glim.svg)](https://travis-ci.org/aacanakin/glim)
-glim - 0.9.4
-============
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aacanakin/glim?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+glim - 0.9.x
+============
 
 [Documentation(not complete)](http://glim.readme.io)
 
