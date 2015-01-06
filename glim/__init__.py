@@ -2,7 +2,6 @@ version = "0.9.4"
 
 from glim import config
 from glim import core
-from glim import view
 from glim import log
 from glim import controller
 from glim import ext
@@ -12,8 +11,6 @@ from glim import command
 
 # package shortcuts for easy import
 Config = config.ConfigFacade
-
-View = view.ViewFacade
 
 Log = log.LogFacade
 
