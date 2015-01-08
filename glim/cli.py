@@ -60,7 +60,7 @@ def main():
 
     # register the subparsers
     parser = argparse.ArgumentParser(parents=[preparser],
-                                     description=description, 
+                                     description=description,
                                      add_help=True)
 
     subparsers = parser.add_subparsers(title='commands', help='commands')
@@ -75,33 +75,34 @@ def main():
     appcommands = import_module('app.commands', pass_errors=True)
     commandadapter.register(appcommands)
 
-    # check if a new app is being created
-    new = True if 'new' in extra else False
+    app = None
 
-    if ('help' in extra) or ('--help' in extra) or ('-h' in extra):
-        help = True
+    if paths.app_exists() is False:
+        # check if a new app is being created
+        new = True if 'new' in extra else False
+
+        if ('help' in extra) or ('--help' in extra) or ('-h' in extra):
+            help = True
+        else:
+            help = False
+
+        if help:
+            parser.print_help()
+            exit()
     else:
-        help = False
+        # load the config module
+        mconfig = import_module('app.config.%s' % env, pass_errors=True)
 
-    # check if help is being called when the app is not created
-    if paths.app_exists() is False and help is True:
-        parser.print_help()
-        exit()
+        # check if mconfig is None
+        if mconfig is None and paths.app_exists():
+            print(colored('Configuration for "%s" environment is not found' % env, 'red'))
+            exit()
 
-    # load the config module
-    mconfig = import_module('app.config.%s' % env)
+        # load the start hook
+        mstart = import_module('app.start')
+        before = mstart.before
 
-    # check if mconfig is None
-    if mconfig is None:
-        print(colored('Configuration for "%s" environment is not found' % env, 'red'))
-        exit()
-
-    # load the start hook
-    mstart = import_module('app.start')
-    before = mstart.before
-
-    # create the app
-    app = None if new else App(commandadapter, mconfig, env, before)
+        app = App(commandadapter, mconfig, env, before)
 
     args = parser.parse_args()
 
