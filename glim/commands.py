@@ -12,6 +12,7 @@ from termcolor import colored
 
 from glim.command import GlimCommand
 from glim.utils import copytree
+from glim.exception import FolderExistsError
 from glim import GlimLog
 
 import glim.paths as paths
@@ -35,8 +36,7 @@ class NewCommand(GlimCommand):
         """Function adds the optional name argument for creating an app with
         project name.
         """
-        self.add_argument(
-            "name", nargs='?', help="enter project name", default=None)
+        self.add_argument("name", nargs='?', help="enter project name", default=None)
 
     def run(self, app):
         """Function copies the prototype folder into os.getcwd() path."""
@@ -48,8 +48,8 @@ class NewCommand(GlimCommand):
 
         try:
             copytree(proto_path, project_path)
-            print(colored('A new glim app created successfully!', 'green'))
-        except Exception as e:
+            print(colored('A new glim app created successfully! Happy coding :)', 'green'))
+        except FolderExistsError as e:
             print(e)
             print(colored('App already exists', 'red'))
 
