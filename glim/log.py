@@ -32,7 +32,7 @@ CONFIG = {
     }
 }
 
-class Log:
+class Log(object):
 
     """
 

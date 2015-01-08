@@ -1,6 +1,6 @@
 
 
-class Extension:
+class Extension(object):
 
     """
 

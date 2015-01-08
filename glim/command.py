@@ -197,7 +197,7 @@ class CommandAdapter(object):
             command.run()
 
 
-class Command:
+class Command(object):
 
     """
 

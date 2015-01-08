@@ -22,7 +22,7 @@ except NameError:
     basestring = (str, bytes)
 
 
-class Glim:
+class Glim(object):
 
     """
 
