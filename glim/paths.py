@@ -36,7 +36,6 @@ APP_PATH = os.path.join(PROJECT_PATH, 'app')
 GLIM_ROOT_PATH = os.path.dirname(os.path.dirname(__file__))
 PROTO_PATH = os.path.join(os.path.dirname(__file__), 'prototype')
 
-EXT_PATH = os.path.join(PROJECT_PATH, 'ext')
 VIEWS_PATH = os.path.join(APP_PATH, 'views')
 ASSET_PATH = os.path.join(APP_PATH, 'assets')
 STORAGE_PATH = os.path.join(APP_PATH, 'storage')
@@ -56,7 +55,7 @@ def configure():
 
 
 def app_exists():
-    return os.path.exists(APP_PATH) and os.path.exists(EXT_PATH)
+    return os.path.exists(APP_PATH)
 
 
 def controllers():
