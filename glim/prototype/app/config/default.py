@@ -25,27 +25,13 @@ config = {
     # the configurations of extensions
     'extensions': {
         # 'gredis' : {
-        # 	'default' : {
-        # 		'host' : 'localhost',
-        # 		'port' : '6379',
-        # 		'db'   : 0
-        # 	}
+        #   'default' : {
+        #       'host' : 'localhost',
+        #       'port' : '6379',
+        #       'db'   : 0
+        #   }
         # }
     },
-
-    # database configuration
-    'db': {
-        # 'default' : {
-        # 	'driver' : 'mysql',
-        # 	'host' : 'localhost',
-        # 	'schema' : 'test',
-        # 	'user' : 'root',
-        # 	'password' : '',
-        # },
-    },
-
-    # the orm switch for orm to be disabled or not
-    'orm': True,
 
     # logging configuration, it has a default configuration
     # if you don't provide one.
