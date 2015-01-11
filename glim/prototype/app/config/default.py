@@ -53,12 +53,6 @@ config = {
 
     },
 
-    # view configuration
-    'views': {
-        # package to be loaded by jinja2
-        'package': 'app.views'
-    },
-
     # werkzeug sessions configuration
     'sessions': {
         # session id prefix
