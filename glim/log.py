@@ -92,6 +92,7 @@ class Log(object):
 
     def error(self, msg):
         self.write(msg, LEVELS['error'], 'error')
+        self.write('%s' % msg, LEVELS['error'], 'red')
 
     def critical(self, msg):
         self.write(msg, LEVELS['critical'], 'red', attrs=['reverse'])
