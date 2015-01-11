@@ -108,7 +108,7 @@ class App:
                     GlimLog.error('Extension %s could not be loaded' % extension)
 
         except Exception as e:
-            GlimLog.error(e)
+            GlimLog.error(traceback.format_exc())
 
     def register_log(self):
         """
