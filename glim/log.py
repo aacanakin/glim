@@ -82,19 +82,19 @@ class Log(object):
         self.logger.addHandler(handler)
 
     def debug(self, msg):
-        self.write('%s' % msg, LEVELS['debug'], 'cyan', attrs=['blink'])
+        self.write(msg, LEVELS['debug'], 'cyan', attrs=['blink'])
 
     def info(self, msg):
-        self.write('%s' % msg, LEVELS['info'], 'green')
+        self.write(msg, LEVELS['info'], 'green')
 
     def warn(self, msg):
-        self.write('%s' % msg, LEVELS['warning'], 'yellow', attrs=['reverse'])
+        self.write(msg, LEVELS['warning'], 'yellow', attrs=['reverse'])
 
     def error(self, msg):
-        self.write('%s' % msg, LEVELS['error'], 'red')
+        self.write(msg, LEVELS['error'], 'red')
 
     def critical(self, msg):
-        self.write('%s' % msg, LEVELS['critical'], 'red', attrs=['reverse'])
+        self.write(msg, LEVELS['critical'], 'red', attrs=['reverse'])
 
     def write(self, msg, level=LEVELS['debug'], color=None, attrs=[]):
         if color is not None and self.config['colored']:
