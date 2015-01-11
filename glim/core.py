@@ -5,8 +5,6 @@ They're used inside glim framework and glim framework extensions.
 
 """
 
-from werkzeug.wrappers import Response as response
-
 
 class Registry(object):
 
