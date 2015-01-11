@@ -161,10 +161,10 @@ class App:
             mroutes = import_module('app.routes')
             app = Glim(mroutes.urls, self.config['app'])
 
-            if 'static' in self.config['app']:
+            if 'assets' in self.config['app']:
                 app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
-                    self.config['app']['static']['url']:
-                    self.config['app']['static']['path']
+                    self.config['app']['assets']['url']:
+                    self.config['app']['assets']['path']
                 })
 
             run_simple(host, int(port), app,
