@@ -89,7 +89,7 @@ class App:
                 else: # if the extension is in glim_extensions package
                     extension_bstr = 'glim_extensions.%s' % extension_pieces[0]
 
-                extension_module = import_module(extension_bstr, pass_errors=True)
+                extension_module = import_module(extension_bstr)
 
                 if extension_module:
                     extension_startstr = '%s.%s' % (extension_bstr, 'start')
@@ -98,27 +98,14 @@ class App:
                     extension_cmdsstr = '%s.%s' % (extension_bstr, 'commands')
                     extension_cmds = import_module(extension_cmdsstr, pass_errors=True)
 
-                    if extension_start:
+                    if extension_start is not None:
                         before = extension_start.before
                         before(config)
 
-                    if extension_cmds:
+                    if extension_cmds is not None:
                         self.commandadapter.register_extension(extension_cmds, extension_pieces[0])
                 else:
                     GlimLog.error('Extension %s could not be loaded' % extension)
-
-                # ext_startmodule = import_module(ext_sstr, pass_errors=True)
-                # if ext_startmodule is not None:
-                #     before = getattr(ext_startmodule, 'before')
-                #     before(config)
-
-                # # register extension commands if exists
-                # ext_cmdstr = '%s.%s' % (ext_bstr, 'commands')
-
-                # ext_cmd_module = import_module(ext_cmdstr, pass_errors=True)
-                # if ext_cmd_module is not None:
-                #     self.commandadapter.register_extension(ext_cmd_module,
-                #                                            extension)
 
         except Exception as e:
             GlimLog.error(e)
