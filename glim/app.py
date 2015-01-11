@@ -60,7 +60,7 @@ class App:
         """Function registers the Config facade using Config(Registry)."""
         Config.register(self.config)
 
-    def register_extensions(self, extensions=[]):
+    def register_extensions(self):
         """
 
         Function registers extensions given extensions list
@@ -78,27 +78,49 @@ class App:
         try:
             for extension, config in self.config['extensions'].items():
 
-                # extension module base string
-                ext_bstr = 'ext.%s' % (extension)
+                extension_bstr = ''
 
-                # start script
-                ext_sstr = '%s.start' % ext_bstr
+                # gather package name if exists
+                extension_pieces = extension.split('.')
 
-                ext_startmodule = import_module(ext_sstr, pass_errors=True)
-                if ext_startmodule is not None:
-                    before = getattr(ext_startmodule, 'before')
-                    before(config)
+                # if the extensions is not in glim_extensions package
+                if len(extension_pieces) > 1:
+                    extension_bstr = '.'.join(extension_pieces)
+                else: # if the extension is in glim_extensions package
+                    extension_bstr = 'glim_extensions.%s' % extension_pieces[0]
 
-                # register extension commands if exists
-                ext_cmdstr = '%s.%s' % (ext_bstr, 'commands')
+                extension_module = import_module(extension_bstr, pass_errors=True)
 
-                ext_cmd_module = import_module(ext_cmdstr, pass_errors=True)
-                if ext_cmd_module is not None:
-                    self.commandadapter.register_extension(ext_cmd_module,
-                                                           extension)
+                if extension_module:
+                    extension_startstr = '%s.%s' % (extension_bstr, 'start')
+                    extension_start = import_module(extension_startstr, pass_errors=True)
+
+                    extension_cmdsstr = '%s.%s' % (extension_bstr, 'commands')
+                    extension_cmds = import_module(extension_cmdsstr, pass_errors=True)
+
+                    if extension_start:
+                        before = extension_start.before
+                        before(config)
+
+                    if extension_cmds:
+                        self.commandadapter.register_extension(extension_cmds, extension_pieces[0])
+                else:
+                    GlimLog.error('Extension %s could not be loaded' % extension)
+
+                # ext_startmodule = import_module(ext_sstr, pass_errors=True)
+                # if ext_startmodule is not None:
+                #     before = getattr(ext_startmodule, 'before')
+                #     before(config)
+
+                # # register extension commands if exists
+                # ext_cmdstr = '%s.%s' % (ext_bstr, 'commands')
+
+                # ext_cmd_module = import_module(ext_cmdstr, pass_errors=True)
+                # if ext_cmd_module is not None:
+                #     self.commandadapter.register_extension(ext_cmd_module,
+                #                                            extension)
 
         except Exception as e:
-            print(traceback.format_exc())
             GlimLog.error(e)
 
     def register_log(self):
