@@ -1,4 +1,21 @@
 ```
+---------------------- v0.10.2 20/01/2014 ---------------------
+- changed default assets folder to app/assets
+- changed default assets url to /assets
+- removed db.py module from core framework, now db is available by extensions
+- removed SQLAlchemy dependency from core framework
+- removed IoC from core framework
+- removed unnecessary test case
+- removed view layer from core framework, now view is available by extensions
+- removed ext folder from prototype folder
+- refactored object extensions of all framework objects
+- added gitter badge to repo
+- fixed bugs related to cli module
+- removed all folder/files related to view, db layer
+- improved log module to log string based messages by default
+- improved error reporting while registering extensions
+---------------------------------------------------------------
+
 ---------------------- v0.9.4 14/12/2014 ----------------------
 - removed extension from MANIFEST
 - more testable app.py module
