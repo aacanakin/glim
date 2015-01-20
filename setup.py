@@ -38,7 +38,7 @@ setup(
     ],
     install_requires=[
         "Werkzeug >= 0.9",
-        "termcolor >= 1.1.0"
+        "termcolor"
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
