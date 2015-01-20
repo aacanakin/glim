@@ -1,7 +1,8 @@
 from setuptools import setup
-import glim
 import os
 from os.path import exists
+
+v = "0.10.2"
 
 def read(*paths):
     """Build a file path from *paths* and return the contents."""
@@ -18,14 +19,14 @@ setup(
     author_email='aacanakin@gmail.com',
     name='glim',
     packages=find_packages(),
-    version=glim.version,
+    version=v,
     description='A modern framework for the web',
     long_description=read('README.rst'),
     entry_points={
         'console_scripts': ['glim=glim.cli:main']
     },
     url='https://github.com/aacanakin/glim',
-    download_url='https://github.com/aacanakin/glim/archive/v%s.zip' % glim.version,
+    download_url='https://github.com/aacanakin/glim/archive/v%s.zip' % v,
     keywords=[
         'framework',
         'web framework',
