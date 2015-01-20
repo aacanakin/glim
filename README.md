@@ -1,8 +1,8 @@
 [![Build
 Status](https://travis-ci.org/aacanakin/glim.svg)](https://travis-ci.org/aacanakin/glim) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aacanakin/glim?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-glim - 0.9.x
-============
+glim - 0.10.x
+=============
 
 [Documentation(not complete)](http://glim.readme.io)
 
@@ -47,18 +47,21 @@ $ glim start
 $ glim start --env production
 ```
 
-Alternative Installation (dev mode)
------------------------------------
+Cutting Edge Installation (generally more stable than release)
+--------------------------------------------------------------
 ```sh
 # clone the repo inside the project folder
 $ git clone git@github.com:aacanakin/glim.git
+
+# enter the folder
+$ cd glim
 
 # create & virtualenv
 $ virtualenv venv
 $ . venv/bin/activate
 
 # install dependencies
-$ pip install -r requirements
+$ pip install -r requirements.txt
 
 # generate a new app
 $ python glim.py new
@@ -79,4 +82,4 @@ glim isn't
 - flask
 - stable currently :(
 
-NOTE: I'm changing lots of things currently. So the web server may not even start but feel free to play with it!
+NOTE: The framework is in its early stages in development. So, there are lots of backward incompatible changes constantly. So the web server may not even start but feel free to play with it!
