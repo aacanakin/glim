@@ -12,7 +12,7 @@ glim.paths.GLIM_ROOT_PATH # returns the glim root path
 glim.paths.PROTO_PATH # returns the prototype folder path
 glim.paths.EXT_PATH # returns the extension folder path
 glim.paths.VIEWS_PATH # returns the views folder path
-glim.paths.STATIC_PATH # returns the static folder path
+glim.paths.ASSET_PATH # returns the assets folder path
 glim.paths.STORAGE_PATH # returns the storage folder path
 
 glim.paths.configure() # detect dev mode & configures the sys path
