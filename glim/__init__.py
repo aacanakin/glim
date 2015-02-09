@@ -18,6 +18,7 @@ Command = command.Command
 GlimCommand = command.GlimCommand
 
 Response = response.Response
+JsonResponse = response.JsonResponse
 
 Controller = controller.Controller
 
