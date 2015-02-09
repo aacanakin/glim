@@ -125,7 +125,7 @@ class Glim(object):
             fnc = None
             if len(endpoint_pieces) is 1:
                 restful = True
-                fnc = None
+            else:
                 fnc = endpoint_pieces[1]
 
             obj = getattr(mcontroller, cls)
