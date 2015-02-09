@@ -118,39 +118,15 @@ class Glim(object):
             endpoint, values = adapter.match()
             mcontroller = import_module('app.controllers')
 
-            # detect filters
-            filters = endpoint.split(',')
-            endpoint_pieces = filters[-1].split('.')
-
-            # if there exists any filter defined
-            if len(filters) > 1:
-
-                filters = filters[:-1]
-                # here run filters
-                for f in filters:
-
-                    fpieces = f.split('.')
-                    cls = fpieces[0]
-                    fnc = fpieces[1]
-                    mfilter = mcontroller
-                    obj = getattr(mfilter, cls)
-                    ifilter = obj(request)
-                    raw = getattr(ifilter, fnc)(** values)
-
-                    if isinstance(raw, basestring):
-                        return Response(raw)
-
-                    if isinstance(raw, Response):
-                        return raw
-
+            endpoint_pieces = endpoint.split('.')
             cls = endpoint_pieces[0]
 
             restful = False
-            try:
-                fnc = endpoint_pieces[1]
-            except:
+            fnc = None
+            if len(endpoint_pieces) is 1:
                 restful = True
                 fnc = None
+                fnc = endpoint_pieces[1]
 
             obj = getattr(mcontroller, cls)
             instance = obj(request)
