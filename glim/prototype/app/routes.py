@@ -27,22 +27,18 @@ Example - route grouping/filtering
 
 # /api/auth matches to ApiController.auth
 # /api/auth/me matches to ApiController.me
-# /api/auth/me filtered by ApiController.check_auth
-# if check_auth function returns any Response,
-# then ApiController.me would not be called
+# /hello mathes to BaseController.hello
 
 urls = {
     '/api' : {
-        '/auth' : 'ApiController.auth',
-        '/me' : [
-            'ApiController.check_auth',
-            'ApiController.me'
-        ]
-    }
+        '/auth': 'ApiController.auth',
+        '/me': 'ApiController.me'
+    },
+    '/hello': 'BaseController.hello'
 }
 
 """
 
 urls = {
-    '/': 'BaseController.hello'
+    '/<name>': 'BaseController.hello'
 }
