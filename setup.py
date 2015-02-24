@@ -38,7 +38,7 @@ setup(
         'termcolor',
     ],
     install_requires=[
-        "Werkzeug >= 0.9",
+        "Werkzeug >= 0.10.1",
         "termcolor"
     ],
     classifiers=[
