@@ -289,8 +289,6 @@ class Glim(object):
         """
         try:
             self.before()
-            # mroutes = import_module('app.routes')
-            # app = Glim(mroutes.urls, self.config['app'])
 
             if 'assets' in self.config['app']:
                 self.wsgi_app = SharedDataMiddleware(self.wsgi_app, {
@@ -298,9 +296,23 @@ class Glim(object):
                     self.config['app']['assets']['path']
                 })
 
+            # stat poll static files if assets is defined
+            extra_files = None
+            if self.config['app']['reloader']:
+                extra_dirs = [paths.ASSET_PATH, ]
+                extra_files = extra_dirs[:]
+                for extra_dir in extra_dirs:
+                    for dirname, dirs, files in os.walk(extra_dir):
+                        for filename in files:
+                            filename = os.path.join(dirname, filename)
+                            if os.path.isfile(filename):
+                                extra_files.append(filename)
+
             run_simple(host, int(port), self,
-                       use_debugger=self.config['app']['debugger'],
-                       use_reloader=self.config['app']['reloader'])
+                   use_debugger=self.config['app']['debugger'],
+                   use_reloader=self.config['app']['reloader'],
+                   reloader_type='stat',
+                   extra_files=extra_files)
 
         except Exception as e:
             print(traceback.format_exc())
