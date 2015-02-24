@@ -18,7 +18,7 @@ paths.configure()
 
 from termcolor import colored
 
-from glim.app import App
+from glim.app import Glim
 from glim.utils import import_module
 from glim.command import CommandAdapter
 
@@ -100,9 +100,11 @@ def main():
 
         # load the start hook
         mstart = import_module('app.start')
+        mroutes = import_module('app.routes')
+        mcontrollers = import_module('app.controllers')
         before = mstart.before
 
-        app = App(commandadapter, mconfig, env, before)
+        app = Glim(commandadapter, mconfig, mroutes, mcontrollers, env, before)
 
     args = parser.parse_args()
 

@@ -19,13 +19,15 @@ import glim.paths as paths
 
 from werkzeug.serving import run_simple
 from werkzeug.wsgi import SharedDataMiddleware
+from werkzeug.wrappers import Request, Response
+from werkzeug.routing import Map, Rule
+from werkzeug.exceptions import HTTPException, NotFound
+from werkzeug.utils import redirect
+from werkzeug.contrib.sessions import FilesystemSessionStore
 from termcolor import colored
 
-
-class App:
-
+class Glim(object):
     """
-
     This class is responsible for registering the components of
     a typical glim framework app
 
@@ -44,11 +46,13 @@ class App:
         The before hook function for registering a function before app starts
 
     """
+    def __init__(self, commandadapter, mconfig=None, mroutes=None, mcontrollers=None, env='default', before=None):
 
-    def __init__(self, commandadapter, mconfig=None, env='default', before=None):
-
+        # register app
         self.commandadapter = commandadapter
         self.config = mconfig.config
+        self.urls = mroutes.urls
+        self.mcontrollers = mcontrollers;
 
         self.register_config()
         self.register_log()
@@ -56,13 +60,29 @@ class App:
 
         self.before = before
 
+        # register session store
+        try:
+            self.session_store = FilesystemSessionStore(
+                self.config['sessions']['path'])
+        except:
+            self.session_store = None
+
+        # process routes, register urls
+        ruleset = self.flatten_urls(self.urls)
+        rule_map = []
+        for url, rule in ruleset.items():
+            rule_map.append(Rule(url, endpoint=rule))
+
+        self.url_map = Map(rule_map)
+
     def register_config(self):
-        """Function registers the Config facade using Config(Registry)."""
+        """
+        Function registers the Config facade using Config(Registry).
+        """
         Config.register(self.config)
 
     def register_extensions(self):
         """
-
         Function registers extensions given extensions list
 
         Args
@@ -73,7 +93,6 @@ class App:
         ------
           Exception: Raises exception when extension can't be loaded
             properly.
-
         """
         try:
             for extension, config in self.config['extensions'].items():
@@ -112,13 +131,11 @@ class App:
 
     def register_log(self):
         """
-
         Function registers Log facade using configuration in app.config.<env>.
 
         Note:
           The Log facade will be registered using default configuration
           if there isn't any 'log' key in app.config.<env>.
-
         """
         if not empty('log', self.config):
 
@@ -135,9 +152,124 @@ class App:
             Log.boot(name='app')
             GlimLog.boot(name='glim')
 
+    def flatten_urls(self, urls, current_key="", ruleset={}):
+        """
+        Function flatten urls for route grouping feature of glim. Thanks
+        for the stackoverflow guy!
+
+        Args
+        ----
+          urls (dict): a dict of url definitions.
+          current_key (unknown type): a dict or a string marking the
+            current key that is used for recursive calls.
+          ruleset (dict): the ruleset that is eventually returned to
+            dispatcher.
+
+        Returns
+        -------
+          ruleset (dict): the ruleset to be bound.
+        """
+        for key in urls:
+            # If the value is of type `dict`, then recurse with the
+            # value
+            if isinstance(urls[key], dict):
+                self.flatten_urls(urls[key], current_key + key)
+            # Else if the value is type of list, meaning it is a filter
+            elif isinstance(urls[key], (list, tuple)):
+                k = ','.join(urls[key])
+                ruleset[current_key + key] = k
+            else:
+                ruleset[current_key + key] = urls[key]
+
+        return ruleset
+
+    def dispatch_request(self, request):
+        """
+        Function dispatches the request. It also handles route
+        filtering.
+
+        Args
+        ----
+          request (werkzeug.wrappers.Request): the request
+            object.
+
+        Returns
+        -------
+          response (werkzeug.wrappers.Response): the response
+            object.
+        """
+        adapter = self.url_map.bind_to_environ(request.environ)
+
+        try:
+
+            endpoint, values = adapter.match()
+
+            endpoint_pieces = endpoint.split('.')
+            cls = endpoint_pieces[0]
+
+            restful = False
+            fnc = None
+            if len(endpoint_pieces) is 1:
+                restful = True
+            else:
+                fnc = endpoint_pieces[1]
+
+            obj = getattr(self.mcontrollers, cls)
+            instance = obj(request)
+
+            raw = None
+            if restful:
+                raw = getattr(instance, request.method.lower())(**values)
+            else:
+                raw = getattr(instance, fnc)(** values)
+
+            if isinstance(raw, Response):
+                return raw
+            else:
+                return Response(raw)
+
+        #TODO: add other type of exceptions for better Exception handling
+        except HTTPException as e:
+            return e
+
+    def wsgi_app(self, environ, start_response):
+        """
+        Function returns the wsgi app of glim framework.
+
+        Args
+        ----
+          environ (unknown type): The werkzeug environment.
+          start_response (function): The werkzeug's start_response
+            function.
+
+        Returns
+        -------
+          response (werkzeug.wrappers.Response): the dispatched response
+            object.
+        """
+        request = Request(environ)
+
+        if self.session_store is not None:
+
+            sid = request.cookies.get(self.config['sessions']['id_header'])
+
+            if sid is None:
+                request.session = self.session_store.new()
+            else:
+                request.session = self.session_store.get(sid)
+
+        response = self.dispatch_request(request)
+
+        if self.session_store is not None:
+            if request.session.should_save:
+                self.session_store.save(request.session)
+                response.set_cookie(self.config['sessions']['id_header'],
+                                    request.session.sid)
+
+        return response(environ, start_response)
+
     def start(self, host='127.0.0.1', port='8080', env='development'):
         """
-
         Function initiates a werkzeug wsgi app using app.routes module.
 
         Note:
@@ -154,23 +286,29 @@ class App:
         Raises
         ------
           Exception: Raises any exception coming from werkzeug's web server
-
         """
         try:
             self.before()
-            mroutes = import_module('app.routes')
-            app = Glim(mroutes.urls, self.config['app'])
+            # mroutes = import_module('app.routes')
+            # app = Glim(mroutes.urls, self.config['app'])
 
             if 'assets' in self.config['app']:
-                app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
+                self.wsgi_app = SharedDataMiddleware(self.wsgi_app, {
                     self.config['app']['assets']['url']:
                     self.config['app']['assets']['path']
                 })
 
-            run_simple(host, int(port), app,
+            run_simple(host, int(port), self,
                        use_debugger=self.config['app']['debugger'],
                        use_reloader=self.config['app']['reloader'])
 
         except Exception as e:
             print(traceback.format_exc())
             exit()
+
+
+    def __call__(self, environ, start_response):
+        """
+        Function returns wsgi app when it is instantiated
+        """
+        return self.wsgi_app(environ, start_response)
