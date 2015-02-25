@@ -310,7 +310,7 @@ class Glim(object):
             # stat poll static files if assets is defined
             extra_files = None
             if self.config['app']['reloader']:
-                extra_dirs = [paths.ASSET_PATH, ]
+                extra_dirs = [self.config['app']['assets']['path'], ]
                 extra_files = extra_dirs[:]
                 for extra_dir in extra_dirs:
                     for dirname, dirs, files in os.walk(extra_dir):
