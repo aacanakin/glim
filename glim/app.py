@@ -122,7 +122,8 @@ class Glim(object):
                         before(config)
 
                     if extension_cmds is not None:
-                        self.commandadapter.register_extension(extension_cmds, extension_pieces[0])
+                        if self.commandadapter is not None:
+                            self.commandadapter.register_extension(extension_cmds, extension_pieces[0])
                 else:
                     GlimLog.error('Extension %s could not be loaded' % extension)
 
