@@ -67,6 +67,8 @@ config = {
         'assets': {
             'path': glim.paths.ASSET_PATH,
             'url': '/assets'
-        }
+        },
+        # 'ssl': 'adhoc' # werkzeug server automatically generates for a key, cert tuple
+        # 'ssl': ('ssl.cert', 'ssl.key')
     }
 }

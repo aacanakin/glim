@@ -56,6 +56,9 @@ config = {
         'assets': {
             'path': glim.paths.ASSET_PATH,
             'url': '/assets'
-        }
+        },
+        # adhoc mode requires pyOpenSsl installation. use pip install pyOpenSsl to work with adhoc mode
+        # 'ssl': 'adhoc' # werkzeug server automatically generates for a key, cert tuple
+        # 'ssl': ('ssl.cert', 'ssl.key')
     }
 }

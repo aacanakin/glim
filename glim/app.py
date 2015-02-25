@@ -57,6 +57,7 @@ class Glim(object):
         self.register_config()
         self.register_log()
         self.register_extensions()
+        self.register_ssl_context()
 
         self.before = before
 
@@ -152,6 +153,15 @@ class Glim(object):
         else:
             Log.boot(name='app')
             GlimLog.boot(name='glim')
+
+    def register_ssl_context(self):
+        """
+        Function detects ssl context
+        """
+        if not empty('ssl', self.config['app']):
+            self.ssl_context = self.config['app']['ssl']
+        else:
+            self.ssl_context = None
 
     def flatten_urls(self, urls, current_key="", ruleset={}):
         """
@@ -312,6 +322,7 @@ class Glim(object):
             run_simple(host, int(port), self,
                    use_debugger=self.config['app']['debugger'],
                    use_reloader=self.config['app']['reloader'],
+                   ssl_context=self.ssl_context,
                    reloader_type='stat',
                    extra_files=extra_files)
 
