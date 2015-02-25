@@ -90,26 +90,27 @@ def main():
             parser.print_help()
             exit()
     else:
-        # load the config module
-        mconfig = import_module('app.config.%s' % env, pass_errors=True)
-
-        # check if mconfig is None
-        if mconfig is None and paths.app_exists():
-            print(colored('Configuration for "%s" environment is not found' % env, 'red'))
-            exit()
-
-        # load the start hook
-        mstart = import_module('app.start')
-        mroutes = import_module('app.routes')
-        mcontrollers = import_module('app.controllers')
-        before = mstart.before
-
-        app = Glim(commandadapter, mconfig, mroutes, mcontrollers, env, before)
+        app = make_app(env, commandadapter)
 
     args = parser.parse_args()
 
     command = commandadapter.match(args)
     commandadapter.dispatch(command, app)
+
+def make_app(env, commandadapter=None):
+    """
+    Function creates an app given environment
+    """
+    mconfig = import_module('app.config.%s' % env, pass_errors=True)
+    if mconfig is None and paths.app_exists():
+        print(colored('Configuration for "%s" environment is not found' % env, 'red'))
+        return None
+    mstart = import_module('app.start')
+    mroutes = import_module('app.routes')
+    mcontrollers = import_module('app.controllers')
+    before = mstart.before
+
+    return Glim(commandadapter, mconfig, mroutes, mcontrollers, env, before)
 
 if __name__ == '__main__':
     main()
