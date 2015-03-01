@@ -12,9 +12,7 @@ from werkzeug.wrappers import Response as response
 Response = response
 
 class JsonResponse(Response):
-
     """
-
     The JsonResponse is an alias of response with response data as dict
 
 
@@ -25,10 +23,7 @@ class JsonResponse(Response):
       headers (dict): A dictionary of headers to make the response
       mimetype (string): The mimetype of response
       direct_passthrough (bool): Boolean value if werkzeug passthrough is chosen or not
-
     """
-
-
     def __init__(self, response=None,
                  status=None, headers=None,
                  mimetype=None, content_type=None,
