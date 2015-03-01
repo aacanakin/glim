@@ -13,7 +13,6 @@ import traceback
 
 from glim import Config, Log, GlimLog
 from glim.utils import import_module, empty
-from glim.dispatch import Glim
 
 import glim.paths as paths
 
