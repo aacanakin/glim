@@ -1,4 +1,18 @@
 ```
+---------------------- v0.10.6 01/03/2014 ---------------------
+- added adhoc and key-value ssl support
+- added assets folder contents to be watched in reloader enabled servers
+- fixed watch folders to be dynamically configured
+- added make_app() function to create an instance of application
+- added optional command adapter dependency
+- added support to use glim with nginx using .fcgi file
+- updated Werkzeug dependency to 0.10.1
+- merged dispatch module with application module. It's now a lot simpler
+- added JsonResponse class
+- improved restful detection
+- removed route level filters
+---------------------------------------------------------------
+
 ---------------------- v0.10.2 20/01/2014 ---------------------
 - changed default assets folder to app/assets
 - changed default assets url to /assets
