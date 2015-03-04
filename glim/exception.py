@@ -13,3 +13,6 @@ class FolderExistsError(GlimError):
 
 class InvalidLoggerError(GlimError):
 	pass
+
+class InvalidRouteDefinitionError(GlimError):
+	pass

@@ -3,6 +3,40 @@ This module provides url definitions for glim framework.
 
 Example - basic routing
 -----------------------
+In glim, the route definitions are restful by default.
+The available http methods are the following;
+    - POST
+    - PUT
+    - OPTIONS
+    - GET
+    - DELETE
+    - TRACE
+    - COPY
+
+You can define by giving http method by the following;
+
+urls = {
+    'POST /profile': 'ProfileController.create',
+    'PUT  /profile': 'ProfileController.update',
+    'POST /profile': 'ProfileController.create'
+}
+
+OR you can automagically generate all available methods by a single route as the following;
+
+urls = {
+    '/profile': 'ProfileController'
+    # This single line route definition generates the following;
+    # 'GET     /profile': 'ProfileController.get'
+    # 'PUT     /profile': 'ProfileController.put'
+    # 'POST    /profile': 'ProfileController.post'
+    # 'OPTIONS /profile': 'ProfileController.options'
+    # 'DELETE  /profile': 'ProfileController.delete'
+    # 'COPY    /profile': 'ProfileController.copy'
+    # 'TRACE   /profile': 'ProfileController.trace'
+}
+
+The definition above creates routes for each available method. Moreover, you can
+always create without giving http method. Also you can define parametrized routes like the following;
 
 urls = {
     # matches get(year) function in PostController
@@ -18,27 +52,12 @@ urls = {
 
     # matches resolve(page_name) function in PageController
     # page_name only matches when it's the following pages
-    '/<any(about, help, imprint, class, "foo,bar"):page_name>':
-    'PageController.resolve',
+    '/<any(about, help, imprint, class, "foo,bar"):page_name>': 'PageController.resolve',
 }
 
-Example - route grouping/filtering
-----------------------------------
-
-# /api/auth matches to ApiController.auth
-# /api/auth/me matches to ApiController.me
-# /hello mathes to BaseController.hello
-
-urls = {
-    '/api' : {
-        '/auth': 'ApiController.auth',
-        '/me': 'ApiController.me'
-    },
-    '/hello': 'BaseController.hello'
-}
-
+The parametrized route definitions are also all available to restful route definitions
 """
 
 urls = {
-    '/<name>': 'BaseController.hello'
+    '/ping': 'AppController.ping'
 }

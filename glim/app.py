@@ -61,16 +61,15 @@ class Glim(object):
 
         # register session store
         try:
-            self.session_store = FilesystemSessionStore(
-                self.config['sessions']['path'])
+            self.session_store = FilesystemSessionStore(self.config['sessions']['path'])
         except:
             self.session_store = None
 
         # process routes, register urls
         ruleset = self.flatten_urls(self.urls)
         rule_map = []
-        for url, rule in ruleset.items():
-            rule_map.append(Rule(url, endpoint=rule))
+        for rule in ruleset:
+            rule_map.append(Rule(rule['url'], endpoint=rule['endpoint'], methods=rule['methods']))
 
         self.url_map = Map(rule_map)
 
@@ -161,10 +160,9 @@ class Glim(object):
         else:
             self.ssl_context = None
 
-    def flatten_urls(self, urls, current_key="", ruleset={}):
+    def flatten_urls(self, urls):
         """
-        Function flatten urls for route grouping feature of glim. Thanks
-        for the stackoverflow guy!
+        Function flatten urls for route grouping feature of glim.
 
         Args
         ----
@@ -176,20 +174,36 @@ class Glim(object):
 
         Returns
         -------
-          ruleset (dict): the ruleset to be bound.
+          ruleset (list): a list of ruleset dict with endpoint, url and method functions
         """
-        for key in urls:
-            # If the value is of type `dict`, then recurse with the
-            # value
-            if isinstance(urls[key], dict):
-                self.flatten_urls(urls[key], current_key + key)
-            # Else if the value is type of list, meaning it is a filter
-            elif isinstance(urls[key], (list, tuple)):
-                k = ','.join(urls[key])
-                ruleset[current_key + key] = k
-            else:
-                ruleset[current_key + key] = urls[key]
+        available_methods = ['POST', 'PUT', 'OPTIONS', 'GET', 'DELETE', 'TRACE', 'COPY']
+        ruleset = []
+        for route, endpoint in urls.items():
+            route_pieces = route.split(' ')
+            try:
+                methods = url = None
+                if len(route_pieces) > 1:
+                    methods = [route_pieces[0]]
+                    url = route_pieces[1]
+                else:
+                    methods = available_methods
+                    url = route_pieces[0]
 
+                endpoint_pieces = endpoint.split('.')
+
+                if len(endpoint_pieces) > 1:
+                    rule = {'url': url, 'endpoint': endpoint, 'methods': methods}
+                    ruleset.append(rule)
+                else:
+                    for method in available_methods:
+                        rule = {
+                            'url': url,
+                            'endpoint': '%s.%s' % (endpoint, method.lower()),
+                            'methods': [method]
+                        }
+                        ruleset.append(rule)
+            except Exception as e:
+                raise InvalidRouteDefinitionError()
         return ruleset
 
     def dispatch_request(self, request):
@@ -213,24 +227,11 @@ class Glim(object):
 
             endpoint, values = adapter.match()
 
-            endpoint_pieces = endpoint.split('.')
-            cls = endpoint_pieces[0]
-
-            restful = False
-            fnc = None
-            if len(endpoint_pieces) is 1:
-                restful = True
-            else:
-                fnc = endpoint_pieces[1]
-
+            cls, func = endpoint.split('.')
             obj = getattr(self.mcontrollers, cls)
             instance = obj(request)
 
-            raw = None
-            if restful:
-                raw = getattr(instance, request.method.lower())(**values)
-            else:
-                raw = getattr(instance, fnc)(** values)
+            raw = getattr(instance, func)(** values)
 
             if isinstance(raw, Response):
                 return raw
