@@ -228,17 +228,21 @@ class Glim(object):
             endpoint, values = adapter.match()
 
             cls, func = endpoint.split('.')
-            obj = getattr(self.mcontrollers, cls)
-            instance = obj(request)
+            if hasattr(self.mcontrollers, cls):
+                obj = getattr(self.mcontrollers, cls)
+                instance = obj(request)
 
-            raw = getattr(instance, func)(** values)
-
-            if isinstance(raw, Response):
-                return raw
+                if hasattr(instance, func):
+                    raw = getattr(instance, func)(** values)
+                    if isinstance(raw, Response):
+                        return raw
+                    else:
+                        return Response(raw)
+            if self.config['app']['debugger']:
+                raise AttributeError("Controller function is not found for endpoint %s" % endpoint)
             else:
-                return Response(raw)
+                raise NotFound()
 
-        #TODO: add other type of exceptions for better Exception handling
         except HTTPException as e:
             return e
 
