@@ -21,7 +21,6 @@ from werkzeug.wsgi import SharedDataMiddleware
 from werkzeug.wrappers import Request, Response
 from werkzeug.routing import Map, Rule
 from werkzeug.exceptions import HTTPException, NotFound
-from werkzeug.utils import redirect
 from werkzeug.contrib.sessions import FilesystemSessionStore
 from termcolor import colored
 
