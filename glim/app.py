@@ -73,6 +73,13 @@ class Glim(object):
 
         self.url_map = Map(rule_map)
 
+        self.before()
+
+        if 'assets' in self.config['app']:
+            assets_url = self.config['app']['assets']['url']
+            assets_path = self.config['app']['assets']['path']
+            self.wsgi_app = SharedDataMiddleware(self.wsgi_app, {assets_url: assets_path})
+
     def register_config(self):
         """
         Function registers the Config facade using Config(Registry).
@@ -302,14 +309,6 @@ class Glim(object):
           Exception: Raises any exception coming from werkzeug's web server
         """
         try:
-            self.before()
-
-            if 'assets' in self.config['app']:
-                self.wsgi_app = SharedDataMiddleware(self.wsgi_app, {
-                    self.config['app']['assets']['url']:
-                    self.config['app']['assets']['path']
-                })
-
             # stat poll static files if assets is defined
             extra_files = None
             if self.config['app']['reloader']:
