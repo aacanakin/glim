@@ -19,21 +19,19 @@ import glim.paths as paths
 
 
 class NewCommand(GlimCommand):
-
     """
-
     This class is responsible for generating a new glim app.
 
     Attributes
     ----------
       glim.command.GlimCommand Attributes
-
     """
     name = 'new'
     description = 'generates a new glim app'
 
     def configure(self):
-        """Function adds the optional name argument for creating an app with
+        """
+        Function adds the optional name argument for creating an app with
         project name.
         """
         self.add_argument("name", nargs='?', help="enter project name", default=None)
@@ -55,15 +53,12 @@ class NewCommand(GlimCommand):
 
 
 class StartCommand(GlimCommand):
-
     """
-
     This class is responsible for starting wsgi of glim framework app.
 
     Attributes
     ----------
       glim.command.GlimCommand Attributes
-
     """
     name = 'start'
     description = 'start the glim app web server'
