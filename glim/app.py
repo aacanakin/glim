@@ -13,16 +13,15 @@ import traceback
 
 from glim import Config, Log, GlimLog
 from glim.utils import import_module, empty
-
 import glim.paths as paths
 
-from werkzeug.serving import run_simple
+from termcolor import colored
+
 from werkzeug.wsgi import SharedDataMiddleware
 from werkzeug.wrappers import Request, Response
 from werkzeug.routing import Map, Rule
 from werkzeug.exceptions import HTTPException, NotFound
 from werkzeug.contrib.sessions import FilesystemSessionStore
-from termcolor import colored
 
 class Glim(object):
     """
@@ -288,50 +287,6 @@ class Glim(object):
                                     request.session.sid)
 
         return response(environ, start_response)
-
-    def start(self, host='127.0.0.1', port='8080', env='development'):
-        """
-        Function initiates a werkzeug wsgi app using app.routes module.
-
-        Note:
-          Function will register a static path for css, js, img, etc. files
-          using SharedDataMiddleware, else it won't register any static script
-          path.
-
-        Args
-        ----
-          host (string): the host ip address to start the web server
-          port (string): the port of ip address
-          env  (string): the application environment
-
-        Raises
-        ------
-          Exception: Raises any exception coming from werkzeug's web server
-        """
-        try:
-            # stat poll static files if assets is defined
-            extra_files = None
-            if self.config['app']['reloader']:
-                extra_dirs = [self.config['app']['assets']['path'], ]
-                extra_files = extra_dirs[:]
-                for extra_dir in extra_dirs:
-                    for dirname, dirs, files in os.walk(extra_dir):
-                        for filename in files:
-                            filename = os.path.join(dirname, filename)
-                            if os.path.isfile(filename):
-                                extra_files.append(filename)
-
-            run_simple(host, int(port), self,
-                   use_debugger=self.config['app']['debugger'],
-                   use_reloader=self.config['app']['reloader'],
-                   ssl_context=self.ssl_context,
-                   reloader_type='stat',
-                   extra_files=extra_files)
-
-        except Exception as e:
-            print(traceback.format_exc())
-            exit()
-
 
     def __call__(self, environ, start_response):
         """
