@@ -1,5 +1,4 @@
 """
-
 This module is responsible for handling paths of glim framework.
 
 Usage
@@ -24,7 +23,6 @@ glim.paths.commands() # returns the app.commands path
 glim.paths.routes() # returns the app.routes path
 glim.paths.extensions(ext) #returns the extension path given extension name
 glim.paths.extension_commands(ext) # returns the ext.<ext>.commands path
-
 """
 
 

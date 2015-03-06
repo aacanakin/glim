@@ -1,7 +1,5 @@
 """
-
 This module provides logging inside glim framework.
-
 """
 
 from glim.core import Facade
@@ -33,9 +31,7 @@ CONFIG = {
 }
 
 class Log(object):
-
     """
-
     This class is the base for logging feature in glim.
 
     Attributes
@@ -47,9 +43,7 @@ class Log(object):
       log = Log(config)
       log.info("glim rocks") # prints a yellow colored msg
       log.error("whoopz") # prints a red colored msg
-
     """
-
     def __init__(self, name, config={}):
 
         if name not in CONFIG.keys():
