@@ -1,8 +1,6 @@
 """
-
 This module is responsible for instantiating a typical glim framework app.
 It registers glim framework components, extensions and wsgi app.
-
 """
 
 
@@ -41,7 +39,6 @@ class Glim(object):
             app.config.<env>
       before (method):
         The before hook function for registering a function before app starts
-
     """
     def __init__(self, commandadapter, mconfig=None, mroutes=None, mcontrollers=None, env='default', before=None):
 

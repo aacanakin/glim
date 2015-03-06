@@ -1,9 +1,7 @@
 """
-
 This module is responsible for registering, dispatching
 command line utilities of glim framework. It also has a
 Command class for other commands to extend it.
-
 """
 
 
@@ -12,9 +10,7 @@ from termcolor import colored
 
 
 class CommandAdapter(object):
-
     """
-
     This class is responsible for detecting, registering
     and dispatching command line utilities of glim framework.
     In glim, there are two types of commands namely Command and
@@ -29,16 +25,13 @@ class CommandAdapter(object):
         The subparsers object that provides sub commands.
       commands (list):
         A list of Command objects
-
     """
-
     def __init__(self, subparsers):
         self.subparsers = subparsers
         self.commands = []
 
     def retrieve_commands(self, module):
         """
-
         Function smartly imports Command type classes given module
 
         Args
@@ -57,7 +50,6 @@ class CommandAdapter(object):
 
           When extending Command class, be sure to have "Command"
           string on your custom commands.
-
         """
         commands = []
 
@@ -71,7 +63,6 @@ class CommandAdapter(object):
 
     def valid_name(self, name):
         """
-
         Function returns if command name is valid or not.
 
         Args
@@ -81,20 +72,17 @@ class CommandAdapter(object):
         Returns
         -------
           valid (boolean): Returns true when valid, else false.
-
         """
         invalid = name is None or name == ''
         return not invalid
 
     def register(self, module):
         """
-
         Function registers into self.commands from module.
 
         Args
         ----
           module (module): The module name.
-
         """
         if module is not None:
             cmds = self.retrieve_commands(module)
@@ -109,7 +97,6 @@ class CommandAdapter(object):
 
     def register_extension(self, module, extension):
         """
-
         Function registers into self.commands from module extension.
         All extension subcommands are registered using the name convention
         'extension:command'
@@ -124,7 +111,6 @@ class CommandAdapter(object):
         ----
           module (module): The module name.
           extension (string): The extension name.
-
         """
         if module is not None:
             cmds = self.retrieve_commands(module)
@@ -138,7 +124,6 @@ class CommandAdapter(object):
 
     def match(self, args):
         """
-
         Function dispatches the active command line utility.
 
         Args
@@ -149,7 +134,6 @@ class CommandAdapter(object):
         Returns
         -------
           command (glim.command.Command): the active command object.
-
         """
         command = None
         for c in self.commands:
@@ -161,7 +145,6 @@ class CommandAdapter(object):
 
     def is_glimcommand(self, command):
         """
-
         Function detects if a command is GlimCommand.
 
         Args
@@ -171,13 +154,11 @@ class CommandAdapter(object):
         Returns
         -------
           True or False
-
         """
         return isinstance(command, GlimCommand)
 
     def dispatch(self, command, app):
         """
-
         Function runs the active command.
 
         Args
@@ -189,7 +170,6 @@ class CommandAdapter(object):
           Exception handling should be done in Command class
           itself. If not, an unhandled exception may result
           in app crash!
-
         """
         if self.is_glimcommand(command):
             command.run(app)
@@ -198,9 +178,7 @@ class CommandAdapter(object):
 
 
 class Command(object):
-
     """
-
     The base Command class is the base of all
     glim framework commands.
 
@@ -216,9 +194,7 @@ class Command(object):
     Note:
       This command will not be registered into glim cli
       interface. It's just a base of all other classes.
-
     """
-
     name = None
     description = 'base command'
 
@@ -240,18 +216,15 @@ class Command(object):
 
     def configure(self):
         """
-
         This function is a hook before the command line
         utility is run. Therefore, it's being used for
         setting up the command line utility. Mostly, arguments
         are registered here.
-
         """
         pass
 
     def add_argument(self, *args, **kwargs):
         """
-
         Function adds an argument to the cli utility.
 
         Args
@@ -260,28 +233,21 @@ class Command(object):
           kwargs (keyword arguments): list of keyword arguments
 
         Note: This function is an alias of parser.add_argument()
-
         """
         self.parser.add_argument(*args, **kwargs)
 
     def run(self):
         """
-
         This function is being called when the command line utility is fired.
         It is always called after configure() by glim.command.CommandAdapter
-
         """
         return
 
 
 class GlimCommand(Command):
-
     """
-
     This class is an alias of glim.command.Command which has feature
     to access glim.app.App object on run()
-
     """
-
     def run(self, app):
         pass

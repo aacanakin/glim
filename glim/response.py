@@ -1,9 +1,7 @@
 """
-
 The response module provides the werkzeug
 wrapper object of any response that is returned
 by controllers.
-
 """
 import json
 from werkzeug.wrappers import Response as response

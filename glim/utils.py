@@ -1,8 +1,6 @@
 """
-
 The utils module is a bunch of functions used inside
 the implementation of glim framework.
-
 """
 
 
@@ -18,7 +16,6 @@ from exception import FolderExistsError
 
 def import_source(module, path, pass_errors=False):
     """
-
     Function imports a module given full path
 
     Args
@@ -35,7 +32,6 @@ def import_source(module, path, pass_errors=False):
     Raises
     ------
     e (Exception): any kind of exceptions during importing.
-
     """
     try:
         m = imp.load_source(module, path)
@@ -48,7 +44,6 @@ def import_source(module, path, pass_errors=False):
 
 def import_module(module, pass_errors=False):
     """
-
     Function imports a module given module name
 
     Args
@@ -68,7 +63,6 @@ def import_module(module, pass_errors=False):
 
     Note:
     pass_errors switch will not pass any errors other than ImportError
-
     """
     frm = module.split('.')
     try:
@@ -89,7 +83,6 @@ def import_module(module, pass_errors=False):
 
 def copytree(src, dst, symlinks=False, ignore=None):
     """
-
     Function recursively copies from directory to directory.
 
     Args
@@ -98,7 +91,6 @@ def copytree(src, dst, symlinks=False, ignore=None):
     dst (string): the full path of destination directory
     symlinks (boolean): the switch for tracking symlinks
     ignore (list): the ignore list
-
     """
     if not os.path.exists(dst):
         os.mkdir(dst)
@@ -116,14 +108,12 @@ def copytree(src, dst, symlinks=False, ignore=None):
 
 def empty(key, dict):
     """
-
     Function determines if the dict key exists or it is empty
 
     Args
     ----
     key (string): the dict key
     dict (dict): the dict to be searched
-
     """
     if key in dict.keys():
         if dict[key]:

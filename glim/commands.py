@@ -1,9 +1,7 @@
 """
-
 This module holds commands of internal
 glim framework commands to manipulate
 a typical glim framework app.
-
 """
 
 
