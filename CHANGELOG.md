@@ -1,4 +1,13 @@
 ```
+---------------------- v0.11.0 01/03/2014 ---------------------
+- implemented a brand new routing system with restful options by default
+- made refactoring for pep8 style guide
+- made improvements about low coupling in app module
+- disabled py3 test builds
+- made improvements about before callback registration
+- added support for gunicorn using .fcgi file
+---------------------------------------------------------------
+
 ---------------------- v0.10.6 01/03/2014 ---------------------
 - added adhoc and key-value ssl support
 - added assets folder contents to be watched in reloader enabled servers
