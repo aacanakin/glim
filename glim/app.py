@@ -14,12 +14,7 @@ from glim.utils import import_module, empty
 import glim.paths as paths
 
 from termcolor import colored
-
-from werkzeug.wsgi import SharedDataMiddleware
-from werkzeug.wrappers import Request, Response
-from werkzeug.routing import Map, Rule
-from werkzeug.exceptions import HTTPException, NotFound
-from werkzeug.contrib.sessions import FilesystemSessionStore
+from bottle import Bottle, route, request, response
 
 class Glim(object):
     """
@@ -48,39 +43,46 @@ class Glim(object):
         self.urls = mroutes.urls
         self.mcontrollers = mcontrollers;
 
+        self.wsgi = Bottle()
         self.register_config()
         self.register_log()
         self.register_extensions()
         self.register_ssl_context()
+        self.register_routes()
 
         self.before = before
-
-        # register session store
-        try:
-            self.session_store = FilesystemSessionStore(self.config['sessions']['path'])
-        except:
-            self.session_store = None
-
-        # process routes, register urls
-        ruleset = self.flatten_urls(self.urls)
-        rule_map = []
-        for rule in ruleset:
-            rule_map.append(Rule(rule['url'], endpoint=rule['endpoint'], methods=rule['methods']))
-
-        self.url_map = Map(rule_map)
-
         self.before()
-
-        if 'assets' in self.config['app']:
-            assets_url = self.config['app']['assets']['url']
-            assets_path = self.config['app']['assets']['path']
-            self.wsgi_app = SharedDataMiddleware(self.wsgi_app, {assets_url: assets_path})
 
     def register_config(self):
         """
         Function registers the Config facade using Config(Registry).
         """
         Config.register(self.config)
+
+    def register_routes(self):
+        """
+        Function creates instances of controllers, adds into bottle routes
+        """
+        routes = self.flatten_urls(self.urls)
+        self.controllers = {}
+        controller_names = set()
+        print(routes)
+
+        for route in routes:
+            cname = route['endpoint'].split('.')[0]
+            controller_names.add(cname)
+
+        for cname in controller_names:
+            attr = getattr(self.mcontrollers, cname)
+            instance = attr(request, response)
+            self.controllers[cname] = instance
+
+        print(self.controllers)
+
+        for route in routes:
+            cname, aname = route['endpoint'].split('.')
+            action = getattr(self.controllers[cname], aname)
+            self.wsgi.route(route['url'], route['methods'], action)
 
     def register_extensions(self):
         """
@@ -208,85 +210,3 @@ class Glim(object):
             except Exception as e:
                 raise InvalidRouteDefinitionError()
         return ruleset
-
-    def dispatch_request(self, request):
-        """
-        Function dispatches the request. It also handles route
-        filtering.
-
-        Args
-        ----
-          request (werkzeug.wrappers.Request): the request
-            object.
-
-        Returns
-        -------
-          response (werkzeug.wrappers.Response): the response
-            object.
-        """
-        adapter = self.url_map.bind_to_environ(request.environ)
-
-        try:
-
-            endpoint, values = adapter.match()
-
-            cls, func = endpoint.split('.')
-            if hasattr(self.mcontrollers, cls):
-                obj = getattr(self.mcontrollers, cls)
-                instance = obj(request)
-
-                if hasattr(instance, func):
-                    raw = getattr(instance, func)(** values)
-                    if isinstance(raw, Response):
-                        return raw
-                    else:
-                        return Response(raw)
-            if self.config['app']['debugger']:
-                raise AttributeError("Controller function is not found for endpoint %s" % endpoint)
-            else:
-                raise NotFound()
-
-        except HTTPException as e:
-            return e
-
-    def wsgi_app(self, environ, start_response):
-        """
-        Function returns the wsgi app of glim framework.
-
-        Args
-        ----
-          environ (unknown type): The werkzeug environment.
-          start_response (function): The werkzeug's start_response
-            function.
-
-        Returns
-        -------
-          response (werkzeug.wrappers.Response): the dispatched response
-            object.
-        """
-        request = Request(environ)
-
-        if self.session_store is not None:
-
-            sid = request.cookies.get(self.config['sessions']['id_header'])
-
-            if sid is None:
-                request.session = self.session_store.new()
-            else:
-                request.session = self.session_store.get(sid)
-
-        response = self.dispatch_request(request)
-
-        if self.session_store is not None:
-            if request.session.should_save:
-                self.session_store.save(request.session)
-                response.set_cookie(self.config['sessions']['id_header'],
-                                    request.session.sid)
-
-        return response(environ, start_response)
-
-    def __call__(self, environ, start_response):
-        """
-        Function returns wsgi app when it is instantiated
-        """
-        return self.wsgi_app(environ, start_response)

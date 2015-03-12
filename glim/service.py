@@ -3,7 +3,6 @@ This module holds the components of a typical glim
 framework app.
 """
 
-from werkzeug.wrappers import Response
 from glim.core import Registry
 
 

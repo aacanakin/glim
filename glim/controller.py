@@ -10,9 +10,9 @@ class Controller(object):
 
     Attributes
     ----------
-      request (werkzeug.wrappers.Request): The current request
-        object. This object is automatically passed by dispatch
-        module.
+      request (bottle.request): Thread safe bottle request object
+      response (bottle.response): Thread safe bottle response object
     """
-    def __init__(self, request):
+    def __init__(self, request, response):
         self.request = request
+        self.response = response
