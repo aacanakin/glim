@@ -1,5 +1,4 @@
 """
-
 The optional services layer of app.
 
 Example
@@ -22,4 +21,4 @@ class UserService(Service):
         Orm.commit()
 """
 
-from glim.component import Service
+from glim import Service
