@@ -66,7 +66,6 @@ class Glim(object):
         routes = self.flatten_urls(self.urls)
         self.controllers = {}
         controller_names = set()
-        print(routes)
 
         for route in routes:
             cname = route['endpoint'].split('.')[0]
@@ -76,8 +75,6 @@ class Glim(object):
             attr = getattr(self.mcontrollers, cname)
             instance = attr(request, response)
             self.controllers[cname] = instance
-
-        print(self.controllers)
 
         for route in routes:
             cname, aname = route['endpoint'].split('.')
