@@ -1,2 +1,2 @@
-Werkzeug
+bottle>=0.12
 termcolor

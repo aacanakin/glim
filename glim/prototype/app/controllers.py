@@ -1,5 +1,4 @@
 """
-
 The controllers of a typical glim app.
 
 Example - Html rendering
@@ -18,16 +17,16 @@ class HelloController(Controller):
 
 Example - JsonResponse
 ----------------------
-from glim import Controller, JsonResponse
+from glim import Controller
 
 class BaseController(Controller):
 	def hello(self):
-		return JsonResponse({'error': None})
+		return {'error': None}
 		# outputs {"error": null} with application/json header
 """
 
-from glim import Controller, JsonResponse
+from glim import Controller
 
 class AppController(Controller):
 	def ping(self):
-		return JsonResponse({'error': None, 'message': 'pong'})
+		return {'error': None, 'message': 'pong'}

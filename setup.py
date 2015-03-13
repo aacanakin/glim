@@ -32,13 +32,13 @@ setup(
         'web framework',
         'api development',
         'model view controller',
-        'Werkzeug',
+        'bottle',
         'SQLAlchemy',
         'Jinja2',
         'termcolor',
     ],
     install_requires=[
-        "Werkzeug >= 0.10.1",
+        "bottle >= 0.12",
         "termcolor"
     ],
     classifiers=[

@@ -53,6 +53,7 @@ config = {
     'app': {
         'reloader': True,
         'debugger': True,
+        'server': 'wsgiref',
         'assets': {
             'path': glim.paths.ASSET_PATH,
             'url': '/assets'

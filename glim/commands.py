@@ -14,6 +14,8 @@ from glim.utils import copytree
 from glim.exception import FolderExistsError
 from glim import GlimLog, Config
 
+from bottle import run
+
 import glim.paths as paths
 
 
@@ -71,24 +73,12 @@ class StartCommand(GlimCommand):
         """Function starts the web server given configuration."""
         GlimLog.info('Glim server started on %s environment' % self.args.env)
         try:
-            extra_files = None
-            if Config.get('app.reloader'):
-                extra_dirs = [Config.get('app.assets.path'), ]
-                extra_files = extra_dirs[:]
-                for extra_dir in extra_dirs:
-                    for dirname, dirs, files in os.walk(extra_dir):
-                        for filename in files:
-                            filename = os.path.join(dirname, filename)
-                            if os.path.isfile(filename):
-                                extra_files.append(filename)
-
-            run_simple(self.args.host, int(self.args.port), app,
-                       use_debugger=Config.get('app.debugger'),
-                       use_reloader=Config.get('app.reloader'),
-                       ssl_context=app.ssl_context,
-                       reloader_type='stat',
-                       extra_files=extra_files)
-
+            run(app.wsgi,
+                host=self.args.host,
+                port=int(self.args.port),
+                debug=Config.get('app.debugger'),
+                reloader=Config.get('app.reloader'),
+                server=Config.get('app.server'))
         except Exception as e:
             print(traceback.format_exc())
             exit()
