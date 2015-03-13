@@ -73,10 +73,12 @@ class StartCommand(GlimCommand):
         """Function starts the web server given configuration."""
         GlimLog.info('Glim server started on %s environment' % self.args.env)
         try:
-            run(app.wsgi, host=self.args.host,
+            run(app.wsgi,
+                host=self.args.host,
                 port=int(self.args.port),
                 debug=Config.get('app.debugger'),
-                reloader=Config.get('app.reloader'))
+                reloader=Config.get('app.reloader'),
+                server=Config.get('app.server'))
         except Exception as e:
             print(traceback.format_exc())
             exit()
