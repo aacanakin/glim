@@ -8,7 +8,6 @@ a typical glim framework app.
 import os, traceback
 from termcolor import colored
 
-from werkzeug.serving import run_simple
 from glim.command import GlimCommand
 from glim.utils import copytree
 from glim.exception import FolderExistsError
