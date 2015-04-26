@@ -1,7 +1,7 @@
 [![Build
 Status](https://travis-ci.org/aacanakin/glim.svg)](https://travis-ci.org/aacanakin/glim) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aacanakin/glim?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-glim - 0.10.x
+glim - 0.11.x
 =============
 
 [Documentation(not complete)](http://glim.readme.io)
@@ -10,7 +10,7 @@ glim - 0.10.x
 
 [Changelog](https://github.com/aacanakin/glim/blob/master/CHANGELOG.md)
 
-glim is a modern web framework on top of [Werkzeug](http://werkzeug.pocoo.org/)inspired from [play](https://www.playframework.com/) & [laravel](http://laravel.com/). The aim is to build a lightweight architecture for web app development. The development philosophy here is to make the core small as possible but still not featureless. It has a conventional extension system that can boot objects with configuration. It also has a handful set of extensions for view rendering, templating and performing database operations. You can check [glim_extensions](https://github.com/aacanakin/glim-extensions) repository for much more information.
+glim is a modern web framework on top of [bottle](http://bottlepy.org/docs/0.12/) inspired from [play](https://www.playframework.com/) & [laravel](http://laravel.com/). The aim is to build a lightweight architecture for web app development. The development philosophy here is to make the core small as possible but still not featureless. It has a conventional extension system that can boot objects with configuration. It also has a handful set of extensions for view rendering, templating and performing database operations. You can check [glim_extensions](https://github.com/aacanakin/glim-extensions) repository for much more information.
 
 Features
 --------
@@ -47,8 +47,8 @@ $ glim start
 $ glim start --env production
 ```
 
-Cutting Edge Installation (generally more stable than release)
---------------------------------------------------------------
+Cutting Edge Installation
+-------------------------
 ```sh
 # clone the repo inside the project folder
 $ git clone git@github.com:aacanakin/glim.git
@@ -74,7 +74,7 @@ glim is
 -------
 - small & lightweight
 - great for painless web app development
-- great for api/web-service development
+- great for api development
 
 glim isn't
 ----------
