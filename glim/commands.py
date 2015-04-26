@@ -63,9 +63,6 @@ class StartCommand(GlimCommand):
     name = 'start'
     description = 'start the glim app web server'
 
-    def configure(self):
-        pass
-
     def run(self, app):
         """Function starts the web server given configuration."""
         GlimLog.info('Glim server started on %s environment' % self.args.env)
