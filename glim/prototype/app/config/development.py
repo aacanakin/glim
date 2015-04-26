@@ -41,14 +41,14 @@ config = {
           'level': 'info',
           'format': '[%(levelname)s] - application : %(message)s',
           'colored': True
-          # 'file' : 'app/storage/logs/app.log'
+          #'file' : 'app/storage/logs/app.log'
         },
 
         'glim' : {
             'level' : 'info',
             'format' : '[%(levelname)s] : %(message)s',
-            'colored': True,
-            'file' : 'app/storage/logs/glim.log'  
+            'colored': True
+            #'file' : 'app/storage/logs/glim.log'  
         },
 
     },
