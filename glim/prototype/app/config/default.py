@@ -47,8 +47,8 @@ config = {
         'glim' : {
             'level' : 'info',
             'format' : '[%(levelname)s] : %(message)s',
-            'colored': True,
-            'file' : 'app/storage/logs/glim.log'  
+            'colored': True
+            # 'file' : 'app/storage/logs/glim.log'
         },
 
     },
