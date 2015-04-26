@@ -62,11 +62,14 @@ config = {
 
     # the glim.app.App configuration
     'app': {
-        'reloader': True,
-        'debugger': True,
-        'server': 'wsgiref',
-        'host': 'localhost',
-        'port': 8080,
+        'server': {
+            'host': '127.0.0.1',
+            'port': 8080,
+            'wsgi': 'wsgiref',
+            'reloader': True,
+            'debugger': True,
+            'options': {}
+        },
         'assets': {
             'path': glim.paths.ASSET_PATH,
             'url': '/assets'
