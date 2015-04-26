@@ -37,19 +37,19 @@ config = {
     # if you don't provide one.
     'log' : {
 
-        # 'app' : {
-        #   'level': 'info',
-        #   'format': '[%(levelname)s] - application : %(message)s',
-        #   'colored': True,
-        #   # 'file' : 'app/storage/logs/app.log'
-        # },
+        'app' : {
+          'level': 'info',
+          'format': '[%(levelname)s] - application : %(message)s',
+          'colored': True
+          # 'file' : 'app/storage/logs/app.log'
+        },
 
-        # 'glim' : {
-            # 'level' : 'info',
-            # 'format' : '[%(levelname)s] : %(message)s',
-            # 'colored': True
-            # 'file' : 'app/storage/logs/glim.log'  
-        # },
+        'glim' : {
+            'level' : 'info',
+            'format' : '[%(levelname)s] : %(message)s',
+            'colored': True,
+            'file' : 'app/storage/logs/glim.log'  
+        },
 
     },
 
@@ -65,11 +65,11 @@ config = {
         'reloader': True,
         'debugger': True,
         'server': 'wsgiref',
+        'host': 'localhost',
+        'port': 8080,
         'assets': {
             'path': glim.paths.ASSET_PATH,
             'url': '/assets'
-        },
-        # 'ssl': 'adhoc' # werkzeug server automatically generates for a key, cert tuple
-        # 'ssl': ('ssl.cert', 'ssl.key')
+        }
     }
 }

@@ -64,17 +64,15 @@ class StartCommand(GlimCommand):
     description = 'start the glim app web server'
 
     def configure(self):
-        """Function adds optional host, port variables."""
-        self.add_argument("--host", help="enter host", default='127.0.0.1')
-        self.add_argument("--port", help="enter port", default='8080')
+        pass
 
     def run(self, app):
         """Function starts the web server given configuration."""
         GlimLog.info('Glim server started on %s environment' % self.args.env)
         try:
             run(app.wsgi,
-                host=self.args.host,
-                port=int(self.args.port),
+                host=Config.get('app.host'),
+                port=Config.get('app.port'),
                 debug=Config.get('app.debugger'),
                 reloader=Config.get('app.reloader'),
                 server=Config.get('app.server'))
