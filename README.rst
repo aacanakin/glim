@@ -4,7 +4,7 @@
 
 `Changelog <https://github.com/aacanakin/glim/blob/master/CHANGELOG.md>`__
 
-glim is a modern web framework on top of `Werkzeug <http://werkzeug.pocoo.org/>`__, `SQLAlchemy <http://www.sqlalchemy.org/>`__ and `Jinja2 <http://jinja.pocoo.org/docs/dev/>`__ inspired from `play <https://www.playframework.com/>`__ & `laravel <http://laravel.com/>`__. TThe aim is to build a lightweight architecture for web app development. The development philosophy here is to make the core small as possible but still not featureless. It has a conventional extension system that can boot objects with configuration. It also has a handful set of extensions for view rendering, templating and performing database operations. You can check `glim_extensions <http://github.com/aacanakin/glim-extensions/>`__ for much more information.
+glim is a modern web framework on top of `bottle <http://bottlepy.org/docs/0.12/>`__ inspired from `play <https://www.playframework.com/>`__ & `laravel <http://laravel.com/>`__. The aim is to build a lightweight architecture for web app development. The development philosophy here is to make the core small as possible but still not featureless. It has a conventional extension system that can boot objects with configuration. It also has a handful set of extensions for view rendering, templating and performing database operations. You can check `glim_extensions <https://github.com/aacanakin/glim-extensions>`__ repository for much more information.
 
 Features
 --------
