@@ -2,7 +2,7 @@ from setuptools import setup
 import os
 from os.path import exists
 
-v = "0.11.1"
+v = "0.11.2"
 
 def read(*paths):
     """Build a file path from *paths* and return the contents."""
