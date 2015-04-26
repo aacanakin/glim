@@ -37,19 +37,19 @@ config = {
     # if you don't provide one.
     'log' : {
 
-        # 'app' : {
-        #   'level': 'info',
-        #   'format': '[%(levelname)s] - application : %(message)s',
-        #   'colored': True,
-        #   # 'file' : 'app/storage/logs/app.log'
-        # },
+        'app' : {
+          'level': 'info',
+          'format': '[%(levelname)s] - application : %(message)s',
+          'colored': True
+          # 'file' : 'app/storage/logs/app.log'
+        },
 
-        # 'glim' : {
-            # 'level' : 'info',
-            # 'format' : '[%(levelname)s] : %(message)s',
-            # 'colored': True
-            # 'file' : 'app/storage/logs/glim.log'  
-        # },
+        'glim' : {
+            'level' : 'info',
+            'format' : '[%(levelname)s] : %(message)s',
+            'colored': True,
+            'file' : 'app/storage/logs/glim.log'  
+        },
 
     },
 
@@ -62,14 +62,17 @@ config = {
 
     # the glim.app.App configuration
     'app': {
-        'reloader': True,
-        'debugger': True,
-        'server': 'wsgiref',
+        'server': {
+            'host': '127.0.0.1',
+            'port': 8080,
+            'wsgi': 'wsgiref',
+            'reloader': True,
+            'debugger': True,
+            'options': {}
+        },
         'assets': {
             'path': glim.paths.ASSET_PATH,
             'url': '/assets'
-        },
-        # 'ssl': 'adhoc' # werkzeug server automatically generates for a key, cert tuple
-        # 'ssl': ('ssl.cert', 'ssl.key')
+        }
     }
 }

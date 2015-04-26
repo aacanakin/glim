@@ -1,4 +1,15 @@
 """
+
+The configuration module
+
+NOTE:
+  This is a SAMPLE of configuration. This configuration
+  can't be run on glim. It's needed to copy this configuration into
+  defined environment. If development.py doesn't exist,
+  Run the following;
+
+  $ cp app/config/default.py app/config/development.py
+
   Here, "development" is the environment. You can run configuration
   using the following;
 
@@ -14,11 +25,11 @@ config = {
     # the configurations of extensions
     'extensions': {
         # 'gredis' : {
-        # 	'default' : {
-        # 		'host' : 'localhost',
-        # 		'port' : '6379',
-        # 		'db'   : 0
-        # 	}
+        #   'default' : {
+        #       'host' : 'localhost',
+        #       'port' : '6379',
+        #       'db'   : 0
+        #   }
         # }
     },
 
@@ -26,19 +37,19 @@ config = {
     # if you don't provide one.
     'log' : {
 
-        # 'app' : {
-        #   'level': 'info',
-        #   'format': '[%(levelname)s] - application : %(message)s',
-        #   'colored': True,
-        #   # 'file' : 'app/storage/logs/app.log'
-        # },
+        'app' : {
+          'level': 'info',
+          'format': '[%(levelname)s] - application : %(message)s',
+          'colored': True
+          # 'file' : 'app/storage/logs/app.log'
+        },
 
-        # 'glim' : {
-            # 'level' : 'info',
-            # 'format' : '[%(levelname)s] : %(message)s',
-            # 'colored': True
-            # 'file' : 'app/storage/logs/glim.log'  
-        # },
+        'glim' : {
+            'level' : 'info',
+            'format' : '[%(levelname)s] : %(message)s',
+            'colored': True,
+            'file' : 'app/storage/logs/glim.log'  
+        },
 
     },
 
@@ -51,15 +62,17 @@ config = {
 
     # the glim.app.App configuration
     'app': {
-        'reloader': True,
-        'debugger': True,
-        'server': 'wsgiref',
+        'server': {
+            'host': '127.0.0.1',
+            'port': 8080,
+            'wsgi': 'wsgiref',
+            'reloader': True,
+            'debugger': True,
+            'options': {}
+        },
         'assets': {
             'path': glim.paths.ASSET_PATH,
             'url': '/assets'
-        },
-        # adhoc mode requires pyOpenSsl installation. use pip install pyOpenSsl to work with adhoc mode
-        # 'ssl': 'adhoc' # werkzeug server automatically generates for a key, cert tuple
-        # 'ssl': ('ssl.cert', 'ssl.key')
+        }
     }
 }

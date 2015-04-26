@@ -63,21 +63,18 @@ class StartCommand(GlimCommand):
     name = 'start'
     description = 'start the glim app web server'
 
-    def configure(self):
-        """Function adds optional host, port variables."""
-        self.add_argument("--host", help="enter host", default='127.0.0.1')
-        self.add_argument("--port", help="enter port", default='8080')
-
     def run(self, app):
         """Function starts the web server given configuration."""
         GlimLog.info('Glim server started on %s environment' % self.args.env)
         try:
+            kwargs = Config.get('app.server.options')
             run(app.wsgi,
-                host=self.args.host,
-                port=int(self.args.port),
-                debug=Config.get('app.debugger'),
-                reloader=Config.get('app.reloader'),
-                server=Config.get('app.server'))
+                host=Config.get('app.server.host'),
+                port=Config.get('app.server.port'),
+                debug=Config.get('app.server.debugger'),
+                reloader=Config.get('app.server.reloader'),
+                server=Config.get('app.server.wsgi'),
+                **kwargs)
         except Exception as e:
             print(traceback.format_exc())
             exit()
