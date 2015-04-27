@@ -4,7 +4,7 @@ Status](https://travis-ci.org/aacanakin/glim.svg)](https://travis-ci.org/aacanak
 glim - 0.11.x
 =============
 
-[Documentation(not complete)](http://glim.readme.io)
+[Documentation](http://glim.readme.io)
 
 [Roadmap](http://glim.readme.io/v0.8.6/docs/roadmap)
 
