@@ -53,13 +53,6 @@ config = {
 
     },
 
-    # werkzeug sessions configuration
-    'sessions': {
-        # session id prefix
-        'id_header': 'glim_session',
-        'path': glim.paths.STORAGE_PATH,
-    },
-
     # the glim.app.App configuration
     'app': {
         'server': {
