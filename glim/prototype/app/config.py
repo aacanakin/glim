@@ -3,17 +3,12 @@
 The configuration module
 
 NOTE:
-  This is a SAMPLE of configuration. This configuration
-  can't be run on glim. It's needed to copy this configuration into
-  defined environment. If development.py doesn't exist,
-  Run the following;
+  This the default of configuration. A good practice would be keeping
+  separate config.py for separate environments. config.<environment>.py would
+  be a good format to keep it. Put config.py to gitignore and run copy in
+  your deployment script.
 
-  $ cp app/config/default.py app/config/development.py
-
-  Here, "development" is the environment. You can run configuration
-  using the following;
-
-  $ glim start --env development # loads the development configuration
+  $ glim start
 
 """
 
@@ -41,14 +36,14 @@ config = {
           'level': 'info',
           'format': '[%(levelname)s] - application : %(message)s',
           'colored': True
-          #'file' : 'app/storage/logs/app.log'
+          # 'file' : 'app/storage/logs/app.log'
         },
 
         'glim' : {
             'level' : 'info',
             'format' : '[%(levelname)s] : %(message)s',
             'colored': True
-            #'file' : 'app/storage/logs/glim.log'  
+            # 'file' : 'app/storage/logs/glim.log'
         },
 
     },

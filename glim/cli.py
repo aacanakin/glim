@@ -48,13 +48,8 @@ def main():
     preparser = argparse.ArgumentParser(description=description,
                                         add_help=False)
 
-    preparser.add_argument('--env', '-e', dest='env',
-                           default='development',
-                           help='choose application environment')
-
     # parse existing options
     namespace, extra = preparser.parse_known_args()
-    env = namespace.env
 
     # register the subparsers
     parser = argparse.ArgumentParser(parents=[preparser],
@@ -88,27 +83,24 @@ def main():
             parser.print_help()
             exit()
     else:
-        app = make_app(env, commandadapter)
+        app = make_app(commandadapter)
 
     args = parser.parse_args()
 
     command = commandadapter.match(args)
     commandadapter.dispatch(command, app)
 
-def make_app(env, commandadapter=None):
+def make_app(commandadapter=None):
     """
-    Function creates an app given environment
+    Function creates an app
     """
-    mconfig = import_module('app.config.%s' % env, pass_errors=True)
-    if mconfig is None and paths.app_exists():
-        print(colored('Configuration for "%s" environment is not found' % env, 'red'))
-        return None
+    mconfig = import_module('app.config', pass_errors=True)
     mstart = import_module('app.start')
     mroutes = import_module('app.routes')
     mcontrollers = import_module('app.controllers')
     before = mstart.before
 
-    return Glim(commandadapter, mconfig, mroutes, mcontrollers, env, before)
+    return Glim(commandadapter, mconfig, mroutes, mcontrollers, before)
 
 if __name__ == '__main__':
     main()

@@ -25,17 +25,15 @@ class Glim(object):
     ----------
       commandadapter (glim.command.CommandAdapter):
         The commandadapter object which is responsible for dispatching commands
-      env (string):
-        application environment variable passed from command line
       mconfig (module):
-        The configuration module imported from app.config.<env>
+        The configuration module imported from app.config
       config (dict):
         The configuration dictionary by environment which resides in
-            app.config.<env>
+            app.config
       before (method):
         The before hook function for registering a function before app starts
     """
-    def __init__(self, commandadapter, mconfig=None, mroutes=None, mcontrollers=None, env='default', before=None):
+    def __init__(self, commandadapter, mconfig=None, mroutes=None, mcontrollers=None, before=None):
 
         # register app
         self.commandadapter = commandadapter
@@ -87,7 +85,7 @@ class Glim(object):
 
         Args
         ----
-          extensions (list) : the extensions dict on app.config.<env>
+          extensions (list) : the extensions dict on app.config
 
         Raises
         ------
@@ -132,11 +130,11 @@ class Glim(object):
 
     def register_log(self):
         """
-        Function registers Log facade using configuration in app.config.<env>.
+        Function registers Log facade using configuration in app.config
 
         Note:
           The Log facade will be registered using default configuration
-          if there isn't any 'log' key in app.config.<env>.
+          if there isn't any 'log' key in app.config
         """
         if not empty('log', self.config):
 

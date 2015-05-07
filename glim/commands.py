@@ -65,7 +65,7 @@ class StartCommand(GlimCommand):
 
     def run(self, app):
         """Function starts the web server given configuration."""
-        GlimLog.info('Glim server started on %s environment' % self.args.env)
+        GlimLog.info('Glim server started')
         try:
             kwargs = Config.get('app.server.options')
             run(app.wsgi,
