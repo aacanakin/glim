@@ -1,8 +1,9 @@
 [![Build
 Status](https://travis-ci.org/aacanakin/glim.svg)](https://travis-ci.org/aacanakin/glim) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aacanakin/glim?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-glim - 0.11.x
-=============
+glim - 0.11.x[deprecated]
+=========================
+This repo is deprecated due to maintenance cost.
 
 [Documentation](http://glim.readme.io)
 
